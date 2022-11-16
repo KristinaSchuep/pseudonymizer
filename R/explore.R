@@ -1,9 +1,7 @@
-# install.packages("devtools")
-# devtools::install_github("paulhendricks/anonymizer")
+## Script to explore different packages and encryption functions
 
-
+# Set-up
 library(dplyr)
-
 
 # Some test data
 t1 <- data.frame(year = 2019,
@@ -15,6 +13,11 @@ t2 <- data.frame(year = 2020,
 t3 <- data.frame(year = 2021, 
                  id = c(7560000000001, 7560000000004,7560000000006),
                  name = c("A", "D", "F"))
+
+
+# Package anonymizer -----------------------------------------------------------
+# install.packages("devtools")
+# devtools::install_github("paulhendricks/anonymizer")
 
 t1$id2 <- anonymizer::anonymize(t1$id, .algo = "sha256", .seed = 1)
 t2$id2 <- anonymizer::anonymize(t2$id, .algo = "sha256", .seed = 1)
@@ -44,9 +47,10 @@ test %>% filter(name == "A")
 test %>% filter(name == "B")
 test %>% filter(name == "D")
 
-library(anonymizer)
-library(digest)
 
+# Package Openssl -----------------------------------------------------------
 
+openssl::sha256(c("john", "mary", "john"), key = "random_salt_value")
+openssl::sha384(c("john", "mary", "john"), key = "random_salt_value")
 
 
