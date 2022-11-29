@@ -50,6 +50,11 @@ test %>% filter(name == "D")
 
 # Package Openssl -----------------------------------------------------------
 
+# From digest: Please note that this package is not meant to be deployed for 
+# cryptographic purposes for which more comprehensive (and widely tested) libraries 
+# such as 'OpenSSL' should be used.
+
+
 openssl::sha256(c("john", "mary", "john"), key = "random_salt_value")
 openssl::sha384(c("john", "mary", "john"), key = "random_salt_value")
 
