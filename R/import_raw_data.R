@@ -7,8 +7,7 @@ import_raw_data <- function(filename,
                             ahvnr,
                             firstname,
                             surname,
-                            birthday,
-                            head){
+                            birthday){
   
   df <- readxl::read_excel(filename,sheet=sheetname,skip=skiprows)
   colnames(df)[colnames(df) == ahvnr] <- "ahvnr"
