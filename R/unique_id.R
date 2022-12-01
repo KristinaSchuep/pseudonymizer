@@ -7,7 +7,7 @@
 # unique_id(data = data, id = id, salt = "bla")
 
 unique_id <- function(data, 
-                      id, 
+                      id = "ahvnr", 
                       salt, 
                       expected_id_format = "digit", 
                       expected_id_length = 13){
