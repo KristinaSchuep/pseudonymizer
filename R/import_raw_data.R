@@ -16,8 +16,7 @@ import_raw_data <- function(filename,
   colnames(df)[colnames(df) == surname] <- "surname"
   colnames(df)[colnames(df) == birthday] <- "birthday"
   names(df) <- tolower(names(df))
-  df
-  
+  return(as.data.frame(df))
 }
 
 
