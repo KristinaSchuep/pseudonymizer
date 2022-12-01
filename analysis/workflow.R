@@ -1,16 +1,19 @@
 # Possible Workflow 
 
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
-df_pop<- import_raw_data(filename="./data/FAKE_DATA_2019.xlsx")
-
-
-df_pop<- import_raw_data(filename="./data/FAKE_DATA_2019.xlsx",
+df_pop<- import_raw_data(filename = "./data/FAKE_DATA_2019.xlsx",
                          ahvnr="NNSS",
                          firstname="NACHNAME",
                          surname="VORNAME",
                          birthday="GEBURTSDATUM")
 
-df_debt<- import_raw_data("./data/FAKE_Verlustscheine.xlsx","Schlussabrechnung",1)
+df_debt<- import_raw_data(filename = "./data/FAKE_Verlustscheine.xlsx",
+                          sheetname = "Schlussabrechnung",
+                          skiprows = 1,
+                          ahvnr="ahv-nr",
+                          firstname="NACHNAME",
+                          surname="name versicherter",
+                          birthday="GEBURTSDATUM")
 
 df_assura <- import_raw_data("./data/FAKE_Verlustscheine.xlsx", "Assura",1)
 
