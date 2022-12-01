@@ -5,6 +5,9 @@
 # Each function should be written in its own R-script (together with its helper functions).
 
 
+# Dependencies
+# Packages: readxl, tidyverse
+
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
 
 import_raw_data <- function(){

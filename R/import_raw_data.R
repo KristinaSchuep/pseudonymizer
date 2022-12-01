@@ -1,30 +1,25 @@
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
 
 
-import_raw_data <- function(){
-  df_pop <- readxl::read_excel("./data/FAKE_DATA_2019.xlsx")
+import_raw_data <- function(filename,
+                            sheetname =NULL,
+                            skiprows = 0,
+                            ahvnr,
+                            firstname,
+                            surname,
+                            birthday,
+                            head){
   
-  df_debt <- readxl::read_excel("./data/FAKE_Verlustscheine.xlsx", sheet = "Schlussabrechnung")[-c(1:2), ]
+  df <- readxl::read_excel(filename,sheet=sheetname,skip=skiprows)
+  colnames(df)[colnames(df) == ahvnr] <- "ahvnr"
+  colnames(df)[colnames(df) == firstname] <- "firstname"
+  colnames(df)[colnames(df) == surname] <- "surname"
+  colnames(df)[colnames(df) == birthday] <- "birthday"
+  names(df) <- tolower(names(df))
+  df
   
-  df_assura <- readxl::read_excel("./data/FAKE_Verlustscheine.xlsx", sheet = "Assura")[-c(1:2), ]
-  
-  df_nichtsedex <- readxl::read_excel("./data/FAKE_Verlustscheine.xlsx", sheet = "Nicht-Sedex")[-c(1:2), ]
-  
-  
-#  read_excel_allsheets <- function(filename, tibble = TRUE) {
-#    sheets <- readxl::excel_sheets(filename)
-#    x <- lapply(sheets, function(X) readxl::read_excel(filename, sheet = X))
-#    if(!tibble) x <- lapply(x, as.data.frame)
-#    names(x) <- sheets
-#    x
-#  }
-  
-#  df_debt <- read_excel_allsheets("./data/FAKE_Verlustscheine.xlsx")
-    
-  
-
-
 }
+
 
 # (Optional/for later): Identify main person per dossier -----------------------
 # - add row numbers to be able to recover order of original file
