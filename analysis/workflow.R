@@ -29,7 +29,7 @@ df_pop <- aggregate_sensitive(data = df_pop)
 # Task 3: Generate and append key table ---------------------------
 
 # Task 4: Drop sensitive data --------------------------------
-
+drop_sensitive(data = df_pop, drop_add = c("plz"))
 
 # Task 5: Export data to csv ----------------------------------
 
