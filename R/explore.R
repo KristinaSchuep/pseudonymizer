@@ -14,6 +14,16 @@ t3 <- data.frame(year = 2021,
                  id = c(7560000000001, 7560000000004,7560000000006),
                  name = c("A", "D", "F"))
 
+# Some more test data
+data <- data.frame(year = 2019,
+                   id = c(7560000000001, 7560000000002,7560000000003),
+                   name = c("A", "B", "C"))
+
+data <- data.frame(year = 2019,
+                   id = c("756.0000.0000.12",
+                          "756.0000.0000.12",
+                          "756.0000.0000.01"),
+                   name = c("A", "B", "C"))
 
 # Package anonymizer -----------------------------------------------------------
 # install.packages("devtools")
@@ -58,4 +68,7 @@ test %>% filter(name == "D")
 openssl::sha256(c("john", "mary", "john"), key = "random_salt_value")
 openssl::sha384(c("john", "mary", "john"), key = "random_salt_value")
 
+# Check that this is consistent across packages:
+digest::hmac("random_salt_value", object = "john", algo = "sha256")
+openssl::sha256(c("john"), key = "random_salt_value")
 
