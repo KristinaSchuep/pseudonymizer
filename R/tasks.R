@@ -41,13 +41,22 @@ aggregate_sensitive <- function(){
 }
 
 
-# Task 3: Generate and append key table ---------------------------
+# Task 3.1: Generate and append key table ---------------------------
 # - generate new key table with unique ID, AHV number, name, address, birth date
 # - load last key table, append 
 # - check for inconsistencies --> warning
 # - keep only unique values
 
 append_keytable <- function(){
+  
+}
+
+# Task 3.2: Generate address file --------------------------------
+# - filter for 'Antragssteller'
+# - select variables: pseud_id, name, address
+# - export as ??
+
+export_address <- function(){
   
 }
 
