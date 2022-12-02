@@ -8,11 +8,13 @@
 #'
 #' @return Exported csv-file.
 #' @export
-export_address <- function(data, filename, vars){
-
+export_address <- function(data, path, filename, vars){
+  # Check if address directory already exists otherwise create
+  dir.create(file.path(path, "address"), showWarnings = FALSE)
+  
   data <- data[data$rolle=="Antragssteller",]
   data <- data[, vars]
-  utils::write.csv(x = data, file = filename)
+  utils::write.csv(x = data, file = file.path(path,filename))
   message(paste0('Address file written to ', filename, '.'))
 }
 

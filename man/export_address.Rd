@@ -4,7 +4,7 @@
 \alias{export_address}
 \title{Generate address file}
 \usage{
-export_address(data, filename, vars)
+export_address(data, path, filename, vars)
 }
 \arguments{
 \item{data}{Dataframe}

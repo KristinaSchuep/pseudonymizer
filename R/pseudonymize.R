@@ -47,6 +47,9 @@ pseudonymize <- function(
   sensitive = c("ahvnr", "firstname", "surname", "birthday"),
   data_summary = TRUE){
 
+  # Check if output directory already exists otherwise create
+  dir.create("output", showWarnings = FALSE)
+  
 data <- import_raw_data(filename = import_filename,
                         sheetname = import_sheetname,
                         skiprows = import_skiprows,
@@ -65,17 +68,20 @@ data <- aggregate_sensitive(data = data,
                             date_new_var = date_new_var)
 
 append_keytable(df = data,
-                path = export_keytable_path,
+                path = export_path,
                 sensitive = sensitive,
                 id_original = id_original)
 
 export_address(data = data,
+               path = export_path,
                filename = export_address_filename,
                vars = export_address_vars)
 
-data <- drop_sensitive(data = data, sensitive = sensitive)
+data <- drop_sensitive(data = data, 
+                       path = export_path,
+                       sensitive = sensitive)
 
-utils::write.csv(x = data, file = export_pseudonymized_filename)
+utils::write.csv(x = data, file = file.path(path,export_pseudonymized_filename))
 
 # Message:
 message(" ")

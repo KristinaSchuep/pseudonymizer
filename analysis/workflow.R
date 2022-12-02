@@ -64,11 +64,11 @@ pseudonymize(import_filename = "./data-raw/FAKE_DATA_2019.xlsx",
              import_newnames = c("ahvnr","firstname","surname","birthday"),
              id_original = "ahvnr",
              id_salt = mysalt,
-             export_keytable_path = "./output/",
-             export_address_filename = './output/address/FAKE_DATA_2019_address.csv',
+             export_path = "./output",
+             export_address_filename = "./FAKE_DATA_2019_address.csv",
              export_address_vars =  address_vars,
-             export_pseudonymized_filename = "./output/panon/FAKE_DATA_2019_panon.csv",
-             export_pseudonymized_drop = sensitive)
+             export_pseudonymized_filename = "./FAKE_DATA_2019_panon.csv",
+             sensitive = sensitive)
 
 
 

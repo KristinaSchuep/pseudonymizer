@@ -15,7 +15,7 @@
 #' @export
 append_keytable <- function(df, path, sensitive, id_original){
 
-  # Check if ./data/keytable directory already exists otherwise create
+  # Check if keytable directory already exists otherwise create
   dir.create(file.path(path, "keytable"), showWarnings = FALSE)
 
   # Define which variables to extract

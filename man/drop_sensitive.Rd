@@ -6,6 +6,7 @@
 \usage{
 drop_sensitive(
   data,
+  path,
   sensitive = c("ahvnr", "firstname", "surname", "birthday")
 )
 }
