@@ -13,7 +13,10 @@
 #'
 #' @return Writes or appends keytable
 #' @export
-append_keytable <- function(df, path, sensitive, id_original){
+append_keytable <- function(df, 
+                            path = export_path,
+                            sensitive, 
+                            id_original){
 
   # Check if keytable directory already exists otherwise create
   dir.create(file.path(path, "keytable"), showWarnings = FALSE)

@@ -8,7 +8,10 @@
 #'
 #' @return Exported csv-file.
 #' @export
-export_address <- function(data, path, filename, vars){
+export_address <- function(data, 
+                           path = export_path, 
+                           filename, 
+                           vars){
   # Check if address directory already exists otherwise create
   dir.create(file.path(path, "address"), showWarnings = FALSE)
   
