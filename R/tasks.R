@@ -53,8 +53,8 @@ append_keytable <- function(){
 
 # Task 3.2: Generate address file --------------------------------
 # - filter for 'Antragssteller'
-# - select variables: pseud_id, name, address
-# - export as ??
+# - select variables: pseudo_id, name, address
+# - export as csv
 
 export_address <- function(){
   

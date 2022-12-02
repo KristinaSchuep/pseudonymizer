@@ -1,4 +1,4 @@
-# Possible Workflow 
+# Possible Workflow
 
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
 df_pop<- import_raw_data(filename = "./data/FAKE_DATA_2019.xlsx",
@@ -28,10 +28,16 @@ df_pop <- aggregate_sensitive(data = df_pop)
 
 # Task 3: Generate and append key table ---------------------------
 
+
+# Task 3.2: Generate address file --------------------------------
+export_address(data = df_pop,
+               filename = './analysis/FAKE_DATA_2019_address.csv',
+               vars = c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort'))
+
 # Task 4: Drop sensitive data --------------------------------
 drop_sensitive(data = df_pop, drop_add = c("plz"))
 
 # Task 5: Export data to csv ----------------------------------
-write.csv(x = df_pop, file = "./data/FAKE_DATA_2019_panon.csv")
+write.csv(x = df_pop, file = "./analysis/FAKE_DATA_2019_panon.csv")
 
 # Task 6: Write wrapper function -----------------------------
