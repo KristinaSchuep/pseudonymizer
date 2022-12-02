@@ -28,7 +28,7 @@ df_nichtsedex <- import_raw_data("./data/FAKE_Verlustscheine.xlsx", "Nicht-Sedex
 
 
 # Task 1: Generate unique ID from AHV-number -------------------------
-df_pop <- unique_id(data = df_pop, id = ahvnr, salt = salt)
+df_pop <- unique_id(data = df_pop, id = id, salt = salt)
 
 # Task 2: Aggregate sensitive data -------------------------------
 df_pop <- aggregate_sensitive(data = df_pop)
