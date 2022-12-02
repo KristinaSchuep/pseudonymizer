@@ -1,7 +1,9 @@
 # Possible Workflow
 
-id<- "pseudo_id"
+id <- "ahvnr"
+pseudo_id <- "pseudo_id"
 sensitive <- c("ahvnr","firstname","surname","birthday")
+salt <- "myverygoodsalt"
 
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
 oldnames <-c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
@@ -26,7 +28,7 @@ df_nichtsedex <- import_raw_data("./data/FAKE_Verlustscheine.xlsx", "Nicht-Sedex
 
 
 # Task 1: Generate unique ID from AHV-number -------------------------
-df_pop <- unique_id(data = df_pop, id = "ahvnr", salt = "myverygoodsalt")
+df_pop <- unique_id(data = df_pop, id = ahvnr, salt = salt)
 
 # Task 2: Aggregate sensitive data -------------------------------
 df_pop <- aggregate_sensitive(data = df_pop)
