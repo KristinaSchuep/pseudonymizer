@@ -35,7 +35,7 @@ export_address(data = df_pop,
                vars = c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort'))
 
 # Task 4: Drop sensitive data --------------------------------
-drop_sensitive(data = df_pop, drop_add = c("plz"))
+df_pop <- drop_sensitive(data = df_pop, drop_add = c("plz"))
 
 # Task 5: Export data to csv ----------------------------------
 write.csv(x = df_pop, file = "./analysis/FAKE_DATA_2019_panon.csv")

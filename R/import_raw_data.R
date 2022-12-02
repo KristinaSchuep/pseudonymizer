@@ -1,6 +1,18 @@
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
 
 
+#' Import datasets into R
+#'
+#' @param filename Filename (and path) of dataset to import
+#' @param sheetname Sheetname
+#' @param skiprows Number of rows to skip
+#' @param ahvnr ahvnr
+#' @param firstname firstname
+#' @param surname surname
+#' @param birthday birthday
+#'
+#' @return Imported dataset, with renamed variables.
+#' @export
 import_raw_data <- function(filename,
                             sheetname =NULL,
                             skiprows = 0,
@@ -8,7 +20,7 @@ import_raw_data <- function(filename,
                             firstname,
                             surname,
                             birthday){
-  
+
   df <- readxl::read_excel(filename,sheet=sheetname,skip=skiprows)
   colnames(df)[colnames(df) == ahvnr] <- "ahvnr"
   colnames(df)[colnames(df) == firstname] <- "firstname"
