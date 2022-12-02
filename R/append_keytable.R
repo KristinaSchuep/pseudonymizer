@@ -19,19 +19,43 @@ append_keytable <- function(df){
   # Create temporary keytable
   keytable_temp <- df_pop[,keep_columns]
   
-  # Check if there is already a keytable in workspace otherwise function is finished
-  list.files(file.path(main_dir, sub_dir), pattern = "keytable")
+  # List of all "*keytable.csv" files in keytable subfolder
+  sort(list.files(file.path(main_dir, sub_dir), pattern = "keytable.csv"),decreasing = TRUE)
   
-  # Merge existing keytable with temporary keytable
-  
-  # Export keytable to ./data/keytable folder 
-  now <- Sys.time()
-  path <- getwd()
-  name<-paste0("keytable",format(now, "_%Y%m%d_%H%M%S"), ".csv")
+  # Load newest keytable with temporary keytable
+  newest<-sort(list.files(file.path(main_dir, sub_dir), pattern = "keytable.csv"),decreasing = TRUE)[1]
 
-  write.csv(keytable,file.path(path,"data","keytable",name), row.names = FALSE)
-  
+    if(is.na(newest){
+    # If there is no keytable 
+    # Export current keytable to ./data/keytable folder 
+    now <- Sys.time()
+    path <- getwd()
+    
+    # Add system time as variable
+    keytable_temp$created <-now
+    name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
+    write.csv(keytable_temp,file.path(path,"data","keytable",name), row.names = FALSE)
+    paste("No existing keytable, current keytable is saved")
+  }
+    else {
+      # If there is already an existing keytable load the newest and append temp
+      
+      keytable <- read.csv(file.path(main_dir, sub_dir,newest))
+      keytable_temp <- rbind(keytable,keytable_temp)
+      paste("Newest keytable is appendend and duplicate AHV-Nr were removed, newer entries were kept")
+      
+      # Remove duplicates and keep newest value if two entries with same pseudoid
+      keytable_temp <- keytable_temp[order(keytable_temp$created, keytable_temp[,id], decreasing = TRUE), ] 
+      keytable_temp[ !duplicated(keytable_temp$ahvnr), ]
+      
+      # Export new keytable to ./data/keytable folder 
+      now <- Sys.time()
+      path <- getwd()
+      # Add system time as variable
+      keytable_temp$created <-now
+      name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
+      write.csv(keytable_temp,file.path(path,"data","keytable",name), row.names = FALSE)
+  }
 
-  return(df)
 }
 
