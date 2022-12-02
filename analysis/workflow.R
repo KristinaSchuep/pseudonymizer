@@ -1,5 +1,8 @@
 # Possible Workflow
 
+id<- "pseudo_id"
+sensitive <- c("ahvnr","firstname","surname","birthday")
+
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
 oldnames <-c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
 newnames <-c("ahvnr","firstname","surname","birthday")
