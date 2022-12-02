@@ -22,8 +22,7 @@
 #' @param export_address_filename Filename (and path) for address file
 #' @param export_address_vars Variables to export for address file
 #' @param export_pseudonymized_filename Filename (and path) for pseudonymized file
-#' @param export_pseudonymized_drop Variables to drop or pseudonymized.
-#' Default: c("ahvnr", "firstname", "surname", "birthday")
+#' @param sensitive Variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
 #'
 #' @return Export of following files: keytable, address file, pseudonymized data
@@ -45,7 +44,7 @@ pseudonymize <- function(
   export_address_filename,
   export_address_vars =  c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort'),
   export_pseudonymized_filename,
-  export_pseudonymized_drop = c("ahvnr", "firstname", "surname", "birthday"),
+  sensitive = c("ahvnr", "firstname", "surname", "birthday"),
   data_summary = TRUE){
 
 data <- import_raw_data(filename = import_filename,
@@ -67,13 +66,14 @@ data <- aggregate_sensitive(data = data,
 
 append_keytable(df = data,
                 path = export_keytable_path,
-                sensitive = export_pseudonymized_drop)
+                sensitive = sensitive,
+                id_original = id_original)
 
 export_address(data = data,
                filename = export_address_filename,
                vars = export_address_vars)
 
-data <- drop_sensitive(data = data, drop = export_pseudonymized_drop)
+data <- drop_sensitive(data = data, sensitive = sensitive)
 
 utils::write.csv(x = data, file = export_pseudonymized_filename)
 

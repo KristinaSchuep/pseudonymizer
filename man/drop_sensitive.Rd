@@ -4,12 +4,15 @@
 \alias{drop_sensitive}
 \title{Drop sensitive data}
 \usage{
-drop_sensitive(data, drop = c("ahvnr", "firstname", "surname", "birthday"))
+drop_sensitive(
+  data,
+  sensitive = c("ahvnr", "firstname", "surname", "birthday")
+)
 }
 \arguments{
 \item{data}{Dataframe}
 
-\item{drop}{Variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")}
+\item{sensitive}{Sensitive variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")}
 }
 \value{
 Dataset from which indicated variables have been dropped.

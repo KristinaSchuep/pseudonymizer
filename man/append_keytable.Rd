@@ -4,12 +4,16 @@
 \alias{append_keytable}
 \title{Generate and append key table}
 \usage{
-append_keytable(df, path)
+append_keytable(df, path, sensitive, id_original)
 }
 \arguments{
 \item{df}{Dataframe}
 
 \item{path}{Filepath}
+
+\item{sensitive}{Sensitive variables to drop}
+
+\item{id_original}{ID-variable that needs to by pseudonymized}
 }
 \value{
 Writes or appends keytable

@@ -21,7 +21,7 @@ pseudonymize(
   export_address_filename,
   export_address_vars = c("pseudo_id", "firstname", "surname", "plz", "wohnort"),
   export_pseudonymized_filename,
-  export_pseudonymized_drop = c("ahvnr", "firstname", "surname", "birthday"),
+  sensitive = c("ahvnr", "firstname", "surname", "birthday"),
   data_summary = TRUE
 )
 }
@@ -61,8 +61,7 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{export_pseudonymized_filename}{Filename (and path) for pseudonymized file}
 
-\item{export_pseudonymized_drop}{Variables to drop or pseudonymized.
-Default: c("ahvnr", "firstname", "surname", "birthday")}
+\item{sensitive}{Variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")}
 
 \item{data_summary}{TRUE (Default) to print head of pseudonymized data.}
 }
