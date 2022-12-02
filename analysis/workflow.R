@@ -32,6 +32,6 @@ df_pop <- aggregate_sensitive(data = df_pop)
 drop_sensitive(data = df_pop, drop_add = c("plz"))
 
 # Task 5: Export data to csv ----------------------------------
-
+write.csv(x = df_pop, file = "./data/FAKE_DATA_2019_panon.csv")
 
 # Task 6: Write wrapper function -----------------------------
