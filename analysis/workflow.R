@@ -1,19 +1,21 @@
 # Possible Workflow
 
 # Task 0: Import datasets (mostly as excel files) into R -----------------------
-df_pop<- import_raw_data(filename = "./data/FAKE_DATA_2019.xlsx",
-                         ahvnr="NNSS",
-                         firstname="NACHNAME",
-                         surname="VORNAME",
-                         birthday="GEBURTSDATUM")
+oldnames <-c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
+newnames <-c("ahvnr","firstname","surname","birthday")
 
+df_pop<- import_raw_data(filename = "./data/FAKE_DATA_2019.xlsx")
+
+
+oldnames <-c("ahv-nr","name versicherter","VORNAME","GEBURTSDATUM")
+newnames <-c("ahvnr","firstname","surname","birthday")
 df_debt<- import_raw_data(filename = "./data/FAKE_Verlustscheine.xlsx",
                           sheetname = "Schlussabrechnung",
                           skiprows = 1,
                           ahvnr="ahv-nr",
-                          firstname="NACHNAME",
+                          firstname="vorname...10",
                           surname="name versicherter",
-                          birthday="GEBURTSDATUM")
+                          birthday="geburtsdatum")
 
 df_assura <- import_raw_data("./data/FAKE_Verlustscheine.xlsx", "Assura",1)
 
