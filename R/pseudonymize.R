@@ -15,11 +15,15 @@
 #' convert it.
 #' @param id_expected_length Expected length of ID-variable (Default: 13). If the
 #' ID-variable does not have the expected length, the function will give an error.
+#' @param date_var Date variable
+#' @param date_new_format Format for new date variable
+#' @param date_new_var Name for new date variable
 #' @param export_address_filename Filename (and path) for address file
 #' @param export_address_vars Variables to export for address file
 #' @param export_pseudonymized_filename Filename (and path) for pseudonymized file
 #' @param export_pseudonymized_drop Variables to drop or pseudonymized.
 #' Default: c("ahvnr", "firstname", "surname", "birthday")
+#' @param data_summary TRUE (Default) to print head of pseudonymized data.
 #'
 #' @return Export of following files: keytable, address file, pseudonymized data
 #' @export
@@ -39,7 +43,8 @@ pseudonymize <- function(
   export_address_filename,
   export_address_vars =  c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort'),
   export_pseudonymized_filename,
-  export_pseudonymized_drop = c("ahvnr", "firstname", "surname", "birthday")){
+  export_pseudonymized_drop = c("ahvnr", "firstname", "surname", "birthday"),
+  data_summary = TRUE){
 
 data <- import_raw_data(filename = import_filename,
                         sheetname = import_sheetname,
@@ -66,7 +71,16 @@ export_address(data = data,
 
 data <- drop_sensitive(data = data, drop = export_pseudonymized_drop)
 
-write.csv(x = data, file = export_pseudonymized_filename)
-print(paste0('Pseudonymized file written to ', export_pseudonymized_filename, '.'))
+utils::write.csv(x = data, file = export_pseudonymized_filename)
 
+# Message:
+message(" ")
+message(paste0('Pseudonymized file with ', nrow(data), ' rows written to ',
+               export_pseudonymized_filename, '.'))
+message(paste0('The file contains the following variables: ',
+               paste(colnames(data), collapse = ", ")))
+if(data_summary == TRUE){
+  message(" ")
+  print(utils::head(tidyr::as_tibble(data)))
+}
 }

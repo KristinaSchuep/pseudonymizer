@@ -20,7 +20,8 @@ pseudonymize(
   export_address_filename,
   export_address_vars = c("pseudo_id", "firstname", "surname", "plz", "wohnort"),
   export_pseudonymized_filename,
-  export_pseudonymized_drop = c("ahvnr", "firstname", "surname", "birthday")
+  export_pseudonymized_drop = c("ahvnr", "firstname", "surname", "birthday"),
+  data_summary = TRUE
 )
 }
 \arguments{
@@ -45,6 +46,12 @@ convert it.}
 \item{id_expected_length}{Expected length of ID-variable (Default: 13). If the
 ID-variable does not have the expected length, the function will give an error.}
 
+\item{date_var}{Date variable}
+
+\item{date_new_format}{Format for new date variable}
+
+\item{date_new_var}{Name for new date variable}
+
 \item{export_address_filename}{Filename (and path) for address file}
 
 \item{export_address_vars}{Variables to export for address file}
@@ -53,6 +60,8 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{export_pseudonymized_drop}{Variables to drop or pseudonymized.
 Default: c("ahvnr", "firstname", "surname", "birthday")}
+
+\item{data_summary}{TRUE (Default) to print head of pseudonymized data.}
 }
 \value{
 Export of following files: keytable, address file, pseudonymized data
