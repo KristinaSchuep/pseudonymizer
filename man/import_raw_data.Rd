@@ -4,15 +4,7 @@
 \alias{import_raw_data}
 \title{Import datasets into R}
 \usage{
-import_raw_data(
-  filename,
-  sheetname = NULL,
-  skiprows = 0,
-  ahvnr,
-  firstname,
-  surname,
-  birthday
-)
+import_raw_data(filename, sheetname = NULL, skiprows = 0, oldnames, newnames)
 }
 \arguments{
 \item{filename}{Filename (and path) of dataset to import}
@@ -21,13 +13,9 @@ import_raw_data(
 
 \item{skiprows}{Number of rows to skip}
 
-\item{ahvnr}{ahvnr}
+\item{oldnames}{Variable names to change}
 
-\item{firstname}{firstname}
-
-\item{surname}{surname}
-
-\item{birthday}{birthday}
+\item{newnames}{New variable names}
 }
 \value{
 Imported dataset, with renamed variables.

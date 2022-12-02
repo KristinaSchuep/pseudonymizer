@@ -13,6 +13,6 @@ export_address <- function(data, filename, vars){
   data <- data[data$rolle=="Antragssteller",]
   data <- data[, vars]
   write.csv(x = data, file = filename)
-  print(paste0('File written to ', filename, '.'))
+  print(paste0('Address file written to ', filename, '.'))
 }
 

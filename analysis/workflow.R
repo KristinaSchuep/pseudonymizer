@@ -48,3 +48,25 @@ df_pop <- drop_sensitive(data = df_pop, drop_add = c("plz"))
 write.csv(x = df_pop, file = "./analysis/FAKE_DATA_2019_panon.csv")
 
 # Task 6: Write wrapper function -----------------------------
+
+# Simplified workflow:
+
+sensitive <- c("ahvnr","firstname","surname","birthday", "bla")
+address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
+mysalt <- "myverygoodsalt"
+
+pseudonymize(import_filename = "./data/FAKE_DATA_2019.xlsx",
+             import_sheetname = NULL,
+             import_skiprows = 0,
+             import_oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
+             import_newnames = c("ahvnr","firstname","surname","birthday"),
+             id_original = "ahvnr",
+             id_salt = mysalt,
+             export_address_filename = './analysis/FAKE_DATA_2019_address.csv',
+             export_address_vars =  address_vars,
+             export_pseudonymized_filename = "./analysis/FAKE_DATA_2019_panon.csv",
+             export_pseudonymized_drop = sensitive)
+
+
+
+

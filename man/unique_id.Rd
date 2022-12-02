@@ -8,8 +8,8 @@ unique_id(
   data,
   id = "ahvnr",
   salt,
-  expected_id_format = "digit",
-  expected_id_length = 13
+  id_expected_format = "digit",
+  id_expected_length = 13
 )
 }
 \arguments{
@@ -19,11 +19,11 @@ unique_id(
 
 \item{salt}{Salt value}
 
-\item{expected_id_format}{Expected format of ID-variable (Default: 'digit').
+\item{id_expected_format}{Expected format of ID-variable (Default: 'digit').
 If the ID-variable does not have the expected format, the function will try to
 convert it.}
 
-\item{expected_id_length}{Expected length of ID-variable (Default: 13). If the
+\item{id_expected_length}{Expected length of ID-variable (Default: 13). If the
 ID-variable does not have the expected length, the function will give an error.}
 }
 \value{
