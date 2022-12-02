@@ -53,7 +53,7 @@ write.csv(x = df_pop, file = "./output/panon/FAKE_DATA_2019_panon.csv")
 
 # Simplified workflow:
 
-sensitive <- c("ahvnr","firstname","surname","birthday", "bla")
+sensitive <- c("ahvnr","firstname","surname","birthday")
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 mysalt <- "myverygoodsalt"
 
@@ -64,6 +64,7 @@ pseudonymize(import_filename = "./data-raw/FAKE_DATA_2019.xlsx",
              import_newnames = c("ahvnr","firstname","surname","birthday"),
              id_original = "ahvnr",
              id_salt = mysalt,
+             export_keytable_path = "./output/",
              export_address_filename = './output/address/FAKE_DATA_2019_address.csv',
              export_address_vars =  address_vars,
              export_pseudonymized_filename = "./output/panon/FAKE_DATA_2019_panon.csv",

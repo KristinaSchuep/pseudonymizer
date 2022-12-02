@@ -17,6 +17,7 @@ pseudonymize(
   date_var = "birthday",
   date_new_format = "\%Y",
   date_new_var = "birthyear",
+  export_keytable_path,
   export_address_filename,
   export_address_vars = c("pseudo_id", "firstname", "surname", "plz", "wohnort"),
   export_pseudonymized_filename,
@@ -51,6 +52,8 @@ ID-variable does not have the expected length, the function will give an error.}
 \item{date_new_format}{Format for new date variable}
 
 \item{date_new_var}{Name for new date variable}
+
+\item{export_keytable_path}{Path for keytable export}
 
 \item{export_address_filename}{Filename (and path) for address file}
 

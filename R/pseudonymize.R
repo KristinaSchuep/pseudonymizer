@@ -18,6 +18,7 @@
 #' @param date_var Date variable
 #' @param date_new_format Format for new date variable
 #' @param date_new_var Name for new date variable
+#' @param export_keytable_path Path for keytable export
 #' @param export_address_filename Filename (and path) for address file
 #' @param export_address_vars Variables to export for address file
 #' @param export_pseudonymized_filename Filename (and path) for pseudonymized file
@@ -40,6 +41,7 @@ pseudonymize <- function(
   date_var = "birthday",
   date_new_format = "%Y",
   date_new_var = "birthyear",
+  export_keytable_path,
   export_address_filename,
   export_address_vars =  c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort'),
   export_pseudonymized_filename,
@@ -63,7 +65,9 @@ data <- aggregate_sensitive(data = data,
                             date_new_format = date_new_format,
                             date_new_var = date_new_var)
 
-# append_keytable()
+append_keytable(df = data,
+                path = export_keytable_path,
+                sensitive = export_pseudonymized_drop)
 
 export_address(data = data,
                filename = export_address_filename,
