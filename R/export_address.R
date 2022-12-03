@@ -3,16 +3,27 @@
 #' Generate address file
 #'
 #' @param data Dataframe
-#' @param filename Filename (and path) for exported address file
+#' @param path Filepath
+#' @param data_name Name or source of data
 #' @param vars Variables to export
 #'
 #' @return Exported csv-file.
 #' @export
-export_address <- function(data, filename, vars){
+export_address <- function(data,
+                           path,
+                           data_name,
+                           vars){
+  # Check if address directory already exists otherwise create
+  dir.create(file.path(path, "address"), showWarnings = FALSE)
 
   data <- data[data$rolle=="Antragssteller",]
   data <- data[, vars]
-  utils::write.csv(x = data, file = filename)
-  message(paste0('Address file written to ', filename, '.'))
+
+  # Create filename
+  now <- Sys.time()
+  name <- paste0(format(now, "%Y%m%d_%H%M%S"), "_", data_name, "_address",".csv")
+
+  utils::write.csv(x = data, file = file.path(path, "address", name), row.names = FALSE)
+  message(paste0('Address file written to ', file.path("address", name), '.'))
 }
 
