@@ -11,7 +11,7 @@ pseudonymize(
   import_skiprows = 0,
   import_oldnames,
   import_newnames,
-  id_original = "ahvnr",
+  id_original,
   id_salt,
   id_expected_format = "digit",
   id_expected_length = 13,
@@ -19,8 +19,8 @@ pseudonymize(
   date_new_format = "\%Y",
   date_new_var = "birthyear",
   export_path,
-  export_address_vars = c("pseudo_id", "firstname", "surname", "plz", "wohnort"),
-  sensitive = c("ahvnr", "firstname", "surname", "birthday"),
+  export_address_vars,
+  sensitive,
   data_summary = TRUE
 )
 }
@@ -58,7 +58,7 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{export_address_vars}{Variables to export for address file}
 
-\item{sensitive}{Variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")}
+\item{sensitive}{Variables to drop.}
 
 \item{data_summary}{TRUE (Default) to print head of pseudonymized data.}
 }
