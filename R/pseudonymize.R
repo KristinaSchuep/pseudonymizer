@@ -3,6 +3,7 @@
 
 #' Pseudonymize data
 #'
+#' @param data_name Name of data
 #' @param import_filename Filename (and path) of dataset to import
 #' @param import_sheetname Sheetname
 #' @param import_skiprows Number of rows to skip
@@ -18,73 +19,70 @@
 #' @param date_var Date variable
 #' @param date_new_format Format for new date variable
 #' @param date_new_var Name for new date variable
-#' @param export_keytable_path Path for keytable export
-#' @param export_address_filename Filename (and path) for address file
+#' @param export_path Path exported data
 #' @param export_address_vars Variables to export for address file
-#' @param export_pseudonymized_filename Filename (and path) for pseudonymized file
-#' @param sensitive Variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")
+#' @param sensitive Variables to drop.
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
 #'
 #' @return Export of following files: keytable, address file, pseudonymized data
 #' @export
 pseudonymize <- function(
+  data_name,
   import_filename,
   import_sheetname = NULL,
   import_skiprows = 0,
   import_oldnames,
   import_newnames,
-  id_original = "ahvnr",
+  id_original,
   id_salt,
   id_expected_format = "digit",
   id_expected_length = 13,
   date_var = "birthday",
   date_new_format = "%Y",
   date_new_var = "birthyear",
-  export_keytable_path,
-  export_address_filename,
-  export_address_vars =  c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort'),
-  export_pseudonymized_filename,
-  sensitive = c("ahvnr", "firstname", "surname", "birthday"),
+  export_path,
+  export_address_vars,
+  sensitive,
   data_summary = TRUE){
 
-data <- import_raw_data(filename = import_filename,
-                        sheetname = import_sheetname,
-                        skiprows = import_skiprows,
-                        oldnames = import_oldnames,
-                        newnames = import_newnames)
+  # Check if output directory already exists otherwise create
+  # dir.create("output", showWarnings = FALSE)
 
-data <- unique_id(data = data,
-                  id = id_original,
-                  salt = id_salt,
-                  id_expected_format = id_expected_format,
-                  id_expected_length = id_expected_length)
+  data <- import_raw_data(filename = import_filename,
+                          sheetname = import_sheetname,
+                          skiprows = import_skiprows,
+                          oldnames = import_oldnames,
+                          newnames = import_newnames)
 
-data <- aggregate_sensitive(data = data,
-                            date_var = date_var,
-                            date_new_format = date_new_format,
-                            date_new_var = date_new_var)
+  data <- unique_id(data = data,
+                    id = id_original,
+                    salt = id_salt,
+                    id_expected_format = id_expected_format,
+                    id_expected_length = id_expected_length)
 
-append_keytable(df = data,
-                path = export_keytable_path,
-                sensitive = sensitive,
-                id_original = id_original)
+  data <- aggregate_sensitive(data = data,
+                              date_var = date_var,
+                              date_new_format = date_new_format,
+                              date_new_var = date_new_var)
 
-export_address(data = data,
-               filename = export_address_filename,
-               vars = export_address_vars)
+  message("1) Append keytable:")
+  append_keytable(df = data,
+                  path = export_path,
+                  sensitive = sensitive,
+                  id_original = id_original)
 
-data <- drop_sensitive(data = data, sensitive = sensitive)
-
-utils::write.csv(x = data, file = export_pseudonymized_filename)
-
-# Message:
-message(" ")
-message(paste0('Pseudonymized file with ', nrow(data), ' rows written to ',
-               export_pseudonymized_filename, '.'))
-message(paste0('The file contains the following variables: ',
-               paste(colnames(data), collapse = ", ")))
-if(data_summary == TRUE){
   message(" ")
-  print(utils::head(tidyr::as_tibble(data)))
-}
+  message("2) Export address file:")
+  export_address(data = data,
+                 path = export_path,
+                 data_name = data_name,
+                 vars = export_address_vars)
+
+  message(" ")
+  message("3) Export pseudonymized data:")
+  export_pseudonymized(data = data,
+                       sensitive = sensitive,
+                       path = export_path,
+                       data_name = data_name,
+                       data_summary = data_summary)
 }

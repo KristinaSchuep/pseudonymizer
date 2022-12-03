@@ -4,12 +4,14 @@
 \alias{export_address}
 \title{Generate address file}
 \usage{
-export_address(data, filename, vars)
+export_address(data, path, data_name, vars)
 }
 \arguments{
 \item{data}{Dataframe}
 
-\item{filename}{Filename (and path) for exported address file}
+\item{path}{Filepath}
+
+\item{data_name}{Name or source of data}
 
 \item{vars}{Variables to export}
 }

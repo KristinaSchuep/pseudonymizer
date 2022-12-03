@@ -5,6 +5,7 @@
 \title{Pseudonymize data}
 \usage{
 pseudonymize(
+  data_name,
   import_filename,
   import_sheetname = NULL,
   import_skiprows = 0,
@@ -17,15 +18,15 @@ pseudonymize(
   date_var = "birthday",
   date_new_format = "\%Y",
   date_new_var = "birthyear",
-  export_keytable_path,
-  export_address_filename,
+  export_path,
   export_address_vars = c("pseudo_id", "firstname", "surname", "plz", "wohnort"),
-  export_pseudonymized_filename,
   sensitive = c("ahvnr", "firstname", "surname", "birthday"),
   data_summary = TRUE
 )
 }
 \arguments{
+\item{data_name}{Name of data}
+
 \item{import_filename}{Filename (and path) of dataset to import}
 
 \item{import_sheetname}{Sheetname}
@@ -53,13 +54,9 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{date_new_var}{Name for new date variable}
 
-\item{export_keytable_path}{Path for keytable export}
-
-\item{export_address_filename}{Filename (and path) for address file}
+\item{export_path}{Path exported data}
 
 \item{export_address_vars}{Variables to export for address file}
-
-\item{export_pseudonymized_filename}{Filename (and path) for pseudonymized file}
 
 \item{sensitive}{Variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")}
 
