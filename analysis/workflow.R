@@ -4,7 +4,7 @@
 library(pseudonymizer)
 
 # Define some common variables -----------------------------------------------
-mysalt <- "myverygoodsalt"
+mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 
 # Population data ------------------------------------------------------------
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
