@@ -29,7 +29,7 @@ unique_id <- function(data,
 
   # Check that id is of expected length
   expect <- paste0("[[:", id_expected_format, ":]]", "{", id_expected_length, "}")
-  assertthat::assert_that(all(grepl(expect, data[, id])), msg = "The id-variable does not have the expected format and cannot be transformed automatically. Please transform the id-variable manually or change the expected format")
+  assertthat::assert_that(all(grepl(expect, data[, id])|is.na(data[, id])), msg = "The id-variable does not have the expected format and cannot be transformed automatically. Please transform the id-variable manually or change the expected format")
 
   # ID to character (necessary for hash function)
   data[, id] <- as.character(data[, id])
