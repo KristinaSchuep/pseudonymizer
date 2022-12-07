@@ -8,7 +8,7 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 
 # Population data ------------------------------------------------------------
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
-sensitive <- c("ahvnr","firstname","surname","birthday")
+sensitive <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 
 pseudonymize(data_name = "FAKE_DATA",
              import_filename = "data-raw/FAKE_DATA_2019.xlsx",
