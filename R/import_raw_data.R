@@ -16,7 +16,7 @@ import_raw_data <- function(filename,
                             oldnames,
                             newnames){
 
-  df <- readxl::read_excel(filename,sheet=sheetname,skip=skiprows)
+  df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
 
   # Check that oldnames are df column names
   assertthat::assert_that(all(oldnames %in% names(df)), msg = "One or more column name cannot be replaced, because it does not exist. Verify that all names in 'oldnames' are actually in dataframe")
