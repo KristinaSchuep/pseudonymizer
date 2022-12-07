@@ -22,7 +22,7 @@ check_colnames <- function(filename,
   same_names <- all(colnames(df) == oldnames)
 
   if(same_names == TRUE) message("You're good: colnames of imported file are equivalent to 'oldnames.'")
-  if(same_names == FALSE) message("Not good: colnames of imported file do not match 'oldnames'. Compare colnames_import and oldnames to see mismatches.")
+  if(same_names == FALSE) message("Not good: colnames of imported file do not match 'oldnames'. Compare colnames_import and oldnames to see mismatches. Also check that newnames corresponds to the correct oldnames.")
   df_print <- data.frame(colnames_import = colnames(df), oldnames = oldnames, newnames = newnames)
   return(df_print)
 }
