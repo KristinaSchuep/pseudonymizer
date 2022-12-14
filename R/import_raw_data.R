@@ -15,8 +15,8 @@ import_raw_data <- function(filename,
                             skiprows = 0,
                             oldnames,
                             newnames){
-
-  df <- readxl::read_excel(filename,sheet=sheetname,skip=skiprows)
+  
+  df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
   
   #remove rows with all NAs
   df <- df[!apply(is.na(df), 1, all),]
