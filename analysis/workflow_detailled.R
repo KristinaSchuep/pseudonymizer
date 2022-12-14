@@ -48,8 +48,16 @@ id <- "ahvnr"
 sensitive <- c("ahvnr","firstname","surname","birthday")
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 
+# Check whether the colnames of imported file are the same as 'oldnames'
+# If not: change 'oldnames' and 'newnames' where necessary.
+df <- check_colnames("data-raw/FAKE_Verlustscheine.xlsx",
+                     sheet = "Schlussabrechnung",
+                     skip = 1,
+                     oldnames = oldnames,
+                     newnames = newnames)
+
 # Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_Verlustscheine.xlsx",
+df <- import_raw_data(filename = "data-raw/FAKE_Verlustscheine.xlsx",
                       sheetname = "Schlussabrechnung",
                       skiprows = 1,
                       oldnames = oldnames,
