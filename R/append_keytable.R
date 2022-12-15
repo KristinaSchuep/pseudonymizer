@@ -30,11 +30,13 @@ append_keytable <- function(df,
   # Add system time as variable
   now <- Sys.time()
   keytable_temp$created <-now
+  class(keytable_temp$created)<-"POSIXct"
 
   # List of all "*keytable.csv" files in keytable subfolder
   # Load newest keytable with temporary keytable
-  newest<-sort(list.files(file.path(path, "keytable"), pattern = "keytable.csv"),decreasing = TRUE)[1]
-
+  newest <- sort(list.files(file.path(path, "keytable"), pattern = "keytable.csv"),decreasing = TRUE)[1]
+  col_classes <- unlist(sapply(keytable_temp,class),use.names=FALSE)
+  
     if(is.na(newest)){
     # If there is no keytable
     # Export current keytable to ./keytable folder
@@ -45,7 +47,7 @@ append_keytable <- function(df,
 
   } else {
       # If there is already an existing keytable load the newest and append temp
-      keytable <- utils::read.csv(file.path(path, "keytable", newest),colClasses = c('character','character','character','character', 'POSIXct', 'POSIXct'))
+      keytable <- utils::read.csv(file.path(path, "keytable", newest),colClasses = col_classes)
       keytable_temp <- rbind(keytable,keytable_temp)
 
 
