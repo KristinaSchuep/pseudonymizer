@@ -43,10 +43,10 @@ export_pseudonymized(data = df,
 
 ## Verlustscheine ------------------------------------------------------
 
-source("analysis/varnames.R")
 id <- "ahvnr"
 sensitive <- c("ahvnr","firstname","surname","birthday")
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
+source("analysis/varnames.R")
 
 # Check whether the colnames of imported file are the same as 'oldnames'
 # If not: change 'oldnames' and 'newnames' where necessary.
@@ -62,6 +62,13 @@ df <- import_raw_data(filename = "data-raw/FAKE_Verlustscheine.xlsx",
                       skiprows = 1,
                       oldnames = oldnames,
                       newnames = newnames)
+
+# df <- readxl::read_excel("data-raw/FAKE_Verlustscheine.xlsx",
+#                    sheet = "Schlussabrechnung",
+#                    range = readxl::anchored("A4", dim = c(NA, openxlsx::convertFromExcelRef("AM"))),
+#                    col_names = newnames,
+#                    col_types = 'text')
+# df <- as.data.frame(df)
 
 # Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = id, salt = salt)
