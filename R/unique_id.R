@@ -36,6 +36,9 @@ unique_id <- function(data,
 
   # Pseudonymize id-variable
   data[, "pseudo_id"] <- openssl::sha256(x = data[, id], key = salt)
+  
+  #Save as character vector
+  class(data$pseudo_id) <- "character"
 
   return(data)
 }
