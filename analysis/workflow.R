@@ -5,13 +5,14 @@ library(pseudonymizer)
 
 # Define some common variables -----------------------------------------------
 mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
+mysalt <- "myverygoodsalt"
 
 # Population data ------------------------------------------------------------
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 sensitive <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 
 pseudonymize(data_name = "FAKE_DATA",
-             import_filename = "data-raw/FAKE_DATA_2019.xlsx",
+             import_filename = "data-raw/FAKE_DATA_2021.xlsx",
              import_oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
              import_newnames = c("ahvnr","firstname","surname","birthday"),
              id_original = "ahvnr",
@@ -36,8 +37,8 @@ df <- check_colnames("data-raw/FAKE_Verlustscheine.xlsx",
                newnames = newnames)
 
 # If check is successful:
+sensitive <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
-sensitive <- c("ahvnr","firstname","surname","birthday")
 
 pseudonymize(data_name = "FAKE_Verlustscheine",
              import_filename = "data-raw/FAKE_Verlustscheine.xlsx",

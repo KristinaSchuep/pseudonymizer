@@ -1,0 +1,4 @@
+"geschlecht","zivilstand","rolle","familiengrösse","aufenthaltsbewilligung","vermögen","el-bezug","sh-bezug","pseudo_id","birthyear"
+"Sex#M","Civil stat#L","Kind",3,"CHResidenc#B",0,0,0,"6703a61b29479e478d72625134e7527f53161a3e8e4816bf7801e0dc45c58fce",1995
+"Sex#W","Civil stat#S","Antragssteller",2,NA,10000,1,0,"95daffcadf18a6d37fd197e7a0239de5b88f26771afc872a1029b4bdabc548ed",1982
+"Sex#M","Civil stat#W","Antragssteller",1,"CHResidenc#L",20000,NA,NA,"a8d26c32f76a92a5ef8623cd143c1f0364ef090eef718942558139133cacdd91",1977

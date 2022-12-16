@@ -1,22 +1,22 @@
 # Workflow step-by-step
 
-salt <- "myverygoodsalt"
+mysalt <- "myverygoodsalt"
+id <- "ahvnr"
+address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
+sensitive <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 
 ## Population data --------------------------------------------------------
 
 oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
-id <- "ahvnr"
-sensitive <- c("ahvnr","firstname","surname","birthday")
-address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 
 # Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.xlsx",
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2020.xlsx",
                       oldnames = oldnames,
                       newnames = newnames)
 
 # Generate unique ID from AHV-number -------------------------
-df <- unique_id(data = df, id = id, salt = salt)
+df <- unique_id(data = df, id = id, salt = mysalt)
 
 # Aggregate sensitive data -------------------------------
 df <- aggregate_sensitive(data = df)
@@ -43,8 +43,7 @@ export_pseudonymized(data = df,
 
 ## Verlustscheine ------------------------------------------------------
 
-id <- "ahvnr"
-sensitive <- c("ahvnr","firstname","surname","birthday")
+sensitive <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 source("analysis/varnames.R")
 
@@ -63,15 +62,8 @@ df <- import_raw_data(filename = "data-raw/FAKE_Verlustscheine.xlsx",
                       oldnames = oldnames,
                       newnames = newnames)
 
-# df <- readxl::read_excel("data-raw/FAKE_Verlustscheine.xlsx",
-#                    sheet = "Schlussabrechnung",
-#                    range = readxl::anchored("A4", dim = c(NA, openxlsx::convertFromExcelRef("AM"))),
-#                    col_names = newnames,
-#                    col_types = 'text')
-# df <- as.data.frame(df)
-
 # Generate unique ID from AHV-number -------------------------
-df <- unique_id(data = df, id = id, salt = salt)
+df <- unique_id(data = df, id = "ahvnr", salt = mysalt)
 
 # Aggregate sensitive data -------------------------------
 df <- aggregate_sensitive(data = df)
@@ -80,19 +72,19 @@ df <- aggregate_sensitive(data = df)
 append_keytable(df = df,
                 path = "output",
                 sensitive = sensitive,
-                id_original = id)
+                id_original = "ahvnr")
 
 # Generate address file --------------------------------
 export_address(data = df,
                path = "output",
-               data_name = 'FAKE_DATA',
+               data_name = 'Verlustscheine',
                vars = address_vars)
 
 # Drop sensitive data and export --------------------------------
 export_pseudonymized(data = df,
                      sensitive = sensitive,
                      path = "output",
-                     data_name = "FAKE_DATA",
+                     data_name = "Verlustscheine",
                      data_summary = TRUE)
 
 
