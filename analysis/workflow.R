@@ -49,6 +49,7 @@ pseudonymize(data_name = "FAKE_Verlustscheine",
              id_original = "ahvnr",
              id_salt = mysalt,
              export_path = "output",
+             export_address = FALSE,
              export_address_vars =  address_vars,
              sensitive = sensitive)
 

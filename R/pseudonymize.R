@@ -20,6 +20,7 @@
 #' @param date_new_format Format for new date variable
 #' @param date_new_var Name for new date variable
 #' @param export_path Path exported data
+#' @param export_address TRUE (Default) to export address variables
 #' @param export_address_vars Variables to export for address file
 #' @param sensitive Variables to drop.
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
@@ -41,6 +42,7 @@ pseudonymize <- function(
   date_new_format = "%Y",
   date_new_var = "birthyear",
   export_path,
+  export_address = TRUE,
   export_address_vars,
   sensitive,
   data_summary = TRUE){
@@ -72,11 +74,13 @@ pseudonymize <- function(
                   id_original = id_original)
 
   message(" ")
-  message("2) Export address file:")
-  export_address(data = data,
-                 path = export_path,
-                 data_name = data_name,
-                 vars = export_address_vars)
+  if(export_address == TRUE){
+    message("2) Export address file:")
+    export_address(data = data,
+                   path = export_path,
+                   data_name = data_name,
+                   vars = export_address_vars)
+  } else message("2) Export address file: no addresses exported.")
 
   message(" ")
   message("3) Export pseudonymized data:")
