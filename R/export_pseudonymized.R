@@ -3,7 +3,7 @@
 #' Export pseudonymized data to csv
 #'
 #' @param data Dataframe
-#' @param sensitive Sensitive variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")
+#' @param sensitive_vars Sensitive variables to drop.
 #' @param path Filepath
 #' @param data_name Name or source of data
 #' @param data_summary TRUE (Default) to print head of exported data.
@@ -11,12 +11,12 @@
 #' @return Exported csv-file from which indicated variables have been dropped.
 #' @export
 export_pseudonymized <- function(data,
-                                 sensitive = c("ahvnr", "firstname", "surname", "birthday"),
+                                 sensitive_vars,
                                  path,
                                  data_name,
                                  data_summary){
   # Drop sensitive data
-  data <- data[, setdiff(colnames(data), sensitive)]
+  data <- data[, setdiff(colnames(data), sensitive_vars)]
 
   # Check if address directory already exists otherwise create
   dir.create(file.path(path, "panon"), showWarnings = FALSE)
@@ -36,5 +36,6 @@ export_pseudonymized <- function(data,
     message(" ")
     print(utils::head(tidyr::as_tibble(data)))
   }
+  return(data)
 }
 

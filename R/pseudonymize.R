@@ -21,8 +21,9 @@
 #' @param date_new_var Name for new date variable
 #' @param export_path Path exported data
 #' @param export_address TRUE (Default) to export address variables
-#' @param export_address_vars Variables to export for address file
-#' @param sensitive Variables to drop.
+#' @param address_vars Variables to export for address file
+#' @param keytable_vars Variables to export for keytable
+#' @param sensitive_vars Variables to drop from final pseudonymized data.
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
 #'
 #' @return Export of following files: keytable, address file, pseudonymized data
@@ -43,8 +44,9 @@ pseudonymize <- function(
   date_new_var = "birthyear",
   export_path,
   export_address = TRUE,
-  export_address_vars,
-  sensitive,
+  address_vars,
+  keytable_vars,
+  sensitive_vars,
   data_summary = TRUE){
 
   # Check if output directory already exists otherwise create
@@ -70,7 +72,7 @@ pseudonymize <- function(
   message("1) Append keytable:")
   append_keytable(df = data,
                   path = export_path,
-                  sensitive = sensitive,
+                  keytable_vars = keytable_vars,
                   id_original = id_original)
 
   message(" ")
@@ -79,13 +81,13 @@ pseudonymize <- function(
     export_address(data = data,
                    path = export_path,
                    data_name = data_name,
-                   vars = export_address_vars)
+                   vars = address_vars)
   } else message("2) Export address file: no addresses exported.")
 
   message(" ")
   message("3) Export pseudonymized data:")
   export_pseudonymized(data = data,
-                       sensitive = sensitive,
+                       sensitive_vars = sensitive_vars,
                        path = export_path,
                        data_name = data_name,
                        data_summary = data_summary)
