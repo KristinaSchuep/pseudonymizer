@@ -1,28 +1,22 @@
-# Task 3: Generate and append key table ---------------------------
-# - generate new key table with unique ID, AHV number, name, address, birth date
-# - load last key table, append
-# - check for inconsistencies --> warning
-# - keep only unique values
-
 #' Generate and append key table
 #'
 #' @param df Dataframe
 #' @param path Filepath
-#' @param sensitive Sensitive variables to drop
+#' @param keytable_vars Variables to keep in keytable
 #' @param id_original ID-variable that needs to by pseudonymized
 #'
 #' @return Writes or appends keytable
 #' @export
 append_keytable <- function(df,
                             path,
-                            sensitive,
+                            keytable_vars,
                             id_original){
 
   # Check if keytable directory already exists otherwise create
   dir.create(file.path(path, "keytable"), showWarnings = FALSE)
 
   # Define which variables to extract
-  keep_columns <- c("pseudo_id",sensitive)
+  keep_columns <- c("pseudo_id",keytable_vars)
 
   # Create temporary keytable
   keytable_temp <- df[,keep_columns]

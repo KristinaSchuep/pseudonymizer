@@ -4,18 +4,12 @@
 \alias{export_pseudonymized}
 \title{Export pseudonymized data to csv}
 \usage{
-export_pseudonymized(
-  data,
-  sensitive = c("ahvnr", "firstname", "surname", "birthday"),
-  path,
-  data_name,
-  data_summary
-)
+export_pseudonymized(data, sensitive_vars, path, data_name, data_summary)
 }
 \arguments{
 \item{data}{Dataframe}
 
-\item{sensitive}{Sensitive variables to drop. Default: c("ahvnr", "firstname", "surname", "birthday")}
+\item{sensitive_vars}{Sensitive variables to drop.}
 
 \item{path}{Filepath}
 

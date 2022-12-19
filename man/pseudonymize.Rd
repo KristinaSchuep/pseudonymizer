@@ -20,8 +20,9 @@ pseudonymize(
   date_new_var = "birthyear",
   export_path,
   export_address = TRUE,
-  export_address_vars,
-  sensitive,
+  address_vars,
+  keytable_vars,
+  sensitive_vars,
   data_summary = TRUE
 )
 }
@@ -59,9 +60,11 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{export_address}{TRUE (Default) to export address variables}
 
-\item{export_address_vars}{Variables to export for address file}
+\item{address_vars}{Variables to export for address file}
 
-\item{sensitive}{Variables to drop.}
+\item{keytable_vars}{Variables to export for keytable}
+
+\item{sensitive_vars}{Variables to drop from final pseudonymized data.}
 
 \item{data_summary}{TRUE (Default) to print head of pseudonymized data.}
 }
