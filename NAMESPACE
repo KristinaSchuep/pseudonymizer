@@ -2,6 +2,7 @@
 
 export(aggregate_sensitive)
 export(append_keytable)
+export(check_colnames)
 export(drop_sensitive)
 export(export_address)
 export(export_pseudonymized)
