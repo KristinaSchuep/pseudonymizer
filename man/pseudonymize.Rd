@@ -19,6 +19,7 @@ pseudonymize(
   date_new_format = "\%Y",
   date_new_var = "birthyear",
   export_path,
+  export_address = TRUE,
   export_address_vars,
   sensitive,
   data_summary = TRUE
@@ -55,6 +56,8 @@ ID-variable does not have the expected length, the function will give an error.}
 \item{date_new_var}{Name for new date variable}
 
 \item{export_path}{Path exported data}
+
+\item{export_address}{TRUE (Default) to export address variables}
 
 \item{export_address_vars}{Variables to export for address file}
 

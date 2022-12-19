@@ -7,6 +7,7 @@
 aggregate_sensitive(
   data,
   date_var = "birthday",
+  date_old_format = "\%d.\%m.\%Y",
   date_new_format = "\%Y",
   date_new_var = "birthyear"
 )
@@ -15,6 +16,8 @@ aggregate_sensitive(
 \item{data}{Dataframe}
 
 \item{date_var}{Date variable}
+
+\item{date_old_format}{Format of old date variable}
 
 \item{date_new_format}{Format for new date variable}
 
