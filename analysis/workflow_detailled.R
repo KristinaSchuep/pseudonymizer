@@ -1,23 +1,27 @@
 # Workflow step-by-step
+# Import newest version of package
+devtools::install_github("KristinaSchuep/pseudonymizer")
+library(pseudonymizer)
+
+# Step 0: Define variables
 mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
-mysalt <- "myverygoodsalt"
+
+#for testing use this simple salt
+#mysalt <- "myverygoodsalt"
 
 id <- "ahvnr"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 sensitive_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
-
-## Population data --------------------------------------------------------
-
 oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
-# Import datasets into R -----------------------
+# Step 1: Import datasets into R -----------------------
 df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.xlsx",
                       oldnames = oldnames,
                       newnames = newnames)
 
-# Generate unique ID from AHV-number -------------------------
+# Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = id, salt = mysalt)
 
 
@@ -36,25 +40,29 @@ df <- suppressMessages(readxl::read_excel("./data-raw/FAKE_DATA_2019.xlsx",
 class(df$NNSS)
 summary(df$NNSS)
 
+# End diagnostic by removing data set
+
+# return to Step 1
+
 # OPTIONAL DIAGNOSTIC END -----------------------
 
 
-# Aggregate sensitive data -------------------------------
+# Step 3: Aggregate sensitive data -------------------------------
 df <- aggregate_sensitive(data = df)
 
-# Generate and append key table ---------------------------
+# Step 4: Generate and append key table ---------------------------
 append_keytable(df = df,
                 path = "output",
                 keytable_vars = keytable_vars,
                 id_original = id)
 
-# Generate address file --------------------------------
+# Step 5: Generate address file --------------------------------
 export_address(data = df,
                path = "output",
                data_name = 'FAKE_DATA',
                vars = address_vars)
 
-# Drop sensitive data and export --------------------------------
+# Step 6: Drop sensitive data and export --------------------------------
 export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
                      path = "output",
