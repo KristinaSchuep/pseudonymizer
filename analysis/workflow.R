@@ -1,16 +1,20 @@
 # Workflow
-
-# Load packages --------------------------------------------------------------
+# Import newest version of package
+devtools::install_github("KristinaSchuep/pseudonymizer")
 library(pseudonymizer)
 
-# Define some common variables -----------------------------------------------
+# Step 0: Define variables
 mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
-mysalt <- "myverygoodsalt"
 
-# Population data ------------------------------------------------------------
+#for testing use this simple salt
+#mysalt <- "myverygoodsalt"
+
+id <- "ahvnr"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
 sensitive_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
+oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
+newnames <-  c("ahvnr","firstname","surname","birthday")
 
 df <- pseudonymize(data_name = "FAKE_DATA_2020",
                    import_filename = "data-raw/FAKE_DATA_2020.xlsx",
