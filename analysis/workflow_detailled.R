@@ -1,6 +1,7 @@
 # Workflow step-by-step
-
+mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 mysalt <- "myverygoodsalt"
+
 id <- "ahvnr"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
@@ -12,12 +13,31 @@ oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2020.xlsx",
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.xlsx",
                       oldnames = oldnames,
                       newnames = newnames)
 
 # Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = id, salt = mysalt)
+
+
+# OPTIONAL DIAGNOSTIC START -----------------------
+# In case of error for ahv Number try the following diagnostic
+# Adapt filename and sheetname as necessary
+
+# Import data set
+df <- suppressMessages(readxl::read_excel("./data-raw/FAKE_DATA_2019.xlsx",
+                                          sheet = NULL,
+                                          skip = 0 ))
+
+# Some simple Checks for AHV-Number
+# Note AHV-Number still has the original variable name
+# Change variable name in the following if necessary
+class(df$NNSS)
+summary(df$NNSS)
+
+# OPTIONAL DIAGNOSTIC END -----------------------
+
 
 # Aggregate sensitive data -------------------------------
 df <- aggregate_sensitive(data = df)
