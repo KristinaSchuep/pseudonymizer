@@ -13,7 +13,7 @@ id <- "ahvnr"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
 sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
-oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
+oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # Step 1: Import datasets into R -----------------------
@@ -56,19 +56,22 @@ df[!(grepl(expect, df$ids)|is.na(df$ids)), c('NNSS', 'ids')]
 # Step 3: Aggregate sensitive data -------------------------------
 df <- aggregate_sensitive(data = df)
 
-# Step 4: Generate and append key table ---------------------------
+# Step 4: Create Dossier ID  -------------------------------
+df <- create_household_id(data = df)
+
+# Step 5: Generate and append key table ---------------------------
 append_keytable(df = df,
                 path = "output",
                 keytable_vars = keytable_vars,
                 id_original = id)
 
-# Step 5: Generate address file --------------------------------
+# Step 6: Generate address file --------------------------------
 export_address(data = df,
                path = "output",
                data_name = 'FAKE_DATA',
                vars = address_vars)
 
-# Step 6: Drop sensitive data and export --------------------------------
+# Step 7: Drop sensitive data and export --------------------------------
 export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
                      path = "output",
