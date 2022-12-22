@@ -9,7 +9,7 @@ export_pseudonymized(data, sensitive_vars, path, data_name, data_summary)
 \arguments{
 \item{data}{Dataframe}
 
-\item{sensitive_vars}{Sensitive variables to drop.}
+\item{sensitive_vars}{Sensitive variables to drop. These are not exported.}
 
 \item{path}{Filepath}
 
