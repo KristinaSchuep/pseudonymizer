@@ -38,7 +38,13 @@ df <- suppressMessages(readxl::read_excel("./data-raw/FAKE_DATA_2019.xlsx",
 # Note AHV-Number still has the original variable name
 # Change variable name in the following if necessary
 class(df$NNSS)
+options(scipen = 999) # to display numbers not in scientific format
 summary(df$NNSS)
+
+# Check which AHV-Numbers have not 13 digits (or are NAs)
+df$ids <- gsub(pattern = "[^[:digit:]]", replacement = "", df$NNSS)
+expect <- paste0("[[:digit:]]{13}")
+df[!(grepl(expect, df$ids)|is.na(df$ids)), c('NNSS', 'ids')]
 
 # End diagnostic by removing data set
 
