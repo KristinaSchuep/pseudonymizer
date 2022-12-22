@@ -3,7 +3,7 @@
 #' Export pseudonymized data to csv
 #'
 #' @param data Dataframe
-#' @param sensitive_vars Sensitive variables to drop.
+#' @param sensitive_vars Sensitive variables to drop. These are not exported.
 #' @param path Filepath
 #' @param data_name Name or source of data
 #' @param data_summary TRUE (Default) to print head of exported data.
