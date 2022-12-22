@@ -10,13 +10,13 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 #mysalt <- "myverygoodsalt"
 
 id <- "ahvnr"
-address_vars <- c('pseudo_id', 'firstname', 'surname', 'plz', 'wohnort')
-keytable_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
-sensitive_vars <- c("ahvnr","firstname","surname","birthday", "plz", "wohnort")
+address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz', 'wohnort')
+keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
+sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
 oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
-df <- pseudonymize(data_name = "FAKE_DATA_2020",
+df <- pseudonymize(data_name = "FAKE_DATA_2019",
                    import_filename = "data-raw/FAKE_DATA_2020.xlsx",
                    import_oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
                    import_newnames = c("ahvnr","firstname","surname","birthday"),
