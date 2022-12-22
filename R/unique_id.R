@@ -19,28 +19,36 @@ unique_id <- function(data,
                       salt,
                       id_expected_format = "digit",
                       id_expected_length = 13){
-  # Check that id is of the expected format
-  expect <- paste0("^[[:", id_expected_format, ":]]+$") # all characters are of expected format
-  if(!all(grepl(expect, data[, id]))){
-    ids <- data[, id]
-    ids <- gsub(pattern = paste0("[^[:", id_expected_format, ":]]"), replacement = "", ids)
-    data[, id] <- ids
-  }
-
-  # Check that id is of expected length
-  expect <- paste0("[[:", id_expected_format, ":]]", "{", id_expected_length, "}")
-  assertthat::assert_that(all(grepl(expect, data[, id])|is.na(data[, id])), msg = "The id-variable does not have the expected format and cannot be transformed automatically. Please transform the id-variable manually or change the expected format")
 
   # ID to character (necessary for hash function)
-  data[, id] <- as.character(data[, id])
+  ids <- as.character(data[, id])
+
+  # Generate a variable with the format of the id
+  # (this allows the researcher who receives the final pseudonymized data
+  # to check whether there were any anomalies in the id)
+  data[, "id_format"] <- gsub('(?<=.{3})[[:digit:]]', 'x', ids, perl = TRUE)
+
+  # Remove all strings that are not of the expected format
+  # (if id_expected_format is 'digit', this removes everything that is not a digit, i.e.
+  # all letters, punctuation and spaces)
+  ids <- gsub(pattern = paste0("[^[:", id_expected_format, ":]]"), replacement = "", ids)
+
+  # # Check that id is of expected length
+  # expect <- paste0("[[:", id_expected_format, ":]]", "{", id_expected_length, "}")
+  # assertthat::assert_that(all(grepl(expect, ids)|is.na(ids)), msg = "The id-variable does not have the expected format and cannot be transformed automatically. Please transform the id-variable manually or change the expected format")
 
   # Pseudonymize id-variable
-  data[, "pseudo_id"] <- openssl::sha256(x = data[, id], key = salt)
-  
+  data[, "pseudo_id"] <- openssl::sha256(x = ids, key = salt)
+
   #Save as character vector
   class(data$pseudo_id) <- "character"
 
   return(data)
 }
 
+# Test ids
+ids <- c('7560000000002', '7560000000002 ', 7560000000002, 7560000000002.00,
+         7560000000002.01,
+         '75600..000000.02', '7560000000a02')
 
+ids <- c(7560000000002, 7560000000002.00, 7560000000002.01)
