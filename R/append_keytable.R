@@ -28,7 +28,9 @@ append_keytable <- function(df,
   # List of all "*keytable.csv" files in keytable subfolder
   # Load newest keytable with temporary keytable
   newest <- sort(list.files(file.path(path, "keytable"), pattern = "keytable.csv"),decreasing = TRUE)[1]
-  col_classes <- unlist(sapply(keytable_temp,class),use.names=FALSE)
+  keytable_temp <- as.data.frame(sapply(keytable_temp[,1:length(keytable_temp)],as.character))
+  
+  col_classes <- c(rep("character",length(keytable_temp)))
 
     if(is.na(newest)){
     # If there is no keytable
