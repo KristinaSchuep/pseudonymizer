@@ -27,7 +27,7 @@ unique_id <- function(data,
   # Generate a variable with the format of the id
   # (this allows the researcher who receives the final pseudonymized data
   # to check whether there were any anomalies in the id)
-  data[, "id_format"] <- gsub('(?<=.{3})[[:digit:]]', 'x', ids, perl = TRUE)
+  data[, "id_format"] <- gsub('(?<=.{3})[[:digit:]]', '9', ids, perl = TRUE)
 
   # Remove all strings that are not of the expected format
   # (if id_expected_format is 'digit', this removes everything that is not a digit, i.e.
