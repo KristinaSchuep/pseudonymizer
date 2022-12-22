@@ -1,7 +1,0 @@
-"insurance","id_dossier","gender","insured_nr","debt_claim_nr","loss_slip_nr","loss_slip_date","debt_coll_office_name","debt_coll_office_plz","debt_coll_office_place","premium_period_from","premium_period_til","costshare_period_from","costshare_period_til","premium_gross","premium_subsidy","premium","costshare","interest","debt_coll_cost","partial_payments","uncovered","refunds_from_debtor","refunds_from_ipv","refunds_annulation_other","pseudo_id","birthyear"
-NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"MM JJJJ","MM JJJJ","MM JJJJ","MM JJJJ",NA,NA,"Betrag gemäss Verlustschein",NA,"Betrag gemäss Verlustschein",NA,NA,NA,NA,NA,NA,NA,NA
-"Nicht-Sedex",1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"100",60,NA,660,NA,NA,NA,NA,NA
-"Nicht-Sedex",1,"M",NA,1111,2222,2010-01-01,"Betreibungsamt Zürich 3",8003,"Zürich","01.04.2020","30.04.2020",NA,NA,250,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"deeccf1574443888e199252c4b90bb1d11be94fbe33df3df6a6da68c0940b478",1980
-"Nicht-Sedex",1,"M",NA,1111,2222,2010-01-01,"Betreibungsamt Zürich 3",8003,"Zürich","01.03.2020","31.03.2020",NA,NA,250,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"deeccf1574443888e199252c4b90bb1d11be94fbe33df3df6a6da68c0940b478",1980
-"Nicht-Sedex",1,"F",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"204ec111d45324ab5bf6660254bb084846f48fc0a95504ac75cdb8d65c726bd1",2020
-"Nicht-Sedex",2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"100",60,NA,660,NA,NA,NA,NA,NA

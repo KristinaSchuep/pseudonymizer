@@ -21,8 +21,9 @@ unique_id <- function(data,
                       id_expected_length = 13){
 
   # ID to character (necessary for hash function)
-  ids <- as.character(data[, id])
-
+  data[,id] <- as.character(data[, id])
+  ids <- data[,id]
+  
   # Generate a variable with the format of the id
   # (this allows the researcher who receives the final pseudonymized data
   # to check whether there were any anomalies in the id)
