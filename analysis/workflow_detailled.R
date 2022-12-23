@@ -12,7 +12,7 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 id <- "ahvnr"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz4', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
-sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
+sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort","egid","ewid")
 oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 

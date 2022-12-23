@@ -10,17 +10,17 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 #mysalt <- "myverygoodsalt"
 
 id <- "ahvnr"
-address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz', 'wohnort')
+address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz4', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
-sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
-oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
+sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort","egid","ewid")
+oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 df <- pseudonymize(data_name = "FAKE_DATA_2019",
                    import_filename = "data-raw/FAKE_DATA_2019.xlsx",
-                   import_oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
-                   import_newnames = c("ahvnr","firstname","surname","birthday"),
-                   id_original = "ahvnr",
+                   import_oldnames = oldnames,
+                   import_newnames = newnames,
+                   id_original = id,
                    id_salt = mysalt,
                    export_path = "output",
                    address_vars =  address_vars,
@@ -30,9 +30,9 @@ df <- pseudonymize(data_name = "FAKE_DATA_2019",
 
 df <- pseudonymize(data_name = "FAKE_DATA_2021",
                    import_filename = "data-raw/FAKE_DATA_2021.xlsx",
-                   import_oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
-                   import_newnames = c("ahvnr","firstname","surname","birthday"),
-                   id_original = "ahvnr",
+                   import_oldnames = oldnames,
+                   import_newnames = newnames,
+                   id_original = id,
                    id_salt = mysalt,
                    export_path = "output",
                    address_vars =  address_vars,
