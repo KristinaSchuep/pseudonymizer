@@ -9,7 +9,9 @@ aggregate_sensitive(
   date_var = "birthday",
   date_old_format = "\%d.\%m.\%Y",
   date_new_format = "\%Y",
-  date_new_var = "birthyear"
+  date_new_var = "birthyear",
+  sip_var = "plz",
+  sip_new_var = "plz4"
 )
 }
 \arguments{
