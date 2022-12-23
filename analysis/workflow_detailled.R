@@ -10,7 +10,7 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 #mysalt <- "myverygoodsalt"
 
 id <- "ahvnr"
-address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz', 'wohnort')
+address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz4', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
 sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
 oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
@@ -56,8 +56,8 @@ df[!(grepl(expect, df$ids)|is.na(df$ids)), c('NNSS', 'ids')]
 # Step 3: Aggregate sensitive data -------------------------------
 df <- aggregate_sensitive(data = df)
 
-# Step 4: Create Dossier ID  -------------------------------
-df <- create_household_id(data = df)
+# Step 4: Create Unique Geo ID  -------------------------------
+df <- unique_geo_id(df = df)
 
 # Step 5: Generate and append key table ---------------------------
 append_keytable(df = df,
