@@ -26,6 +26,17 @@ df <- pseudonymize(data_name = "FAKE_DATA_2019",
                    address_vars =  address_vars,
                    keytable_vars = keytable_vars,
                    sensitive_vars = sensitive_vars)
+
+df <- pseudonymize(data_name = "FAKE_DATA_2020",
+                   import_filename = "data-raw/FAKE_DATA_2020.xlsx",
+                   import_oldnames = oldnames,
+                   import_newnames = newnames,
+                   id_original = id,
+                   id_salt = mysalt,
+                   export_path = "output",
+                   address_vars =  address_vars,
+                   keytable_vars = keytable_vars,
+                   sensitive_vars = sensitive_vars)
 # View(df) to inspect exported data
 
 df <- pseudonymize(data_name = "FAKE_DATA_2021",
