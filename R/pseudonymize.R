@@ -47,8 +47,8 @@ pseudonymize <- function(
   var_plz = "plz",
   var_egid = "egid",
   var_ewid = "ewid",
-  sip_var = "plz",
-  sip_new_var = "plz4",
+  zip_var = "plz",
+  zip_new_var = "plz4",
   export_path,
   export_address = TRUE,
   address_vars,
@@ -75,8 +75,8 @@ pseudonymize <- function(
                               date_var = date_var,
                               date_new_format = date_new_format,
                               date_new_var = date_new_var,
-                              sip_var = sip_var,
-                              sip_new_var = sip_new_var)
+                              zip_var = zip_var,
+                              zip_new_var = zip_new_var)
 
   data <- unique_geo_id(df = data,
                         var_street = var_street,

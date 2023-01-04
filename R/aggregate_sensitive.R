@@ -15,11 +15,11 @@ aggregate_sensitive <- function(data,
                                 date_old_format = "%d.%m.%Y",
                                 date_new_format = "%Y",
                                 date_new_var = "birthyear",
-                                sip_var = "plz",
-                                sip_new_var = "plz4"){
+                                zip_var = "plz",
+                                zip_new_var = "plz4"){
   data[, date_var] <- as.Date(data[, date_var], date_old_format, tz = "UTC")
   data[, date_new_var] <- as.numeric(format(data[, date_var], format = date_new_format))
-  data[, sip_new_var] <- gsub('.{2}$', '', data[, sip_var])
+  data[, zip_new_var] <- gsub('.{2}$', '', data[, zip_var])
   return(data)
 }
 
