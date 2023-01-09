@@ -26,10 +26,12 @@ import_raw_data <- function(filename,
   else 
     stop("Unclear file format. The filename does neither contain '.csv' nor '.xls' (e.g., '.xlsx', .'xls', '.xlsm'.)")
   
-  
+  n<-nrow(df)
   #remove rows with all NAs
   df <- df[!apply(is.na(df), 1, all),]
-
+  message(paste0("Imported file had ", n, "rows. After removing NAs", nrow(df),
+                 " observations remain."))
+  
   # Check that oldnames are df column names
   assertthat::assert_that(all(oldnames %in% names(df)), msg = "One or more column name cannot be replaced, because it does not exist. Verify that all names in 'oldnames' are actually in dataframe")
 

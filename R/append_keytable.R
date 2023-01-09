@@ -35,25 +35,31 @@ append_keytable <- function(df,
     if(is.na(newest)){
     # If there is no keytable
     # Export current keytable to ./keytable folder
-
+    
+    n <- nrow(keytable_temp)
+    keytable_temp <- keytable_temp[ !duplicated(keytable_temp$ahvnr), ]
+    message(paste0(n - nrow(keytable_temp), " duplicates based on AHV-number removed. Keytable now containts ", nrow(keytable_temp), " unique AHV-numbers."))    
+    
     name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
     utils::write.csv(keytable_temp,file.path(path,"keytable",name), row.names = FALSE)
     message("No existing keytable, current keytable is saved")
 
   } else {
-      # If there is already an existing keytable load the newest and append temp
-      keytable <- utils::read.csv(file.path(path, "keytable", newest),colClasses = col_classes)
-      keytable_temp <- rbind(keytable,keytable_temp)
+    # If there is already an existing keytable load the newest and append temp
+    keytable <- utils::read.csv(file.path(path, "keytable", newest),colClasses = col_classes)
+    keytable_temp <- rbind(keytable,keytable_temp)
 
 
-      # Remove duplicates and keep newest value if two entries with same pseudoid
-      keytable_temp <- keytable_temp[order(keytable_temp$year,keytable_temp$created, keytable_temp[,id_original], decreasing = TRUE), ]
-      keytable_temp <- keytable_temp[ !duplicated(keytable_temp$ahvnr), ]
-
-      # Export new keytable to ./data/keytable folder
-      name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
-      utils::write.csv(keytable_temp,file.path(path,"keytable",name), row.names = FALSE)
-      message("Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent year and complication are kept")
+    # Remove duplicates and keep newest value if two entries with same pseudoid
+    keytable_temp <- keytable_temp[order(keytable_temp$year,keytable_temp$created, keytable_temp[,id_original], decreasing = TRUE), ]
+    n <- nrow(keytable_temp)
+    keytable_temp <- keytable_temp[ !duplicated(keytable_temp$ahvnr), ]
+    message(paste0(n - nrow(keytable_temp), " duplicates based on AHV-number removed. Keytable now containts ", nrow(keytable_temp), " unique AHV-numbers."))
+     
+    # Export new keytable to ./data/keytable folder
+    name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
+    utils::write.csv(keytable_temp,file.path(path,"keytable",name), row.names = FALSE)
+    message("Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent year and complication are kept")
   }
 
 }
