@@ -17,7 +17,7 @@ oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 df <- pseudonymize(data_name = "FAKE_DATA_2019",
-                   import_filename = "data-raw/FAKE_DATA_2019.xlsx",
+                   import_filename = "data-raw/FAKE_DATA_2019.csv",
                    import_oldnames = oldnames,
                    import_newnames = newnames,
                    id_original = id,
