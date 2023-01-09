@@ -1,4 +1,0 @@
-"geschlecht","zivilstand","rolle","familiengrösse","aufenthaltsbewilligung","vermögen","steuerbareseinkommen","hasel","hassh","amount","id_format","pseudo_id","birthyear","plz4","address_id","address_flag","egid_pseudo","egid_flag","ewid_pseudo","ewid_flag"
-"Sex#M","Civil stat#L","Kind",3,"CHResidenc#B",0,25000,0,0,-100,"7569999999999","6703a61b29479e478d72625134e7527f53161a3e8e4816bf7801e0dc45c58fce",1995,"8045",1,0,1,0,1,0
-"Sex#W","Civil stat#S","Antragssteller",2,NA,10000,500000,1,0,777,"7569999999999","95daffcadf18a6d37fd197e7a0239de5b88f26771afc872a1029b4bdabc548ed",1982,"8135",2,0,2,0,2,0
-"Sex#M","Civil stat#W","Antragssteller",1,NA,20000,50000,NA,NA,99,"7569999999999","e85faf826a514bea765a01ba27e0957d9d14748ee8a0f73fc47a97ee66693253",1990,"8135",3,0,3,0,3,0

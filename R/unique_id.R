@@ -29,10 +29,14 @@ unique_id <- function(data,
   # to check whether there were any anomalies in the id)
   data[, "id_format"] <- gsub('(?<=.{3})[[:digit:]]', '9', ids, perl = TRUE)
 
-  # Remove all strings that are not of the expected format
-  # (if id_expected_format is 'digit', this removes everything that is not a digit, i.e.
-  # all letters, punctuation and spaces)
-  ids <- gsub(pattern = paste0("[^[:", id_expected_format, ":]]"), replacement = "", ids)
+  # Remove all strings that are not numeric or characters 
+  # AHV Number should be all numeric, 
+  # by keeping the characters, people with systematically deviating ahv numbers can be distinguished from each other
+  
+  ids <- gsub(pattern = "[^[:alnum:]]", replacement = "", ids)
+    
+  # Save this cleaned ahv-number
+  data[, id] <- ids
 
   # # Check that id is of expected length
   # expect <- paste0("[[:", id_expected_format, ":]]", "{", id_expected_length, "}")
