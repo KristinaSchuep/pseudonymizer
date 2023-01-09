@@ -1,0 +1,12 @@
+﻿NNSS,NACHNAME,VORNAME,GEBURTSDATUM,GESCHLECHT,ZIVILSTAND,ROLLE,FAMILIENGRÖSSE,AUFENTHALTSBEWILLIGUNG,STRASSE,HAUSNR,PLZ,WOHNORT,EGID,EWID,VERMÖGEN,STEUERBARESEINKOMMEN,EL-BEZUG,SH-BEZUG,AMOUNT
+7560000000001,Ackermann,Aaron,29.08.95,Sex#M,Civil stat#L,Kind,3,CHResidenc#B,Ackerstrasse,11,804500,Zürich,11111,,0,12345,0,0,100
+7560000000004,Da Silva,Denise,01.11.82,Sex#W,Civil stat#S,Antragssteller,2,,Denzingsteig,22,813503,Sihlwald,22,,10000,99999,1,0,2000
+7560000000006,Freud,Ferdi,09.03.77,Sex#M,Civil stat#W,Antragssteller,1,CHResidenc#L,Fichtenhalde,300,852502,Wilen b. Neunforn,9,122,20000,400000,,,-50
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
