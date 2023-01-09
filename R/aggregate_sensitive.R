@@ -17,6 +17,8 @@ aggregate_sensitive <- function(data,
                                 date_new_var = "birthyear",
                                 zip_var = "plz",
                                 zip_new_var = "plz4"){
+  # check if birthday variable is 8 (without centuries) or 10 digits
+  
   data[, date_var] <- as.Date(data[, date_var], date_old_format, tz = "UTC")
   data[, date_new_var] <- as.numeric(format(data[, date_var], format = date_new_format))
   data[, zip_new_var] <- gsub('.{2}$', '', data[, zip_var])
