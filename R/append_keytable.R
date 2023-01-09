@@ -16,7 +16,7 @@ append_keytable <- function(df,
   dir.create(file.path(path, "keytable"), showWarnings = FALSE)
 
   # Define which variables to extract
-  keep_columns <- c("pseudo_id",keytable_vars)
+  keep_columns <- c("pseudo_id",keytable_var,"year")
 
   # Create temporary keytable
   keytable_temp <- df[,keep_columns]
@@ -47,13 +47,13 @@ append_keytable <- function(df,
 
 
       # Remove duplicates and keep newest value if two entries with same pseudoid
-      keytable_temp <- keytable_temp[order(keytable_temp$created, keytable_temp[,id_original], decreasing = TRUE), ]
+      keytable_temp <- keytable_temp[order(keytable_temp$year,keytable_temp$created, keytable_temp[,id_original], decreasing = TRUE), ]
       keytable_temp <- keytable_temp[ !duplicated(keytable_temp$ahvnr), ]
 
       # Export new keytable to ./data/keytable folder
       name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
       utils::write.csv(keytable_temp,file.path(path,"keytable",name), row.names = FALSE)
-      message("Newest keytable is appended and duplicate AHV-Nr were removed, newer entries are kept")
+      message("Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent year and complication are kept")
   }
 
 }
