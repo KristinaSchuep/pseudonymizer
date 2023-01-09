@@ -16,7 +16,16 @@ import_raw_data <- function(filename,
                             oldnames,
                             newnames){
   
-  df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
+  if (grepl(".csv", filename, fixed = TRUE)){
+    #import csv and recognize empty strings as NA
+    df <- suppressMessages(read.csv(filename, na.strings=c("","NA")))
+  } else if (grepl(".xls", filename, fixed = TRUE)){
+    #import excel
+    df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
+  }
+  else 
+    stop("Unclear file format. The filename does neither contain '.csv' nor '.xls' (e.g., '.xlsx', .'xls', '.xlsm'.)")
+  
   
   #remove rows with all NAs
   df <- df[!apply(is.na(df), 1, all),]

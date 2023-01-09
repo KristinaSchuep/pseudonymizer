@@ -17,7 +17,7 @@ oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # Step 1: Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.xlsx",
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.csv",
                       oldnames = oldnames,
                       newnames = newnames)
 
