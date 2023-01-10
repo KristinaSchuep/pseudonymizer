@@ -1,0 +1,23 @@
+-/                                                                                                                                                            /                                                                                                                                                            -                                                                                                                                                            Imported file had 3 rows. After removing NAs 3 observations remain.
+3 duplicates based on AHV-number removed. Keytable now containts 7 unique AHV-numbers.
+Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent year and complication are kept
+Address file written to address/20230110_104433_FAKE_DATA_address.csv.
+Pseudonymized file with 3 rows written to 'panon/20230110_104433_FAKE_DATA_panon.csv'.
+The file contains the following variables: geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, el-bezug, sh-bezug, amount, id_format, pseudo_id, birthyear, plz4, address_id, address_flag, egid_pseudo, egid_flag, ewid_pseudo, ewid_flag
+ 
+# A tibble: 3 × 20
+  geschle…¹ zivil…² rolle famil…³ aufen…⁴ vermö…⁵ steue…⁶ el-be…⁷ sh-be…⁸ amount id_fo…⁹ pseud…˟ birth…˟ plz4  addre…˟ addre…˟ egid_…˟ egid_…˟ ewid_…˟ ewid_…˟
+  <chr>     <chr>   <chr>   <dbl> <chr>     <dbl>   <dbl>   <dbl>   <dbl>  <dbl> <chr>   <chr>     <dbl> <chr>   <int>   <dbl>   <int>   <int>   <int>   <dbl>
+1 Sex#M     Civil … Kind        3 CHResi…       0   12345       0       0    100 756.99… 6703a6…    1995 8045        1       0       1       0      NA       1
+2 Sex#W     Civil … Antr…       2 <NA>      10000   99999       1       0   2000 756999… 95daff…    1982 8135        2       0       2       0      NA       1
+3 Sex#M     Civil … Antr…       1 CHResi…   20000  400000      NA      NA    -50 756999… a8d26c…    1977 8525        3       0       3       0       2       0
+# … with abbreviated variable names ¹​geschlecht, ²​zivilstand, ³​familiengrösse, ⁴​aufenthaltsbewilligung, ⁵​vermögen, ⁶​steuerbareseinkommen, ⁷​`el-bezug`,
+#   ⁸​`sh-bezug`, ⁹​id_format, ˟​pseudo_id, ˟​birthyear, ˟​address_id, ˟​address_flag, ˟​egid_pseudo, ˟​egid_flag, ˟​ewid_pseudo, ˟​ewid_flag
+  geschlecht   zivilstand          rolle familiengrösse aufenthaltsbewilligung vermögen steuerbareseinkommen el-bezug sh-bezug amount        id_format
+1      Sex#M Civil stat#L           Kind              3           CHResidenc#B        0                12345        0        0    100 756.9999.9999.99
+2      Sex#W Civil stat#S Antragssteller              2                   <NA>    10000                99999        1        0   2000    7569999999999
+3      Sex#M Civil stat#W Antragssteller              1           CHResidenc#L    20000               400000       NA       NA    -50    7569999999999
+                                                         pseudo_id birthyear plz4 address_id address_flag egid_pseudo egid_flag ewid_pseudo ewid_flag
+1 6703a61b29479e478d72625134e7527f53161a3e8e4816bf7801e0dc45c58fce      1995 8045          1            0           1         0          NA         1
+2 95daffcadf18a6d37fd197e7a0239de5b88f26771afc872a1029b4bdabc548ed      1982 8135          2            0           2         0          NA         1
+3 a8d26c32f76a92a5ef8623cd143c1f0364ef090eef718942558139133cacdd91      1977 8525          3            0           3         0           2         0

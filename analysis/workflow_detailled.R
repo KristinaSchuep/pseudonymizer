@@ -18,7 +18,7 @@ oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # ------- Start recording
-sink(paste0(path,"Flavia_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
+sink(paste0(path,"/log/Flavia_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
 sink(stdout(), type = "message")
 
 
@@ -40,7 +40,7 @@ df <- unique_geo_id(df = df)
 append_keytable(df = df,
                 path = path,
                 keytable_vars = keytable_vars,
-                id_original = id)
+                id = id)
 
 # Step 6: Generate address file --------------------------------
 export_address(data = df,

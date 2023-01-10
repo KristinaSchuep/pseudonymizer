@@ -13,6 +13,7 @@ export_address <- function(data,
                            path,
                            data_name,
                            vars){
+  message(paste0("------- Export Address File -------"))
   # Check if address directory already exists otherwise create
   dir.create(file.path(path, "address"), showWarnings = FALSE)
 

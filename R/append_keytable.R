@@ -11,7 +11,7 @@ append_keytable <- function(df,
                             path,
                             keytable_vars,
                             id){
-
+  message(paste0("------- Append Key Table -------"))
   # Check if keytable directory already exists otherwise create
   dir.create(file.path(path, "keytable"), showWarnings = FALSE)
 
