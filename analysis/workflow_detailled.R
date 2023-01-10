@@ -3,6 +3,10 @@
 devtools::install_github("KristinaSchuep/pseudonymizer")
 library(pseudonymizer)
 
+# ------- Start recording
+sink(paste0("Flavia_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
+sink(stdout(), type = "message")
+
 # Step 0: Define variables
 mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 
@@ -17,7 +21,7 @@ oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # Step 1: Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.csv",
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2021.xlsx",
                       oldnames = oldnames,
                       newnames = newnames)
 
@@ -49,6 +53,8 @@ export_pseudonymized(data = df,
                      data_name = "FAKE_DATA",
                      data_summary = TRUE)
 
+# ------- End recording
+sink()
 
 ## Verlustscheine ------------------------------------------------------
 

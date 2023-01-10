@@ -4,7 +4,7 @@
 \alias{append_keytable}
 \title{Generate and append key table}
 \usage{
-append_keytable(df, path, keytable_vars, id_original)
+append_keytable(df, path, keytable_vars, id)
 }
 \arguments{
 \item{df}{Dataframe}
@@ -13,7 +13,7 @@ append_keytable(df, path, keytable_vars, id_original)
 
 \item{keytable_vars}{Variables to keep in keytable}
 
-\item{id_original}{ID-variable that needs to by pseudonymized}
+\item{id}{ID-variable that needs to by pseudonymized}
 }
 \value{
 Writes or appends keytable
