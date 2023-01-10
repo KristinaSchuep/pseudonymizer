@@ -1,0 +1,44 @@
+------- Import Raw Data -------
+Imported file (./data-raw/FAKE_DATA_2020.csv) had 3 rows. After removing 0 NAs 3 observations remain.
+------- Append Key Table -------
+3 duplicates based on AHV-number and birthday removed. Keytable now containts 9 observations with 8 unique AHV-numbers.
+Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent complication are kept
+------- Export Address File -------
+Address file written to address/20230110_144753_FAKE_DATA_address.csv.
+------- Export Pseudonymized Data -------
+Pseudonymized file with 3 rows written to 'panon/20230110_144753_FAKE_DATA_panon.csv'.
+The file contains the following variables: geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, hasel, hassh, amount, id_format, pseudo_id, birthyear, plz4, address_id, address_flag, egid_pseudo, egid_flag, ewid_pseudo, ewid_flag
+# A tibble: 6 × 20
+  geschlecht zivilst…¹ rolle famil…² aufen…³ vermö…⁴ steue…⁵ hasel hassh amount id_fo…⁶ pseud…⁷ birth…⁸ plz4  addre…⁹
+  <chr>      <chr>     <chr>   <int> <chr>     <int>   <int> <int> <int>  <int> <chr>   <chr>     <dbl> <chr>   <int>
+1 Sex#M      Civil st… Kind        3 CHResi…       0  0          0     0    -30 756999… 6703a6…    1995 8045        1
+2 Sex#W      Civil st… Gatte       2 CHResi…   10000  2   e7     1     0  50000 756999… 785e14…    1961 8802        2
+3 Sex#M      Civil st… Antr…       1 <NA>      20000  1.20e5    NA    NA     NA 756999… d4cf8a…      NA 8302        3
+4 <NA>       <NA>      <NA>       NA <NA>         NA  2.5 e4    NA    NA      0 756.99… 95daff…    1970 9e+         4
+5 <NA>       <NA>      <NA>       NA <NA>         NA  5   e5    NA    NA   3600 756AB9… c458d4…      NA 2           5
+6 <NA>       <NA>      <NA>       NA <NA>         NA  5   e4    NA    NA   1200 723999… 538c0b…      NA <NA>        6
+# … with 5 more variables: address_flag <dbl>, egid_pseudo <int>, egid_flag <dbl>, ewid_pseudo <int>,
+#   ewid_flag <dbl>, and abbreviated variable names ¹​zivilstand, ²​familiengrösse, ³​aufenthaltsbewilligung,
+#   ⁴​vermögen, ⁵​steuerbareseinkommen, ⁶​id_format, ⁷​pseudo_id, ⁸​birthyear, ⁹​address_id
+# ℹ Use `colnames()` to see all variable names
+-/                                                                                                                   /                                                                                                                   -                                                                                                                   # A tibble: 3 × 20
+  geschlecht zivilst…¹ rolle famil…² aufen…³ vermö…⁴ steue…⁵ hasel hassh amount id_fo…⁶ pseud…⁷ birth…⁸ plz4  addre…⁹
+  <chr>      <chr>     <chr>   <dbl> <chr>     <dbl>   <dbl> <dbl> <dbl>  <dbl> <chr>   <chr>     <dbl> <chr>   <int>
+1 Sex#M      Civil st… Kind        3 CHResi…       0   25000     0     0   -100 756999… 6703a6…    1995 8045        1
+2 Sex#W      Civil st… Antr…       2 <NA>      10000  500000     1     0    777 756999… 95daff…    1982 8135        2
+3 Sex#M      Civil st… Antr…       1 <NA>      20000   50000    NA    NA     99 756999… e85faf…    1990 8135        3
+# … with 5 more variables: address_flag <dbl>, egid_pseudo <int>, egid_flag <int>, ewid_pseudo <int>,
+#   ewid_flag <int>, and abbreviated variable names ¹​zivilstand, ²​familiengrösse, ³​aufenthaltsbewilligung,
+#   ⁴​vermögen, ⁵​steuerbareseinkommen, ⁶​id_format, ⁷​pseudo_id, ⁸​birthyear, ⁹​address_id
+# ℹ Use `colnames()` to see all variable names
+-/                                                                                                                   /                                                                                                                   -                                                                                                                   # A tibble: 3 × 20
+  geschl…¹ zivil…² rolle famil…³ aufen…⁴ vermö…⁵ steue…⁶ el-be…⁷ sh-be…⁸ amount id_fo…⁹ pseud…˟ birth…˟ plz4  addre…˟
+  <chr>    <chr>   <chr>   <dbl> <chr>     <dbl>   <dbl>   <dbl>   <dbl>  <dbl> <chr>   <chr>     <dbl> <chr>   <int>
+1 Sex#M    Civil … Kind        3 CHResi…       0   12345       0       0    100 756.99… 6703a6…    1995 8045        1
+2 Sex#W    Civil … Antr…       2 <NA>      10000   99999       1       0   2000 756999… 95daff…    1982 8135        2
+3 Sex#M    Civil … Antr…       1 CHResi…   20000  400000      NA      NA    -50 756999… a8d26c…    1977 8525        3
+# … with 5 more variables: address_flag <dbl>, egid_pseudo <int>, egid_flag <int>, ewid_pseudo <int>,
+#   ewid_flag <dbl>, and abbreviated variable names ¹​geschlecht, ²​zivilstand, ³​familiengrösse,
+#   ⁴​aufenthaltsbewilligung, ⁵​vermögen, ⁶​steuerbareseinkommen, ⁷​`el-bezug`, ⁸​`sh-bezug`, ⁹​id_format, ˟​pseudo_id,
+#   ˟​birthyear, ˟​address_id
+# ℹ Use `colnames()` to see all variable names

@@ -11,7 +11,7 @@ pseudonymize(
   import_skiprows = 0,
   import_oldnames,
   import_newnames,
-  id_original,
+  id,
   id_salt,
   id_expected_format = "digit",
   id_expected_length = 13,
@@ -46,7 +46,7 @@ pseudonymize(
 
 \item{import_newnames}{New variable names}
 
-\item{id_original}{ID-variable that needs to by pseudonymized}
+\item{id}{ID-variable that needs to by pseudonymized}
 
 \item{id_salt}{Salt value}
 

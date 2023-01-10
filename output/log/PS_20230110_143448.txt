@@ -1,0 +1,16 @@
+------- Import Raw Data -------
+-/                                                                                                                   /                                                                                                                   -                                                                                                                   Imported file had 3 rows. After removing 0 NAs 3 observations remain.
+------- Append Key Table -------
+0 duplicates based on AHV-number and birthday removed. Keytable now containts 3 observations with 3 unique AHV-numbers.
+No existing keytable, current keytable is saved
+------- Export Address File -------
+Address file written to address/20230110_143454_FAKE_DATA_address.csv.
+------- Export Pseudonymized Data -------
+Pseudonymized file with 3 rows written to 'panon/20230110_143454_FAKE_DATA_panon.csv'.
+The file contains the following variables: geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, el-bezug, sh-bezug, amount, id_format, pseudo_id, birthyear, plz4, address_id, address_flag, egid_pseudo, egid_flag, ewid_pseudo, ewid_flag
+Error in stddeer() : could not find function "stddeer"
+Error in stdeer() : could not find function "stdeer"
+Error: object 'filename' not found
+ℹ Updating pseudonymizer documentation
+ℹ Loading pseudonymizer
+ℹ Loading pseudonymizer
