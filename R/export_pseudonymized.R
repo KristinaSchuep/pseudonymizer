@@ -36,7 +36,8 @@ export_pseudonymized <- function(data,
   if(data_summary == TRUE){
     message(" ")
     print(utils::head(tidyr::as_tibble(data)))
-  }
-  return(data)
+    return(data)
+    }
+
 }
 
