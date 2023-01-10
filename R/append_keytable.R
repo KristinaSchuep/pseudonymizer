@@ -59,7 +59,7 @@ append_keytable <- function(df,
     # Export new keytable to ./data/keytable folder
     name<-paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable",".csv")
     utils::write.csv(keytable_temp,file.path(path,"keytable",name), row.names = FALSE)
-    message("Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent year and complication are kept")
+    message("Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent complication are kept")
   }
 
 }

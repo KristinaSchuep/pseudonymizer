@@ -1,0 +1,13 @@
+Error in import_raw_data(filename = "./data-raw/FAKE_DATA_2021.xlsx",  : 
+  could not find function "import_raw_data"
+Error in unique_id(data = df, id = id, salt = mysalt) : 
+  could not find function "unique_id"
+Error in aggregate_sensitive(data = df) : 
+  could not find function "aggregate_sensitive"
+Error in unique_geo_id(df = df) : could not find function "unique_geo_id"
+Error in append_keytable(df = df, path = path, keytable_vars = keytable_vars,  : 
+  could not find function "append_keytable"
+Error in export_address(data = df, path = path, data_name = "FAKE_DATA",  : 
+  could not find function "export_address"
+Error in export_pseudonymized(data = df, sensitive_vars = sensitive_vars,  : 
+  could not find function "export_pseudonymized"
