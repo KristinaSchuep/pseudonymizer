@@ -15,7 +15,7 @@ import_raw_data <- function(filename,
                             skiprows = 0,
                             oldnames,
                             newnames){
-  
+  message(paste0("------- Import Raw Data -------"))
   if (grepl(".csv", filename, fixed = TRUE)){
     #import csv and recognize empty strings as NA
     df <- suppressMessages(read.csv(filename, na.strings=c("","NA")))
@@ -28,7 +28,7 @@ import_raw_data <- function(filename,
   n<-nrow(df)
   #remove rows with all NAs
   df <- df[!apply(is.na(df), 1, all),]
-  message(paste0("Imported file had ", n, " rows. After removing NAs ", nrow(df),
+  message(paste0("Imported file had ", n, " rows. After removing", n-nrow(df), " NAs ", nrow(df),
                  " observations remain."))
   
   # Check that oldnames are df column names

@@ -15,6 +15,7 @@ export_pseudonymized <- function(data,
                                  path,
                                  data_name,
                                  data_summary){
+  message(paste0("------- Export Pseudonymized Data -------"))
   # Drop sensitive data
   data <- data[, setdiff(colnames(data), sensitive_vars)]
 
