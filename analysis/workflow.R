@@ -10,6 +10,7 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 #mysalt <- "myverygoodsalt"
 
 id <- "ahvnr"
+path <- "output"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz4', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
 sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort","egid","ewid")
@@ -20,9 +21,9 @@ df <- pseudonymize(data_name = "FAKE_DATA_2019",
                    import_filename = "data-raw/FAKE_DATA_2019.csv",
                    import_oldnames = oldnames,
                    import_newnames = newnames,
-                   id_original = id,
+                   id = id,
                    id_salt = mysalt,
-                   export_path = "output",
+                   path = path,
                    address_vars =  address_vars,
                    keytable_vars = keytable_vars,
                    sensitive_vars = sensitive_vars)
@@ -31,9 +32,9 @@ df <- pseudonymize(data_name = "FAKE_DATA_2020",
                    import_filename = "data-raw/FAKE_DATA_2020.xlsx",
                    import_oldnames = oldnames,
                    import_newnames = newnames,
-                   id_original = id,
+                   id = id,
                    id_salt = mysalt,
-                   export_path = "output",
+                   path = path,
                    address_vars =  address_vars,
                    keytable_vars = keytable_vars,
                    sensitive_vars = sensitive_vars)
@@ -43,9 +44,9 @@ df <- pseudonymize(data_name = "FAKE_DATA_2021",
                    import_filename = "data-raw/FAKE_DATA_2021.xlsx",
                    import_oldnames = oldnames,
                    import_newnames = newnames,
-                   id_original = id,
+                   id = id,
                    id_salt = mysalt,
-                   export_path = "output",
+                   path = path,
                    address_vars =  address_vars,
                    keytable_vars = keytable_vars,
                    sensitive_vars = sensitive_vars)

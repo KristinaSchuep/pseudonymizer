@@ -1,0 +1,63 @@
+------- Import Raw Data -------
+Imported file (./data-raw/FAKE_DATA_2020.csv) had 3 rows. After removing 0 NAs 3 observations remain.
+------- Append Key Table -------
+3 duplicates based on AHV-number and birthday removed. Keytable now containts 9 observations with 8 unique AHV-numbers.
+Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent complication are kept
+------- Export Address File -------
+Address file written to address/20230110_144125_FAKE_DATA_address.csv.
+------- Export Pseudonymized Data -------
+Pseudonymized file with 3 rows written to 'panon/20230110_144125_FAKE_DATA_panon.csv'.
+The file contains the following variables: geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, hasel, hassh, amount, id_format, pseudo_id, birthyear, plz4, address_id, address_flag, egid_pseudo, egid_flag, ewid_pseudo, ewid_flag
+Error in stdeer() : could not find function "stdeer"
+          ahvnr   surname firstname   birthday geschlecht   zivilstand          rolle familiengrösse
+1 7560000000001 Ackermann     Aaron 1995-08-29      Sex#M Civil stat#L           Kind              3
+2 7560000000004  Da Silva    Denise 1982-11-01      Sex#W Civil stat#S Antragssteller              2
+3 7560000000005      Egli     Erich 1990-02-16      Sex#M Civil stat#W Antragssteller              1
+  aufenthaltsbewilligung      strasse hausnr    plz  wohnort    egid ewid vermögen steuerbareseinkommen hasel hassh
+1           CHResidenc#B Ackerstrasse     11 804500   Zürich     222    2        0                25000     0     0
+2                   <NA> Denzingsteig     22 813503 Sihlwald    1231  122    10000               500000     1     0
+3                   <NA>    Eichenweg     33 813500  Langnau 9999999  999    20000                50000    NA    NA
+  amount     id_format                                                        pseudo_id birthyear plz4 address_id
+1   -100 7569999999999 6703a61b29479e478d72625134e7527f53161a3e8e4816bf7801e0dc45c58fce      1995 8045          1
+2    777 7569999999999 95daffcadf18a6d37fd197e7a0239de5b88f26771afc872a1029b4bdabc548ed      1982 8135          2
+3     99 7569999999999 e85faf826a514bea765a01ba27e0957d9d14748ee8a0f73fc47a97ee66693253      1990 8135          3
+  address_flag egid_pseudo egid_flag ewid_pseudo ewid_flag
+1            0           1         0           1         0
+2            0           2         0           2         0
+3            0           3         0           3         0
+Error: unexpected string constant in "head(df,1''"
+------- Export Pseudonymized Data -------
+Pseudonymized file with 3 rows written to 'panon/20230110_144235_FAKE_DATA_panon.csv'.
+The file contains the following variables: geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, hasel, hassh, amount, id_format, pseudo_id, birthyear, plz4, address_id, address_flag, egid_pseudo, egid_flag, ewid_pseudo, ewid_flag
+Error in stdeer() : could not find function "stdeer"
+Error: object 'sdf' not found
+R version 4.2.2 (2022-10-31)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.6.2
+
+Matrix products: default
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] pseudonymizer_0.0.0.9000 testthat_3.1.5          
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.2.0  xfun_0.34         remotes_2.4.2     purrr_1.0.0       vctrs_0.5.1       generics_0.1.3   
+ [7] miniUI_0.1.1.1    usethis_2.1.6     htmltools_0.5.3   utf8_1.2.2        rlang_1.0.6       pkgbuild_1.4.0   
+[13] urlchecker_1.0.1  later_1.3.0       pillar_1.8.1      DBI_1.1.3         glue_1.6.2        withr_2.5.0      
+[19] sessioninfo_1.2.2 readxl_1.4.1      lifecycle_1.0.3   stringr_1.4.1     commonmark_1.8.1  cellranger_1.1.0 
+[25] devtools_2.4.5    htmlwidgets_1.5.4 memoise_2.0.1     knitr_1.40        callr_3.7.3       fastmap_1.1.0    
+[31] httpuv_1.6.6      ps_1.7.2          fansi_1.0.3       Rcpp_1.0.9        xtable_1.8-4      openssl_2.0.5    
+[37] promises_1.2.0.1  cachem_1.0.6      desc_1.4.2        pkgload_1.3.1     mime_0.12         fs_1.5.2         
+[43] brio_1.1.3        askpass_1.1       digest_0.6.30     stringi_1.7.8     processx_3.8.0    dplyr_1.0.10     
+[49] shiny_1.7.3       rprojroot_2.0.3   cli_3.6.0         tools_4.2.2       magrittr_2.0.3    tibble_3.1.8     
+[55] profvis_0.3.7     crayon_1.5.2      tidyr_1.2.1       pkgconfig_2.0.3   ellipsis_0.3.2    xml2_1.3.3       
+[61] prettyunits_1.1.1 assertthat_0.2.1  roxygen2_7.2.2    rstudioapi_0.14   R6_2.5.1          compiler_4.2.2   
+Error in stdeer() : could not find function "stdeer"
+Error: object 'sdf' not found

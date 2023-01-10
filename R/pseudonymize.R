@@ -9,7 +9,7 @@
 #' @param import_skiprows Number of rows to skip
 #' @param import_oldnames Variable names to change
 #' @param import_newnames New variable names
-#' @param id_original ID-variable that needs to by pseudonymized
+#' @param id ID-variable that needs to by pseudonymized
 #' @param id_salt Salt value
 #' @param id_expected_format Expected format of ID-variable (Default: 'digit').
 #' If the ID-variable does not have the expected format, the function will try to
@@ -19,7 +19,7 @@
 #' @param date_var Date variable
 #' @param date_new_format Format for new date variable
 #' @param date_new_var Name for new date variable
-#' @param export_path Path exported data
+#' @param path Path exported data
 #' @param export_address TRUE (Default) to export address variables
 #' @param address_vars Variables to export for address file
 #' @param keytable_vars Variables to export for keytable
@@ -35,7 +35,7 @@ pseudonymize <- function(
   import_skiprows = 0,
   import_oldnames,
   import_newnames,
-  id_original,
+  id,
   id_salt,
   id_expected_format = "digit",
   id_expected_length = 13,
@@ -49,7 +49,7 @@ pseudonymize <- function(
   var_ewid = "ewid",
   zip_var = "plz",
   zip_new_var = "plz4",
-  export_path,
+  path,
   export_address = TRUE,
   address_vars,
   keytable_vars,
@@ -66,7 +66,7 @@ pseudonymize <- function(
                           newnames = import_newnames)
 
   data <- unique_id(data = data,
-                    id = id_original,
+                    id = id,
                     salt = id_salt,
                     id_expected_format = id_expected_format,
                     id_expected_length = id_expected_length)
@@ -84,18 +84,18 @@ pseudonymize <- function(
                         var_plz = var_plz,
                         var_egid = var_egid,
                         var_ewid = var_ewid)
-  
+
   message("1) Append keytable:")
   append_keytable(df = data,
-                  path = export_path,
+                  path = path,
                   keytable_vars = keytable_vars,
-                  id_original = id_original)
+                  id = id)
 
   message(" ")
   if(export_address == TRUE){
     message("2) Export address file:")
     export_address(data = data,
-                   path = export_path,
+                   path = path,
                    data_name = data_name,
                    vars = address_vars)
   } else message("2) Export address file: no addresses exported.")
@@ -104,7 +104,7 @@ pseudonymize <- function(
   message("3) Export pseudonymized data:")
   export_pseudonymized(data = data,
                        sensitive_vars = sensitive_vars,
-                       path = export_path,
+                       path = path,
                        data_name = data_name,
                        data_summary = data_summary)
 }
