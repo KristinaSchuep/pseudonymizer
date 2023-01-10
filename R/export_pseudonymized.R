@@ -33,6 +33,10 @@ export_pseudonymized <- function(data,
                  file.path("panon", name), "'."))
   message(paste0("The file contains the following variables: ",
                  paste(colnames(data), collapse = ", ")))
+  if(data_summary == TRUE){
+    message(" ")
+    print(utils::head(tidyr::as_tibble(data)))
+  }
   return(data)
 }
 

@@ -18,7 +18,7 @@ oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # ------- Start recording
-sink(paste0(path,"/log/Flavia_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
+sink(paste0(path,"/log/PS_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
 sink(stdout(), type = "message")
 
 
@@ -53,7 +53,7 @@ export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
                      path = path,
                      data_name = "FAKE_DATA",
-                     data_summary = TRUE)
+                     data_summary = FALSE)
 
 # ------- End recording
 sink()
