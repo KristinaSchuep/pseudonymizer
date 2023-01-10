@@ -3,20 +3,20 @@
 #' @param df Dataframe
 #' @param path Filepath
 #' @param keytable_vars Variables to keep in keytable
-#' @param id_original ID-variable that needs to by pseudonymized
+#' @param id ID-variable that needs to by pseudonymized
 #'
 #' @return Writes or appends keytable
 #' @export
 append_keytable <- function(df,
                             path,
                             keytable_vars,
-                            id_original){
+                            id){
 
   # Check if keytable directory already exists otherwise create
   dir.create(file.path(path, "keytable"), showWarnings = FALSE)
 
   # Define which variables to extract
-  keep_columns <- c("pseudo_id",keytable_var,"year")
+  keep_columns <- c("pseudo_id",keytable_vars)
 
   # Create temporary keytable
   keytable_temp <- df[,keep_columns]
@@ -50,8 +50,8 @@ append_keytable <- function(df,
     keytable_temp <- rbind(keytable,keytable_temp)
 
 
-    # Remove duplicates and keep newest value if two entries with same pseudoid
-    keytable_temp <- keytable_temp[order(keytable_temp$year,keytable_temp$created, keytable_temp[,id_original], decreasing = TRUE), ]
+    # Remove duplicates and keep newest value if two entries with same pseudo_id
+    keytable_temp <- keytable_temp[order(keytable_temp$created, keytable_temp[,id], decreasing = TRUE), ]
     n <- nrow(keytable_temp)
     keytable_temp <- keytable_temp[ !duplicated(keytable_temp$ahvnr), ]
     message(paste0(n - nrow(keytable_temp), " duplicates based on AHV-number removed. Keytable now containts ", nrow(keytable_temp), " unique AHV-numbers."))
