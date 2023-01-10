@@ -3,10 +3,6 @@
 devtools::install_github("KristinaSchuep/pseudonymizer")
 library(pseudonymizer)
 
-# ------- Start recording
-sink(paste0("Flavia_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
-sink(stdout(), type = "message")
-
 # Step 0: Define variables
 mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 
@@ -14,11 +10,17 @@ mysalt<- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 #mysalt <- "myverygoodsalt"
 
 id <- "ahvnr"
+path <- "output"
 address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz4', 'wohnort')
 keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
 sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort","egid","ewid")
 oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
+
+# ------- Start recording
+sink(paste0(path,"Flavia_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt")) 
+sink(stdout(), type = "message")
+
 
 # Step 1: Import datasets into R -----------------------
 df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2021.xlsx",
@@ -36,20 +38,20 @@ df <- unique_geo_id(df = df)
 
 # Step 5: Generate and append key table ---------------------------
 append_keytable(df = df,
-                path = "output",
+                path = path,
                 keytable_vars = keytable_vars,
                 id_original = id)
 
 # Step 6: Generate address file --------------------------------
 export_address(data = df,
-               path = "output",
+               path = path,
                data_name = 'FAKE_DATA',
                vars = address_vars)
 
 # Step 7: Drop sensitive data and export --------------------------------
 export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
-                     path = "output",
+                     path = path,
                      data_name = "FAKE_DATA",
                      data_summary = TRUE)
 
