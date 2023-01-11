@@ -6,11 +6,11 @@
 \usage{
 unique_geo_id(
   df,
-  var_street = "strasse",
-  var_number = "hausnr",
+  var_street = "street",
+  var_number = "street_nr",
   var_plz = "plz",
-  var_egid = "egid",
-  var_ewid = "ewid"
+  list_rename = c("egid", "ewid"),
+  list_distinct = c(999999999, 999)
 )
 }
 \arguments{

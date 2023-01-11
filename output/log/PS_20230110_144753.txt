@@ -42,3 +42,14 @@ The file contains the following variables: geschlecht, zivilstand, rolle, famili
 #   ⁴​aufenthaltsbewilligung, ⁵​vermögen, ⁶​steuerbareseinkommen, ⁷​`el-bezug`, ⁸​`sh-bezug`, ⁹​id_format, ˟​pseudo_id,
 #   ˟​birthyear, ˟​address_id
 # ℹ Use `colnames()` to see all variable names
+── R CMD build ──────────────────────────────────────────────────────────────────────────────────────────────────────
+     checking for file ‘/private/var/folders/7l/3g9s6sfd34j731nqkjr_7_c80000gs/T/RtmpYCw0om/remotes68f83a1bb5f1/KristinaSchuep-pseudonymizer-48bf328/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/7l/3g9s6sfd34j731nqkjr_7_c80000gs/T/RtmpYCw0om/remotes68f83a1bb5f1/KristinaSchuep-pseudonymizer-48bf328/DESCRIPTION’
+  ─  preparing ‘pseudonymizer’:
+     checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+  ─  checking for LF line-endings in source and make files and shell scripts
+  ─  checking for empty or unneeded directories
+─  building ‘pseudonymizer_0.0.0.9000.tar.gz’
+     
+-/                                                                                                                   /                                                                                                                   -                                                                                                                   -/                                                                                                                   /                                                                                                                   -                                                                                                                   [1] "egid"
+[1] "egid"
+[1] "egid"

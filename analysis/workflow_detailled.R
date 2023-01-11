@@ -23,7 +23,7 @@ sink(stdout(), type = "message")
 
 
 # Step 1: Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2020.csv",
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.csv",
                       oldnames = oldnames,
                       newnames = newnames)
 
@@ -57,6 +57,7 @@ export_pseudonymized(data = df,
 
 # ------- End recording
 sink(NULL,type="message")
+sink()
 
 ## Verlustscheine ------------------------------------------------------
 
@@ -78,12 +79,46 @@ sensitive_vars <- c("ahvnr","debtor_surname", "debtor_firstname", "debtor_street
                     "debtor_street_nr","debtor_plz","debtor_wohnort",
                     "firstname","surname","birthday","street","street_nr","plz","wohnort")
 
-# Import datasets into R -----------------------
+# Step 1: Import datasets into R -----------------------
 df <- import_raw_data(filename = "data-raw/FAKE_Verlustscheine.xlsx",
                       sheetname = "Schlussabrechnung",
                       skiprows = 1,
                       oldnames = oldnames,
                       newnames = newnames)
+
+# Step 2: Generate unique ID from AHV-number -------------------------
+df <- unique_id(data = df, id = id, salt = mysalt)
+
+# Step 3: Aggregate sensitive data -------------------------------
+df <- aggregate_sensitive(data = df)
+
+# Step 4: Create Unique Geo ID  -------------------------------
+df <- unique_geo_id(df = df,
+                    var_street = "strasse",
+                    var_number = "hausnr",
+                    var_plz = "plz",
+                    var_egid = "debt_claim_nr",
+                    var_ewid = "loss_slip_nr")
+
+# Step 5: Generate and append key table ---------------------------
+append_keytable(df = df,
+                path = path,
+                keytable_vars = keytable_vars,
+                id = id)
+
+# Step 6: Generate address file --------------------------------
+export_address(data = df,
+               path = path,
+               data_name = 'FAKE_DATA',
+               vars = address_vars)
+
+# Step 7: Drop sensitive data and export --------------------------------
+export_pseudonymized(data = df,
+                     sensitive_vars = sensitive_vars,
+                     path = path,
+                     data_name = "FAKE_DATA",
+                     data_summary = FALSE)
+
 
 # Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "ahvnr", salt = mysalt)

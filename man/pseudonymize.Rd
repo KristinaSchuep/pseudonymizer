@@ -25,7 +25,7 @@ pseudonymize(
   var_ewid = "ewid",
   zip_var = "plz",
   zip_new_var = "plz4",
-  export_path,
+  path,
   export_address = TRUE,
   address_vars,
   keytable_vars,
@@ -63,7 +63,7 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{date_new_var}{Name for new date variable}
 
-\item{export_path}{Path exported data}
+\item{path}{Path exported data}
 
 \item{export_address}{TRUE (Default) to export address variables}
 
