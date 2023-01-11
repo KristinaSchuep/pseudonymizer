@@ -18,7 +18,7 @@ import_raw_data <- function(filename,
   message(paste0("------- Import Raw Data -------"))
   if (grepl(".csv", filename, fixed = TRUE)){
     #import csv and recognize empty strings as NA
-    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=';')))
+    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=';'))
   } else if (grepl(".xls", filename, fixed = TRUE)){
     #import excel
     df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
