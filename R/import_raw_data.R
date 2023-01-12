@@ -18,7 +18,8 @@ import_raw_data <- function(filename,
   message(paste0("------- Import Raw Data -------"))
   if (grepl(".csv", filename, fixed = TRUE)){
     #import csv and recognize empty strings as NA
-    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=';'))
+    # read_delim should be able to recognize the right deliminator
+    df <- suppressMessages(readr::read_delim(filename, na = c("","NA")))
   } else if (grepl(".xls", filename, fixed = TRUE)){
     #import excel
     df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
@@ -31,6 +32,8 @@ import_raw_data <- function(filename,
   message(paste0("Imported file (", filename,") had ", n, " rows. After removing ", n-nrow(df), " NAs ", nrow(df),
                  " observations remain."))
 
+  # Convert column names to UTF-8
+  names(df) <- iconv(names(df), to = "UTF-8", sub = "")
   # Check that oldnames are df column names
   assertthat::assert_that(all(oldnames %in% names(df)), msg = "One or more column name cannot be replaced, because it does not exist. Verify that all names in 'oldnames' are actually in dataframe")
 
