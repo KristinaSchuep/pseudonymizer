@@ -9,15 +9,27 @@ append_keytable(df, path, keytable_vars, id_original)
 \arguments{
 \item{df}{Dataframe}
 
-\item{path}{Filepath}
+\item{path}{File path to directory where keytables will be stored. The function
+will create a subfolder folder called 'keytable' and store the table there (i.e.
+in 'path/keytable').}
 
 \item{keytable_vars}{Variables to keep in keytable}
 
-\item{id_original}{ID-variable that needs to by pseudonymized}
+\item{id_original}{Original ID, this is used to delete duplicated entries}
 }
 \value{
 Writes or appends keytable
 }
 \description{
-Generate and append key table
+Generate a new keytable or append an existing keytable which holds the
+sensitive and the pseudonymized identifier.
+}
+\examples{
+\dontrun{
+df <- unique_id(data = testdata, id = "ahvnr", salt = "myverygoodsalt")
+append_keytable(df = df,
+                path = "output",
+                keytable_vars = c("ahvnr","firstname","surname"),
+                id_original = "ahvnr")
+}
 }

@@ -15,17 +15,26 @@ aggregate_sensitive(
 \arguments{
 \item{data}{Dataframe}
 
-\item{date_var}{Date variable}
+\item{date_var}{Date variable(s)}
 
-\item{date_old_format}{Format of old date variable}
+\item{date_old_format}{Format of old date variable(s)}
 
-\item{date_new_format}{Format for new date variable}
+\item{date_new_format}{Format for new date variable(s)}
 
-\item{date_new_var}{Name for new date variable}
+\item{date_new_var}{Name for new date variable(s)}
 }
 \value{
-Datafile for which indicated variables have been aggregated
+Original dataframe plus the new date variable(s)
 }
 \description{
-Aggregate sensitive data
+This function aggregates a date variable (e.g. date of birth to year of birth).
+}
+\examples{
+testdata <- cbind(testdata,
+                  data.frame("other_date" = c("20.03.2000", "12.06.1998", "26.12.1989")))
+aggregate_sensitive(data = testdata,
+                    date_var = c("birthday", "other_date"),
+                    date_old_format = c("\%Y-\%m-\%d", "\%d.\%m.\%Y"),
+                    date_new_format = c("\%Y", "\%Y"),
+                    date_new_var = c("birthyear", "otheryear"))
 }

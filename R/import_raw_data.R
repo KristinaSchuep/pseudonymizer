@@ -1,23 +1,27 @@
-# Task 0: Import datasets (mostly as excel files) into R -----------------------
-
-#' Import datasets into R
+#' Import dataset into R
 #'
 #' @param filename Filename (and path) of dataset to import
-#' @param sheetname Sheetname
-#' @param skiprows Number of rows to skip
-#' @param oldnames Variable names to change
-#' @param newnames New variable names
+#' @param sheetname Sheetname (Default = NULL)
+#' @param skiprows Number of rows to skip (Default = 0)
+#' @param oldnames Vector with the variable names to be renamed
+#' @param newnames Vector with the new variable names
 #'
 #' @return Imported dataset, with renamed variables.
 #' @export
+#' @examples
+#' \dontrun{
+#' df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.xlsx",
+#'                       oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
+#'                       newnames = c("ahvnr","surname","firstname","birthday"))
+#' }
 import_raw_data <- function(filename,
                             sheetname = NULL,
                             skiprows = 0,
                             oldnames,
                             newnames){
-  
+
   df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
-  
+
   #remove rows with all NAs
   df <- df[!apply(is.na(df), 1, all),]
 

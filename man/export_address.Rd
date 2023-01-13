@@ -9,7 +9,9 @@ export_address(data, path, data_name, vars)
 \arguments{
 \item{data}{Dataframe}
 
-\item{path}{Filepath}
+\item{path}{File path to directory where adress table will be stored. The function
+will create a subfolder folder called 'address' and store the table there (i.e.
+in 'path/address').}
 
 \item{data_name}{Name or source of data}
 
@@ -20,4 +22,13 @@ Exported csv-file.
 }
 \description{
 Generate address file
+}
+\examples{
+\dontrun{
+df <- unique_id(data = testdata, id = "ahvnr", salt = "myverygoodsalt")
+export_address(data = df,
+               path = "output",
+               data_name = "FAKE_DATA",
+               vars = c("pseudo_id", "firstname", "surname", 'plz', 'wohnort'))
+}
 }

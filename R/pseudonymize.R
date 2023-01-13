@@ -1,33 +1,59 @@
-# Task 6: Write wrapper function -----------------------------
-
-
 #' Pseudonymize data
 #'
-#' @param data_name Name of data
-#' @param import_filename Filename (and path) of dataset to import
-#' @param import_sheetname Sheetname
+#' This function performs six steps:
+#'
+#' 1) Import a data set
+#' 2) Generate a unique, stable, pseudonymized identifier from a sensitive identifier for each observation unit
+#' 3) Aggregate some sensitive data (like aggregate date of birth to year of birth)
+#' 4) Optional: Generate a keytable which holds the sensitive and the pseudonymized identifier
+#' 5) Optional: Generate an address file
+#' 6) Drop sensitive data and export
+#'
+#' @param data_name Name of data set
+#' @param import_filename File name (and path) of dataset to import
+#' @param import_sheetname Sheet name
 #' @param import_skiprows Number of rows to skip
 #' @param import_oldnames Variable names to change
 #' @param import_newnames New variable names
 #' @param id_original ID-variable that needs to by pseudonymized
 #' @param id_salt Salt value
-#' @param id_expected_format Expected format of ID-variable (Default: 'digit').
-#' If the ID-variable does not have the expected format, the function will try to
-#' convert it.
-#' @param id_expected_length Expected length of ID-variable (Default: 13). If the
-#' ID-variable does not have the expected length, the function will give an error.
-#' @param date_var Date variable
-#' @param date_new_format Format for new date variable
-#' @param date_new_var Name for new date variable
-#' @param export_path Path exported data
+#' @param id_expected_format Expected pattern of ID-variable strings. If the ID-variable
+#' does not have the expected pattern, the function will remove any characters that are
+#' not of the expected format (Default = 'digit', i.e. letters, punctuation and spaces
+#' will be removed from the original ID before applying the hash function).
+#' @param date_var Date variable(s)
+#' @param date_new_format Format for new date variable(s)
+#' @param date_new_var Name for new date variable(s)
+#' @param export_path Path to exported data
 #' @param export_address TRUE (Default) to export address variables
 #' @param address_vars Variables to export for address file
 #' @param keytable_vars Variables to export for keytable
 #' @param sensitive_vars Variables to drop from final pseudonymized data.
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
 #'
-#' @return Export of following files: keytable, address file, pseudonymized data
+#' @return Exports following files: keytable, address file, pseudonymized data.
+#' Additionally returns pseudonymized data.
 #' @export
+#' @examples
+#' \dontrun{
+#' mysalt <- "myverygoodsalt" # Beware, this is NOT a good salt!
+#' oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
+#' newnames <-  c("ahvnr","surname","firstname","birthday")
+#' address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz', 'wohnort')
+#' keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
+#' sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
+#'
+#' df <- pseudonymize(data_name = "FAKE_DATA_2019",
+#'                    import_filename = "data-raw/FAKE_DATA_2019.xlsx",
+#'                    import_oldnames = oldnames,
+#'                    import_newnames = newnames,
+#'                    id_original = "ahvnr",
+#'                    id_salt = mysalt,
+#'                    export_path = "output",
+#'                    address_vars =  address_vars,
+#'                    keytable_vars = keytable_vars,
+#'                    sensitive_vars = sensitive_vars)
+#' }
 pseudonymize <- function(
   data_name,
   import_filename,
@@ -38,7 +64,6 @@ pseudonymize <- function(
   id_original,
   id_salt,
   id_expected_format = "digit",
-  id_expected_length = 13,
   date_var = "birthday",
   date_new_format = "%Y",
   date_new_var = "birthyear",
@@ -61,8 +86,7 @@ pseudonymize <- function(
   data <- unique_id(data = data,
                     id = id_original,
                     salt = id_salt,
-                    id_expected_format = id_expected_format,
-                    id_expected_length = id_expected_length)
+                    id_expected_format = id_expected_format)
 
   data <- aggregate_sensitive(data = data,
                               date_var = date_var,

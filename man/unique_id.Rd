@@ -2,15 +2,9 @@
 % Please edit documentation in R/unique_id.R
 \name{unique_id}
 \alias{unique_id}
-\title{Generate unique ID from AHV-number}
+\title{Generate unique, pseudonymized ID}
 \usage{
-unique_id(
-  data,
-  id = "ahvnr",
-  salt,
-  id_expected_format = "digit",
-  id_expected_length = 13
-)
+unique_id(data, id = "ahvnr", salt, id_expected_format = "digit")
 }
 \arguments{
 \item{data}{Dataframe}
@@ -19,17 +13,20 @@ unique_id(
 
 \item{salt}{Salt value}
 
-\item{id_expected_format}{Expected format of ID-variable (Default: 'digit').
-If the ID-variable does not have the expected format, the function will try to
-convert it.}
-
-\item{id_expected_length}{Expected length of ID-variable (Default: 13). If the
-ID-variable does not have the expected length, the function will give an error.}
+\item{id_expected_format}{Expected pattern of ID-variable strings. If the ID-variable
+does not have the expected pattern, the function will remove any characters that are
+not of the expected format (Default = 'digit', i.e. letters, punctuation and spaces
+will be removed from the original ID before applying the hash function).}
 }
 \value{
 Dataframe with pseudo_id as additional variable. If id does not have
-the expected format, the dataframe will contain the converted value.
+the expected format, the dataframe will contain the corrected value.
 }
 \description{
-Generate unique ID from AHV-number
+This function generates a unique, pseudonymized identifier using SHA-256,
+a vectorized hash function. Choose a random key ('salt') that is only known to
+you for additional security.
+}
+\examples{
+unique_id(data = testdata, id = "ahvnr", salt = "myverygoodsalt")
 }

@@ -2,24 +2,31 @@
 % Please edit documentation in R/import_raw_data.R
 \name{import_raw_data}
 \alias{import_raw_data}
-\title{Import datasets into R}
+\title{Import dataset into R}
 \usage{
 import_raw_data(filename, sheetname = NULL, skiprows = 0, oldnames, newnames)
 }
 \arguments{
 \item{filename}{Filename (and path) of dataset to import}
 
-\item{sheetname}{Sheetname}
+\item{sheetname}{Sheetname (Default = NULL)}
 
-\item{skiprows}{Number of rows to skip}
+\item{skiprows}{Number of rows to skip (Default = 0)}
 
-\item{oldnames}{Variable names to change}
+\item{oldnames}{Vector with the variable names to be renamed}
 
-\item{newnames}{New variable names}
+\item{newnames}{Vector with the new variable names}
 }
 \value{
 Imported dataset, with renamed variables.
 }
 \description{
-Import datasets into R
+Import dataset into R
+}
+\examples{
+\dontrun{
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.xlsx",
+                      oldnames = c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM"),
+                      newnames = c("ahvnr","surname","firstname","birthday"))
+}
 }

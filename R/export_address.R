@@ -1,14 +1,22 @@
-# Task 3.2: Generate address file --------------------------------
-
 #' Generate address file
 #'
 #' @param data Dataframe
-#' @param path Filepath
+#' @param path File path to directory where adress table will be stored. The function
+#' will create a subfolder folder called 'address' and store the table there (i.e.
+#' in 'path/address').
 #' @param data_name Name or source of data
 #' @param vars Variables to export
 #'
 #' @return Exported csv-file.
 #' @export
+#' @examples
+#' \dontrun{
+#' df <- unique_id(data = testdata, id = "ahvnr", salt = "myverygoodsalt")
+#' export_address(data = df,
+#'                path = "output",
+#'                data_name = "FAKE_DATA",
+#'                vars = c("pseudo_id", "firstname", "surname", 'plz', 'wohnort'))
+#' }
 export_address <- function(data,
                            path,
                            data_name,

@@ -14,7 +14,6 @@ pseudonymize(
   id_original,
   id_salt,
   id_expected_format = "digit",
-  id_expected_length = 13,
   date_var = "birthday",
   date_new_format = "\%Y",
   date_new_var = "birthyear",
@@ -27,11 +26,11 @@ pseudonymize(
 )
 }
 \arguments{
-\item{data_name}{Name of data}
+\item{data_name}{Name of data set}
 
-\item{import_filename}{Filename (and path) of dataset to import}
+\item{import_filename}{File name (and path) of dataset to import}
 
-\item{import_sheetname}{Sheetname}
+\item{import_sheetname}{Sheet name}
 
 \item{import_skiprows}{Number of rows to skip}
 
@@ -43,20 +42,18 @@ pseudonymize(
 
 \item{id_salt}{Salt value}
 
-\item{id_expected_format}{Expected format of ID-variable (Default: 'digit').
-If the ID-variable does not have the expected format, the function will try to
-convert it.}
+\item{id_expected_format}{Expected pattern of ID-variable strings. If the ID-variable
+does not have the expected pattern, the function will remove any characters that are
+not of the expected format (Default = 'digit', i.e. letters, punctuation and spaces
+will be removed from the original ID before applying the hash function).}
 
-\item{id_expected_length}{Expected length of ID-variable (Default: 13). If the
-ID-variable does not have the expected length, the function will give an error.}
+\item{date_var}{Date variable(s)}
 
-\item{date_var}{Date variable}
+\item{date_new_format}{Format for new date variable(s)}
 
-\item{date_new_format}{Format for new date variable}
+\item{date_new_var}{Name for new date variable(s)}
 
-\item{date_new_var}{Name for new date variable}
-
-\item{export_path}{Path exported data}
+\item{export_path}{Path to exported data}
 
 \item{export_address}{TRUE (Default) to export address variables}
 
@@ -69,8 +66,40 @@ ID-variable does not have the expected length, the function will give an error.}
 \item{data_summary}{TRUE (Default) to print head of pseudonymized data.}
 }
 \value{
-Export of following files: keytable, address file, pseudonymized data
+Exports following files: keytable, address file, pseudonymized data.
+Additionally returns pseudonymized data.
 }
 \description{
-Pseudonymize data
+This function performs six steps:
+}
+\details{
+\enumerate{
+\item Import a data set
+\item Generate a unique, stable, pseudonymized identifier from a sensitive identifier for each observation unit
+\item Aggregate some sensitive data (like aggregate date of birth to year of birth)
+\item Optional: Generate a keytable which holds the sensitive and the pseudonymized identifier
+\item Optional: Generate an address file
+\item Drop sensitive data and export
+}
+}
+\examples{
+\dontrun{
+mysalt <- "myverygoodsalt" # Beware, this is NOT a good salt!
+oldnames <- c("NNSS","NACHNAME","VORNAME","GEBURTSDATUM")
+newnames <-  c("ahvnr","surname","firstname","birthday")
+address_vars <- c('pseudo_id', 'firstname', 'surname', 'strasse', 'hausnr','plz', 'wohnort')
+keytable_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
+sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr", "plz", "wohnort")
+
+df <- pseudonymize(data_name = "FAKE_DATA_2019",
+                   import_filename = "data-raw/FAKE_DATA_2019.xlsx",
+                   import_oldnames = oldnames,
+                   import_newnames = newnames,
+                   id_original = "ahvnr",
+                   id_salt = mysalt,
+                   export_path = "output",
+                   address_vars =  address_vars,
+                   keytable_vars = keytable_vars,
+                   sensitive_vars = sensitive_vars)
+}
 }

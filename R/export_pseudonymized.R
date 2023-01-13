@@ -1,15 +1,25 @@
-# Task 4: Export pseudonymized data to csv ----------------------------------
-
 #' Export pseudonymized data to csv
 #'
 #' @param data Dataframe
 #' @param sensitive_vars Sensitive variables to drop. These are not exported.
-#' @param path Filepath
+#' @param path File path to directory where data will be stored. The function
+#' will create a subfolder folder called 'panon' and store the table there (i.e.
+#' in 'path/panon').
 #' @param data_name Name or source of data
 #' @param data_summary TRUE (Default) to print head of exported data.
 #'
 #' @return Exported csv-file from which indicated variables have been dropped.
 #' @export
+#' @examples
+#' \dontrun{
+#' df <- unique_id(data = testdata, id = "ahvnr", salt = "myverygoodsalt")
+#' df <- export_pseudonymized(data = df,
+#'                            sensitive_vars = c("ahvnr","firstname","surname",
+#'                                               "birthday","plz", "wohnort"),
+#'                            path = "output",
+#'                            data_name = "FAKE_DATA",
+#'                            data_summary = TRUE)
+#' }
 export_pseudonymized <- function(data,
                                  sensitive_vars,
                                  path,
