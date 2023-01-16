@@ -47,7 +47,7 @@ Some points are noteworthy:
 You can install the development version of pseudonymizer from [GitHub](https://github.com/) with:
 
 ``` r
-devtools::install_github("KristinaSchuep/pseudonymizer")
+devtools::install_github("KristinaSchuep/pseudonymizer@semester-project")
 ```
 
 ## Example

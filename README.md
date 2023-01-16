@@ -47,7 +47,7 @@ Some points are noteworthy:
     vectorized hash function which is widely used, particularly by [U.S.
     government agencies to secure their sensitive
     data](https://csrc.nist.gov/publications/detail/fips/180/4/final). A
-    hash is a one-way mathematical function (i.e., it can’t be reverse
+    hash is a one-way mathematical function (i.e., it can’t be reverse
     engineered). However, it is in principle possible to generate large
     data bases of possible inputs and compute the corresponding hash
     (especially if the structure of the input is known). With such a key
@@ -69,12 +69,12 @@ You can install the development version of pseudonymizer from
 [GitHub](https://github.com/) with:
 
 ``` r
-devtools::install_github("KristinaSchuep/pseudonymizer")
+devtools::install_github("KristinaSchuep/pseudonymizer@semester-project")
 ```
 
 ## Example
 
-This is a basic example with some fake data. The function `pseudonymize()`
+This is a basic example with some fake data. The function `pseudonymize`
 performs all of the six steps described above and exports a keytable, an
 address file and the final, pseudonymized data set ready for
 distribution to the research team.
@@ -113,24 +113,24 @@ df <- pseudonymize(data_name = "FAKE_DATA_2019",
                    keytable_vars = keytable_vars,
                    sensitive_vars = sensitive_vars)
 #> 1) Append keytable:
-#> Newest keytable is appendend and duplicate AHV-Nr were removed, newer entries were kept
+#> No existing keytable, current keytable is saved
 #> 
 #> 2) Export address file:
-#> Address file written to address/20230113_181451_FAKE_DATA_2019_address.csv.
+#> Address file written to address/20230116_153342_FAKE_DATA_2019_address.csv.
 #> 
 #> 3) Export pseudonymized data:
-#> Pseudonymized file with 6 rows written to 'panon/20230113_181451_FAKE_DATA_2019_panon.csv'.
+#> Pseudonymized file with 6 rows written to 'panon/20230116_153342_FAKE_DATA_2019_panon.csv'.
 #> The file contains the following variables: pseudo_id, geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, hasel, hassh, amount, birthyear
 #> 
 #> # A tibble: 6 x 12
 #>   pseudo_id    gesch~1 zivil~2 rolle famil~3 aufen~4 vermö~5 steue~6 hasel hassh
 #>   <chr>        <chr>   <chr>   <chr>   <dbl> <chr>     <dbl>   <dbl> <dbl> <dbl>
-#> 1 6703a61b294~ Sex#M   Civil ~ Kind        3 CHResi~       0  0          0     0
-#> 2 785e14d0c82~ Sex#W   Civil ~ Gatte       2 CHResi~   10000  2   e7     1     0
-#> 3 d4cf8afd53c~ Sex#M   Civil ~ Antr~       1 <NA>      20000  1.20e5    NA    NA
-#> 4 95daffcadf1~ <NA>    <NA>    <NA>       NA <NA>         NA  2.5 e4    NA    NA
-#> 5 94f0246dba5~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e5    NA    NA
-#> 6 bb87fd06255~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e4    NA    NA
+#> 1 afecff870da~ Sex#M   Civil ~ Kind        3 CHResi~       0  0          0     0
+#> 2 6787b9062d2~ Sex#W   Civil ~ Gatte       2 CHResi~   10000  2   e7     1     0
+#> 3 aa02ed37def~ Sex#M   Civil ~ Antr~       1 <NA>      20000  1.20e5    NA    NA
+#> 4 81b66072df6~ <NA>    <NA>    <NA>       NA <NA>         NA  2.5 e4    NA    NA
+#> 5 38482735ff1~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e5    NA    NA
+#> 6 bb4f1cacf63~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e4    NA    NA
 #> # ... with 2 more variables: amount <dbl>, birthyear <dbl>, and abbreviated
 #> #   variable names 1: geschlecht, 2: zivilstand, 3: familiengrösse,
 #> #   4: aufenthaltsbewilligung, 5: vermögen, 6: steuerbareseinkommen
@@ -163,7 +163,7 @@ export_address(data = df,
                path = "output",
                data_name = 'FAKE_DATA',
                vars = address_vars)
-#> Address file written to address/20230113_181451_FAKE_DATA_address.csv.
+#> Address file written to address/20230116_153342_FAKE_DATA_address.csv.
 
 # Step 6: Drop sensitive data and export 
 df <- export_pseudonymized(data = df,
@@ -171,18 +171,18 @@ df <- export_pseudonymized(data = df,
                            path = "output",
                            data_name = "FAKE_DATA",
                            data_summary = TRUE)
-#> Pseudonymized file with 6 rows written to 'panon/20230113_181451_FAKE_DATA_panon.csv'.
+#> Pseudonymized file with 6 rows written to 'panon/20230116_153342_FAKE_DATA_panon.csv'.
 #> The file contains the following variables: pseudo_id, geschlecht, zivilstand, rolle, familiengrösse, aufenthaltsbewilligung, vermögen, steuerbareseinkommen, hasel, hassh, amount, birthyear
 #> 
 #> # A tibble: 6 x 12
 #>   pseudo_id    gesch~1 zivil~2 rolle famil~3 aufen~4 vermö~5 steue~6 hasel hassh
 #>   <chr>        <chr>   <chr>   <chr>   <dbl> <chr>     <dbl>   <dbl> <dbl> <dbl>
-#> 1 6703a61b294~ Sex#M   Civil ~ Kind        3 CHResi~       0  0          0     0
-#> 2 785e14d0c82~ Sex#W   Civil ~ Gatte       2 CHResi~   10000  2   e7     1     0
-#> 3 d4cf8afd53c~ Sex#M   Civil ~ Antr~       1 <NA>      20000  1.20e5    NA    NA
-#> 4 95daffcadf1~ <NA>    <NA>    <NA>       NA <NA>         NA  2.5 e4    NA    NA
-#> 5 94f0246dba5~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e5    NA    NA
-#> 6 bb87fd06255~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e4    NA    NA
+#> 1 afecff870da~ Sex#M   Civil ~ Kind        3 CHResi~       0  0          0     0
+#> 2 6787b9062d2~ Sex#W   Civil ~ Gatte       2 CHResi~   10000  2   e7     1     0
+#> 3 aa02ed37def~ Sex#M   Civil ~ Antr~       1 <NA>      20000  1.20e5    NA    NA
+#> 4 81b66072df6~ <NA>    <NA>    <NA>       NA <NA>         NA  2.5 e4    NA    NA
+#> 5 38482735ff1~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e5    NA    NA
+#> 6 bb4f1cacf63~ <NA>    <NA>    <NA>       NA <NA>         NA  5   e4    NA    NA
 #> # ... with 2 more variables: amount <dbl>, birthyear <dbl>, and abbreviated
 #> #   variable names 1: geschlecht, 2: zivilstand, 3: familiengrösse,
 #> #   4: aufenthaltsbewilligung, 5: vermögen, 6: steuerbareseinkommen
