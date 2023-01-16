@@ -47,7 +47,7 @@ Some points are noteworthy:
     vectorized hash function which is widely used, particularly by [U.S.
     government agencies to secure their sensitive
     data](https://csrc.nist.gov/publications/detail/fips/180/4/final). A
-    hash is a one-way mathematical function (i.e. it can’t be reverse
+    hash is a one-way mathematical function (i.e., it can’t be reverse
     engineered). However, it is in principle possible to generate large
     data bases of possible inputs and compute the corresponding hash
     (especially if the structure of the input is known). With such a key
@@ -74,7 +74,7 @@ devtools::install_github("KristinaSchuep/pseudonymizer")
 
 ## Example
 
-This is a basic example with some fake data. The function `pseudonymize`
+This is a basic example with some fake data. The function `pseudonymize()`
 performs all of the six steps described above and exports a keytable, an
 address file and the final, pseudonymized data set ready for
 distribution to the research team.
@@ -84,7 +84,7 @@ library(pseudonymizer)
 
 # Load your salt
 # Beware, this is NOT a good salt, this is for illustrative purposes only!
-mysalt <- "myverygoodsalt" 
+mysalt <- "myverybadsalt" 
 # Use this code to import your own, safe salt:
 # mysalt <- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 
