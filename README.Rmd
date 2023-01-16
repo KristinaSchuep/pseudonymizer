@@ -37,7 +37,7 @@ The package involves six steps:
 Some points are noteworthy:
 
 1) Which (combination of) variables are considered sensitive depends on different factors and should be defined in accordance with any existing data protection contract.
-2) This package generates a pseudonymized ID using SHA-256, a vectorized hash function which is widely used, particularly by [U.S. government agencies to secure their sensitive data](https://csrc.nist.gov/publications/detail/fips/180/4/final). A hash is a one-way mathematical function (i.e. it can't be reverse engineered). However, it is in principle possible to generate large data bases of possible inputs and compute the corresponding hash (especially if the structure of the input is known). With such a key table, re-identification would be possible. Adding a constant value (the 'salt') to all inputs increases security substantially. 
+2) This package generates a pseudonymized ID using SHA-256, a vectorized hash function which is widely used, particularly by [U.S. government agencies to secure their sensitive data](https://csrc.nist.gov/publications/detail/fips/180/4/final). A hash is a one-way mathematical function (i.e., it can't be reverse engineered). However, it is in principle possible to generate large data bases of possible inputs and compute the corresponding hash (especially if the structure of the input is known). With such a key table, re-identification would be possible. Adding a constant value (the 'salt') to all inputs increases security substantially. 
 3) Choose a salt that is long and completely unrelated to the data or the project, ideally generated randomly.
 4) The key table with the identifying data and the salt must only be accessible by the data security manager and must be stored as securely as the original data.
 5) Through the combination of several variables, pseudonymized data might still allow the identification of certain individuals. Therefore, this data should also be stored securely and should only be accessible to a restricted and authorized group of persons. 
@@ -59,7 +59,7 @@ library(pseudonymizer)
 
 # Load your salt
 # Beware, this is NOT a good salt, this is for illustrative purposes only!
-mysalt <- "myverygoodsalt" 
+mysalt <- "myverybadsalt" 
 # Use this code to import your own, safe salt:
 # mysalt <- as.character(read.delim("salt.txt",header=FALSE, sep = "", dec="."))
 
