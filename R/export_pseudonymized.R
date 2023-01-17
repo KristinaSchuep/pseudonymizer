@@ -24,9 +24,9 @@ export_pseudonymized <- function(data,
 
   # Create filename
   now <- Sys.time()
-  name <- paste0(format(now, "%Y%m%d_%H%M%S"), "_", data_name, "_panon",".csv")
+  name <- paste0(format(now, "%Y%m%d_%H%M%S"), "_", data_name, "_panon",".xlsx")
 
-  utils::write.csv(x = data, file = file.path(path, "panon", name), row.names = FALSE)
+  openxlsx::write.xlsx(x = data, file = file.path(path, "panon", name), rowNames = FALSE,colNames = TRUE)
 
   # Message:
   message(paste0("Pseudonymized file with ", nrow(data), " rows written to '",
