@@ -17,6 +17,10 @@ sensitive_vars <- c("ahvnr","firstname","surname","birthday","strasse","hausnr",
 oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
+# ------- Start recording
+sink(paste0(path,"/log/PS_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt"))
+sink(stdout(), type = "message")
+
 df <- pseudonymize(data_name = "FAKE_DATA_2019",
                    import_filename = "data-raw/FAKE_DATA_2019.csv",
                    import_oldnames = oldnames,
@@ -51,6 +55,9 @@ df <- pseudonymize(data_name = "FAKE_DATA_2021",
                    keytable_vars = keytable_vars,
                    sensitive_vars = sensitive_vars)
 # View(df) to inspect exported data
+
+# ------- End recording
+sink(NULL,type="message")
 
 
 # Verlustscheine: 'Schlussabrechnung' ------------------------------------------
