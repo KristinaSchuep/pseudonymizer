@@ -1,7 +1,0 @@
-"geschlecht","zivilstand","rolle","familiengrösse","aufenthaltsbewilligung","vermögen","steuerbareseinkommen","hasel","hassh","amount","id_format","pseudo_id","birthyear","plz4","address_id","address_flag","egid_pseudo","egid_flag","ewid_pseudo","ewid_flag"
-"Sex#M","Civil stat#L","Kind",3,"CHResidenc#B",0,0,0,0,-30,"7569999999999","6703a61b29479e478d72625134e7527f53161a3e8e4816bf7801e0dc45c58fce",1995,"8045",1,0,1,0,1,0
-"Sex#W","Civil stat#H","Gatte",2,"CHResidenc#C",10000,2e+07,1,0,50000,"7569999999999","785e14d0c8253c031ebccb052fcfbc8ab8ac350d5796c0742a6607df661d56e7",1961,"8802",2,0,2,0,2,0
-"Sex#M","Civil stat#H","Antragssteller",1,NA,20000,120003,NA,NA,NA,"7569999999999","d4cf8afd53cdaa70f5b1ef4f7624d5fd529157b439c24aaf78f7695d47a30b30",NA,"8302",3,0,3,0,3,0
-NA,NA,NA,NA,NA,NA,25000,NA,NA,0,"756.9999.999.999","95daffcadf18a6d37fd197e7a0239de5b88f26771afc872a1029b4bdabc548ed",1970,"9e+",4,0,NA,1,NA,1
-NA,NA,NA,NA,NA,NA,5e+05,NA,NA,3600,"756AB99999999","c458d465dc60920ed5caaf9d34d5f0e89a3fb8717f896b2ea4484d1facf770f4",NA,"2",5,0,NA,1,NA,1
-NA,NA,NA,NA,NA,NA,50000,NA,NA,1200,"7239999CSV","538c0b9bc34de9dd7873eb2c1bec98a1b425311eae40fc4980a8ac3956cca8fb",NA,NA,6,1,NA,1,NA,1
