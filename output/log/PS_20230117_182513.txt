@@ -153,3 +153,35 @@ The downloaded binary packages are in
 #   ewid_flag <dbl>, and abbreviated variable names ¹​zivilstand, ²​familiengrã.sse, ³​aufenthaltsbewilligung,
 #   ⁴​vermã.gen, ⁵​steuerbareseinkommen, ⁶​id_format, ⁷​pseudo_id, ⁸​birthyear, ⁹​address_id
 # ℹ Use `colnames()` to see all variable names
+      NNSS            NACHNAME           VORNAME          GEBURTSDATUM        GESCHLECHT         ZIVILSTAND       
+ Min.   :7.56e+12   Length:3           Length:3           Length:3           Length:3           Length:3          
+ 1st Qu.:7.56e+12   Class :character   Class :character   Class :character   Class :character   Class :character  
+ Median :7.56e+12   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :7.56e+12                                                                                                 
+ 3rd Qu.:7.56e+12                                                                                                 
+ Max.   :7.56e+12                                                                                                 
+                                                                                                                  
+    ROLLE           FAMILIENGRÃ.SSE AUFENTHALTSBEWILLIGUNG   STRASSE              HAUSNR          PLZ        
+ Length:3           Min.   :1.0     Length:3               Length:3           Min.   :11.0   Min.   :804500  
+ Class :character   1st Qu.:1.5     Class :character       Class :character   1st Qu.:16.5   1st Qu.:809000  
+ Mode  :character   Median :2.0     Mode  :character       Mode  :character   Median :22.0   Median :813500  
+                    Mean   :2.0                                               Mean   :22.0   Mean   :810501  
+                    3rd Qu.:2.5                                               3rd Qu.:27.5   3rd Qu.:813502  
+                    Max.   :3.0                                               Max.   :33.0   Max.   :813503  
+                                                                                                             
+   WOHNORT               EGID              EWID         VERMÃ.GEN     STEUERBARESEINKOMMEN     HASEL     
+ Length:3           Min.   :    222   Min.   :  2.0   Min.   :    0   Min.   : 25000       Min.   :0.00  
+ Class :character   1st Qu.:    726   1st Qu.: 62.0   1st Qu.: 5000   1st Qu.: 37500       1st Qu.:0.25  
+ Mode  :character   Median :   1231   Median :122.0   Median :10000   Median : 50000       Median :0.50  
+                    Mean   :3333817   Mean   :374.3   Mean   :10000   Mean   :191667       Mean   :0.50  
+                    3rd Qu.:5000615   3rd Qu.:560.5   3rd Qu.:15000   3rd Qu.:275000       3rd Qu.:0.75  
+                    Max.   :9999999   Max.   :999.0   Max.   :20000   Max.   :500000       Max.   :1.00  
+                                                                                           NA's   :1     
+     HASSH       AMOUNT      
+ Min.   :0   Min.   :-100.0  
+ 1st Qu.:0   1st Qu.:  -0.5  
+ Median :0   Median :  99.0  
+ Mean   :0   Mean   : 258.7  
+ 3rd Qu.:0   3rd Qu.: 438.0  
+ Max.   :0   Max.   : 777.0  
+ NA's   :1                   
