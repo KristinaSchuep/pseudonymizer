@@ -27,6 +27,10 @@ import_raw_data <- function(filename,
     stop("Unclear file format. The filename does neither contain '.csv' nor '.xls' (e.g., '.xlsx', .'xls', '.xlsm'.)")
 
   n<-nrow(df)
+
+  # force replace empty cells with NA
+  df <- replace(df, df=='', NA)
+
   #remove rows with all NAs
   df <- df[!apply(is.na(df), 1, all),]
   message(paste0("Imported file (", filename,") had ", n, " rows. After removing ", n-nrow(df), " NAs ", nrow(df),

@@ -119,3 +119,37 @@ The downloaded binary packages are in
 #   ewid_flag <dbl>, and abbreviated variable names ¹​zivilstand, ²​familiengrã.sse, ³​aufenthaltsbewilligung,
 #   ⁴​vermã.gen, ⁵​steuerbareseinkommen, ⁶​id_format, ⁷​pseudo_id, ⁸​birthyear, ⁹​address_id
 # ℹ Use `colnames()` to see all variable names
+# A tibble: 6 × 20
+  geschlecht zivilst…¹ rolle famil…² aufen…³ vermã…⁴ steue…⁵ hasel hassh amount id_fo…⁶ pseud…⁷ birth…⁸ plz4  addre…⁹
+  <chr>      <chr>     <chr>   <int> <chr>     <int>   <int> <int> <int>  <int> <chr>   <chr>     <dbl> <chr>   <int>
+1 Sex#M      Civil st… Kind        3 CHResi…       0  0          0     0    -30 756999… 6703a6…    1995 8045        1
+2 Sex#W      Civil st… Gatte       2 CHResi…   10000  2   e7     1     0  50000 756999… 785e14…    1961 8802        2
+3 Sex#M      Civil st… Antr…       1 <NA>      20000  1.20e5    NA    NA     NA 756999… d4cf8a…      NA 8302        3
+4 <NA>       <NA>      <NA>       NA <NA>         NA  2.5 e4    NA    NA      0 756.99… 95daff…    1970 9e+         4
+5 <NA>       <NA>      <NA>       NA <NA>         NA  5   e5    NA    NA   3600 756AB9… c458d4…      NA 2           5
+6 <NA>       <NA>      <NA>       NA <NA>         NA  5   e4    NA    NA   1200 723999… 538c0b…      NA <NA>        6
+# … with 5 more variables: address_flag <dbl>, egid_pseudo <int>, egid_flag <dbl>, ewid_pseudo <int>,
+#   ewid_flag <dbl>, and abbreviated variable names ¹​zivilstand, ²​familiengrã.sse, ³​aufenthaltsbewilligung,
+#   ⁴​vermã.gen, ⁵​steuerbareseinkommen, ⁶​id_format, ⁷​pseudo_id, ⁸​birthyear, ⁹​address_id
+# ℹ Use `colnames()` to see all variable names
+── R CMD build ──────────────────────────────────────────────────────────────────────────────────────────────────────
+     checking for file ‘/private/var/folders/7l/3g9s6sfd34j731nqkjr_7_c80000gs/T/RtmpYCw0om/remotes68f8706f5a72/KristinaSchuep-pseudonymizer-bf590fa/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/7l/3g9s6sfd34j731nqkjr_7_c80000gs/T/RtmpYCw0om/remotes68f8706f5a72/KristinaSchuep-pseudonymizer-bf590fa/DESCRIPTION’
+  ─  preparing ‘pseudonymizer’:
+   checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+  ─  checking for LF line-endings in source and make files and shell scripts
+  ─  checking for empty or unneeded directories
+  ─  building ‘pseudonymizer_0.0.0.9000.tar.gz’
+     
+# A tibble: 6 × 20
+  geschlecht zivilst…¹ rolle famil…² aufen…³ vermã…⁴ steue…⁵ hasel hassh amount id_fo…⁶ pseud…⁷ birth…⁸ plz4  addre…⁹
+  <chr>      <chr>     <chr>   <int> <chr>     <int>   <int> <int> <int>  <int> <chr>   <chr>     <dbl> <chr>   <int>
+1 Sex#M      Civil st… Kind        3 CHResi…       0  0          0     0    -30 756999… 6703a6…    1995 8045        1
+2 Sex#W      Civil st… Gatte       2 CHResi…   10000  2   e7     1     0  50000 756999… 785e14…    1961 8802        2
+3 Sex#M      Civil st… Antr…       1 <NA>      20000  1.20e5    NA    NA     NA 756999… d4cf8a…      NA 8302        3
+4 <NA>       <NA>      <NA>       NA <NA>         NA  2.5 e4    NA    NA      0 756.99… 95daff…    1970 9e+         4
+5 <NA>       <NA>      <NA>       NA <NA>         NA  5   e5    NA    NA   3600 756AB9… c458d4…      NA 2           5
+6 <NA>       <NA>      <NA>       NA <NA>         NA  5   e4    NA    NA   1200 723999… 538c0b…      NA <NA>        6
+# … with 5 more variables: address_flag <dbl>, egid_pseudo <int>, egid_flag <dbl>, ewid_pseudo <int>,
+#   ewid_flag <dbl>, and abbreviated variable names ¹​zivilstand, ²​familiengrã.sse, ³​aufenthaltsbewilligung,
+#   ⁴​vermã.gen, ⁵​steuerbareseinkommen, ⁶​id_format, ⁷​pseudo_id, ⁸​birthyear, ⁹​address_id
+# ℹ Use `colnames()` to see all variable names
