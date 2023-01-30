@@ -25,6 +25,11 @@
 #' @param keytable_vars Variables to export for keytable
 #' @param sensitive_vars Variables to drop from final pseudonymized data.
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
+#' @param var_street Variable for street name
+#' @param var_number Variable for street number
+#' @param var_plz Variable for zip code
+#' @param var_egid Variable of official building registry
+#' @param var_ewid Variable of official flat registry
 #'
 #' @return Export of following files: keytable, address file, pseudonymized data
 #' @export
@@ -71,12 +76,12 @@ pseudonymize <- function(
                     id_expected_format = id_expected_format,
                     id_expected_length = id_expected_length)
 
-  data <- aggregate_sensitive(df = data,
+  data <- aggregate_sensitive(data = data,
                               date_var = date_var,
                               date_new_format = date_new_format,
                               date_new_var = date_new_var,
-                              zip_var = zip_var,
-                              zip_new_var = zip_new_var)
+                              var_plz = var_plz,
+                              var_new_plz = var_new_plz)
 
   data <- unique_geo_id(df = data,
                         var_street = var_street,

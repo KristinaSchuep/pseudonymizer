@@ -31,7 +31,7 @@ df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.csv",
 df <- unique_id(data = df, id = id, salt = mysalt)
 
 # Step 3: Aggregate sensitive data -------------------------------
-df <- aggregate_sensitive(df = df)
+df <- aggregate_sensitive(data = df)
 
 # Step 4: Create Unique Geo ID  -------------------------------
 df <- unique_geo_id(df = df)

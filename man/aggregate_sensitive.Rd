@@ -2,20 +2,20 @@
 % Please edit documentation in R/aggregate_sensitive.R
 \name{aggregate_sensitive}
 \alias{aggregate_sensitive}
-\title{Aggregate sensitive df}
+\title{Aggregate sensitive data}
 \usage{
 aggregate_sensitive(
-  df,
+  data,
   date_var = "birthday",
   date_old_format = "\%Y-\%m-\%d",
   date_new_format = "\%Y",
   date_new_var = "birthyear",
-  zip_var = "plz",
-  zip_new_var = "plz4"
+  var_plz = "plz",
+  var_new_plz = "plz4"
 )
 }
 \arguments{
-\item{df}{dfframe}
+\item{data}{data frame}
 
 \item{date_var}{Date variable}
 
@@ -24,10 +24,12 @@ aggregate_sensitive(
 \item{date_new_format}{Format for new date variable}
 
 \item{date_new_var}{Name for new date variable}
+
+\item{var_plz}{Variable for zip code}
 }
 \value{
-dffile for which indicated variables have been aggregated
+datafile for which indicated variables have been aggregated
 }
 \description{
-Aggregate sensitive df
+Aggregate sensitive data
 }

@@ -63,6 +63,16 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{date_new_var}{Name for new date variable}
 
+\item{var_street}{Variable for street name}
+
+\item{var_number}{Variable for street number}
+
+\item{var_plz}{Variable for zip code}
+
+\item{var_egid}{Variable of official building registry}
+
+\item{var_ewid}{Variable of official flat registry}
+
 \item{path}{Path exported data}
 
 \item{export_address}{TRUE (Default) to export address variables}
