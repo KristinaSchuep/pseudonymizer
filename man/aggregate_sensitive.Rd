@@ -7,7 +7,7 @@
 aggregate_sensitive(
   data,
   date_var = "birthday",
-  date_old_format = "\%d.\%m.\%Y",
+  date_old_format = "\%Y-\%m-\%d",
   date_new_format = "\%Y",
   date_new_var = "birthyear",
   zip_var = "plz",
