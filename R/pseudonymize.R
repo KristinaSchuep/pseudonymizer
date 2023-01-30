@@ -71,7 +71,7 @@ pseudonymize <- function(
                     id_expected_format = id_expected_format,
                     id_expected_length = id_expected_length)
 
-  data <- aggregate_sensitive(data = data,
+  data <- aggregate_sensitive(df = data,
                               date_var = date_var,
                               date_new_format = date_new_format,
                               date_new_var = date_new_var,

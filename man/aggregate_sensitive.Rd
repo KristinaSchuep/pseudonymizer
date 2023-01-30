@@ -2,16 +2,12 @@
 % Please edit documentation in R/aggregate_sensitive.R
 \name{aggregate_sensitive}
 \alias{aggregate_sensitive}
-\title{Aggregate sensitive data}
+\title{Aggregate sensitive df}
 \usage{
 aggregate_sensitive(
-  data,
+  df,
   date_var = "birthday",
-<<<<<<< HEAD
   date_old_format = "\%Y-\%m-\%d",
-=======
-  date_old_format = "\%d.\%m.\%Y",
->>>>>>> f04d73ab4457384941a00d3600beab0da1c1a211
   date_new_format = "\%Y",
   date_new_var = "birthyear",
   zip_var = "plz",
@@ -19,7 +15,7 @@ aggregate_sensitive(
 )
 }
 \arguments{
-\item{data}{Dataframe}
+\item{df}{dfframe}
 
 \item{date_var}{Date variable}
 
@@ -30,8 +26,8 @@ aggregate_sensitive(
 \item{date_new_var}{Name for new date variable}
 }
 \value{
-Datafile for which indicated variables have been aggregated
+dffile for which indicated variables have been aggregated
 }
 \description{
-Aggregate sensitive data
+Aggregate sensitive df
 }
