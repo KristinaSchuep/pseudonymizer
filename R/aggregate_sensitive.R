@@ -24,7 +24,9 @@ aggregate_sensitive <- function(data,
 
   # Shorten 6 digit Zipcodes from Zurich (starts with 8) to 4 digits, by removing last two numbers
   index <- substr(data[, zip_var],1,1)==8 & nchar(data[, zip_var])==6
+
   index <- index %in% TRUE
+
   data[index,zip_new_var] <- gsub('.{2}$', '', data[index, zip_var])
 
   # for all others just keep original zip code
