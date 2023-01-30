@@ -20,11 +20,10 @@ pseudonymize(
   date_new_var = "birthyear",
   var_street = "strasse",
   var_number = "hausnr",
-  var_plz = "plz",
   var_egid = "egid",
   var_ewid = "ewid",
-  zip_var = "plz",
-  zip_new_var = "plz4",
+  var_zip = "plz",
+  var_new_zip = "plz4",
   path,
   export_address = TRUE,
   address_vars,
@@ -67,11 +66,13 @@ ID-variable does not have the expected length, the function will give an error.}
 
 \item{var_number}{Variable for street number}
 
-\item{var_plz}{Variable for zip code}
-
 \item{var_egid}{Variable of official building registry}
 
 \item{var_ewid}{Variable of official flat registry}
+
+\item{var_zip}{Variable for zip code}
+
+\item{var_new_zip}{Variable for new zip code format}
 
 \item{path}{Path exported data}
 

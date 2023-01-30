@@ -27,7 +27,8 @@
 #' @param data_summary TRUE (Default) to print head of pseudonymized data.
 #' @param var_street Variable for street name
 #' @param var_number Variable for street number
-#' @param var_plz Variable for zip code
+#' @param var_zip Variable for zip code
+#' @param var_new_zip Variable for new zip code format
 #' @param var_egid Variable of official building registry
 #' @param var_ewid Variable of official flat registry
 #'
@@ -49,11 +50,10 @@ pseudonymize <- function(
   date_new_var = "birthyear",
   var_street = "strasse",
   var_number = "hausnr",
-  var_plz = "plz",
   var_egid = "egid",
   var_ewid = "ewid",
-  zip_var = "plz",
-  zip_new_var = "plz4",
+  var_zip = "plz",
+  var_new_zip = "plz4",
   path,
   export_address = TRUE,
   address_vars,
@@ -80,13 +80,13 @@ pseudonymize <- function(
                               date_var = date_var,
                               date_new_format = date_new_format,
                               date_new_var = date_new_var,
-                              var_plz = var_plz,
-                              var_new_plz = var_new_plz)
+                              var_zip = var_zip,
+                              var_new_plz = var_new_zip)
 
   data <- unique_geo_id(df = data,
                         var_street = var_street,
                         var_number = var_number,
-                        var_plz = var_plz,
+                        var_zip = var_zip,
                         var_egid = var_egid,
                         var_ewid = var_ewid)
 

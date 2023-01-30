@@ -10,8 +10,8 @@ aggregate_sensitive(
   date_old_format = "\%Y-\%m-\%d",
   date_new_format = "\%Y",
   date_new_var = "birthyear",
-  var_plz = "plz",
-  var_new_plz = "plz4"
+  var_zip = "plz",
+  var_new_zip = "plz4"
 )
 }
 \arguments{
@@ -25,7 +25,7 @@ aggregate_sensitive(
 
 \item{date_new_var}{Name for new date variable}
 
-\item{var_plz}{Variable for zip code}
+\item{var_zip}{Variable for zip code}
 }
 \value{
 datafile for which indicated variables have been aggregated
