@@ -1,0 +1,10 @@
+------- Import Raw Data -------
+Imported file (./data-raw/FAKE_DATA_AHV_2019.csv) had 7 rows. After removing 1 NAs 6 observations remain.
+------- Append Key Table -------
+0 duplicates based on AHV-number and birthday removed. Keytable now containts 24 observations with 18 unique AHV-numbers.
+Newest keytable is appended and duplicate AHV-Nr were removed, entries from most recent complication are kept
+------- Export Address File -------
+Address file written to address/20230322_100358_FAKE_DATA_address.csv.
+------- Export Pseudonymized Data -------
+Pseudonymized file with 6 rows written to 'panon/20230322_100359_FAKE_DATA_panon.xlsx'.
+The file contains the following variables: geschlecht, zivilstand, rolle, familiengrã.sse, aufenthaltsbewilligung, vermã.gen, steuerbareseinkommen, hasel, hassh, amount, id_format, pseudo_id, birthyear, plz4, address_id, address_flag, egid_pseudo, egid_flag, ewid_pseudo, ewid_flag

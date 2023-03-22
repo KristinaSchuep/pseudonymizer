@@ -1,0 +1,10 @@
+------- Import Raw Data -------
+Imported file (data-raw/FAKE_DATA_2019.csv) had 7 rows. After removing 1 NAs 6 observations remain.
+Error in aggregate_sensitive(data = data, date_var = date_var, date_new_format = date_new_format,  : 
+  unused argument (var_new_plz = var_new_zip)
+------- Import Raw Data -------
+-/                                                                                                                  /                                                                                                                  -                                                                                                                  Error in as.POSIXlt.character(x, tz, ...) : 
+  character string is not in a standard unambiguous format
+------- Import Raw Data -------
+-/                                                                                                                  /                                                                                                                  -                                                                                                                  Error in as.POSIXlt.character(x, tz, ...) : 
+  character string is not in a standard unambiguous format

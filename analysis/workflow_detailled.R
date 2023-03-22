@@ -18,12 +18,12 @@ oldnames <- c("NNSS","VORNAME","NACHNAME","GEBURTSDATUM")
 newnames <-  c("ahvnr","firstname","surname","birthday")
 
 # ------- Start recording
-sink(paste0(path,"/log/PS_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt"))
-sink(stdout(), type = "message")
+#sink(paste0(path,"/log/PS_", format(Sys.time(),"%Y%m%d_%H%M%S"),".txt"))
+#sink(stdout(), type = "message")
 
 
 # Step 1: Import datasets into R -----------------------
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_2019.csv",
+df <- import_raw_data(filename = "./data-raw/FAKE_DATA_AHV_2019.csv",
                       oldnames = oldnames,
                       newnames = newnames)
 
@@ -56,7 +56,8 @@ export_pseudonymized(data = df,
                      data_summary = FALSE)
 
 # ------- End recording
-sink(NULL,type="message")
+#sink(NULL,type="message")
+#sink()
 
 ## Verlustscheine ------------------------------------------------------
 
@@ -102,11 +103,10 @@ append_keytable(df = df,
 
 # Drop sensitive data and export --------------------------------
 result <- export_pseudonymized(data = df,
-                     sensitive_vars = sensitive_vars,
-                     path = "output",
-                     data_name = "Verlustscheine",
-                     data_summary = TRUE)
-
+                               sensitive_vars = sensitive_vars,
+                               path = "output",
+                               data_name = "Verlustscheine",
+                               data_summary = TRUE)
 
 
 
