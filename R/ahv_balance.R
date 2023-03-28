@@ -1,14 +1,25 @@
 # Testing AHV-Nummer Randomization Modul --------------------------------
+rm(list=ls())
+setwd("/Users/flhug/Dropbox (Personal)/Individuelle Praemienverbilligung/Zurich/analysis/SVA-Summary")
+
 library(dplyr)
+library(stringr)
+library(tidyr)
+library(readr)
 library(vtable)
+
+## Import & Append --------------------
+path<-"/Volumes/pp/projects/sva-research"
 #library(fastDummies)
+transfer <- "2023-03-28"
 
 
-# Rename columns  ---------
-# For easier handling
-oldnames <- c("vermã.gen", "familiengrã.sse")
-index <- match(oldnames, names(df))
-colnames(df)[index] <- c("capital", "hh_size")
+# Load Data ----------
+# XLSX Files
+list_of_files <- sort(list.files(file.path(path,transfer), pattern =".xlsx"),decreasing = TRUE)
+# remove hidden files from list_of_files
+file <- grep('~$', list_of_files, fixed = TRUE, value = TRUE, invert = TRUE)
+df <-  readxl::read_excel(file.path(path,transfer,file))
 
 # For testing, create a random AHV-Number -------
 #n<-nrow(df)
@@ -17,12 +28,20 @@ colnames(df)[index] <- c("capital", "hh_size")
 #df <- df %>%
 #  mutate(ahvnr = a_nr)
 
+# Rename columns  ---------
+# For easier handling
+colnames(df) <- tolower(colnames(df))
+oldnames <- c("tvbcaseid", "tvbcaseid_creation_ts", "tvbbeneficaryid_creation_ts", "civilstatus", "resid_auth", "cnt_person", "relevantincome")
+index <- match(oldnames, names(df))
+
+colnames(df)[index] <- c("caseid","date_case_creation", "date_beneficiary_creation", "zivilstand","aufenthaltsbewilligung","hh_size","steuerbareseinkommen")
+
 # Data wrangling -------
 # To prepare for Balance Table
 
 ahv <- as.data.frame(df) %>%
   # keep relevant columns
-  select("ahvnr", "geschlecht", "zivilstand", "aufenthaltsbewilligung", "plz4", "birthyear", "steuerbareseinkommen","capital","hh_size","hasel","hassh") %>%
+  select("ahvnr", "geschlecht", "zivilstand", "aufenthaltsbewilligung", "plz4", "birthyear", "steuerbareseinkommen","hh_size","hasel","hassh") %>%
   # Reshape variables
   mutate(
     # If PLZ4 not equal to 4 digits, make NA
@@ -31,11 +50,9 @@ ahv <- as.data.frame(df) %>%
     # create buckets for income
     steuerbareseinkommen = as.numeric(steuerbareseinkommen),
     income_bucket = cut(steuerbareseinkommen,breaks = c(-Inf, 0, 20000, 40000, 60000, 80000, 999999999),
-                        labels = c("none", "<20'000", "20'-40'000", "40-60'000","60'-80'000", ">80'000")),
+                        labels = c("none", "<20'000", "20'-40'000", "40-60'000","60'-80'000", ">80'000"))) %>%
 
-    # create buckets for capital
-    capital_bucket = cut(capital,breaks = c(-Inf, 0, 20000, 40000, 60000, 80000, 999999999),
-                         labels = c("none", "<20'000", "20'-40'000", "40-60'000","60'-80'000", ">80'000"))) %>%
+
 
   # make categorical variables
   mutate_at(vars('geschlecht', 'zivilstand', 'aufenthaltsbewilligung','plz4','birthyear','hh_size'), factor) %>%
@@ -85,25 +102,25 @@ ahv_sum <- ahv %>%
 # Check if balance directory already exists otherwise create
 dir.create(file.path(path, "balance"), showWarnings = FALSE)
 # mod_123456
-st(ahv_sum[c("mod_123456","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_123456","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_123456', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_123456.csv')
 
 # mod_234567
-st(ahv_sum[c("mod_234567","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_234567","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_234567', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_234567.csv')
 
 # mod_345678
-st(ahv_sum[c("mod_345678","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_345678","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_345678', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_345678.csv')
 
 # mod_456789
-st(ahv_sum[c("mod_456789","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_456789","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_456789', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_456789.csv')
@@ -111,19 +128,19 @@ st(ahv_sum[c("mod_456789","geschlecht","zivilstand","aufenthaltsbewilligung","hh
 
 # Balance Tables: 5 Digits and less -------
 # mod_12345
-st(ahv_sum[c("mod_12345","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_12345","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_12345', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_12345.csv')
 
 # mod_1234
-st(ahv_sum[c("mod_1234","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_1234","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_1234', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_1234.csv')
 
 # mod_123
-st(ahv_sum[c("mod_123","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket", "capital_bucket","plz4","birthyear")],
+st(ahv_sum[c("mod_123","geschlecht","zivilstand","aufenthaltsbewilligung","hh_size","hasel","hassh","income_bucket","plz4","birthyear")],
    group = 'mod_123', group.test = TRUE,
    digits = 3, numformat = NA, factor.numeric=TRUE, factor.counts = FALSE,
    out = 'csv',file='output/balance/balance_mod_123.csv')
