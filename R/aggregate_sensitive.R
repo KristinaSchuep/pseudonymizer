@@ -21,6 +21,7 @@ aggregate_sensitive <- function(data,
   # check if birthday variable is 8 (without centuries) or 10 digits
 
   data[, date_var] <- as.Date(data[, date_var], date_old_format, tz = "UTC")
+
   data[, date_new_var] <- as.numeric(format(data[, date_var], format = date_new_format))
 
   # Shorten 6 digit Zipcodes from Zurich (starts with 8) to 4 digits, by removing last two numbers
