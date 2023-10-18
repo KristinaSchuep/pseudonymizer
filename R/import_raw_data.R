@@ -14,13 +14,13 @@ import_raw_data <- function(filename,
                             sheetname = NULL,
                             skiprows = 0,
                             oldnames,
-                            newnames){
+                            newnames) {
   message(paste0("------- Import Raw Data -------"))
-  if (grepl(".csv", filename, fixed = TRUE)){
+  if (grepl(".csv", filename, fixed = TRUE)) {
     #import csv and recognize empty strings as NA
     # read_delim should be able to recognize the right deliminator
     df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=';', fileEncoding = "iso-8859-1"))
-  } else if (grepl(".xls", filename, fixed = TRUE)){
+  } else if (grepl(".xls", filename, fixed = TRUE)) {
     #import excel
     df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
   } else
@@ -29,10 +29,10 @@ import_raw_data <- function(filename,
   n<-nrow(df)
 
   # force replace empty cells with NA
-  df <- replace(df, df=='', NA)
+  df <- replace(df, df == '', NA)
 
   #remove rows with all NAs
-  df <- df[!apply(is.na(df), 1, all),]
+  df <- df[!apply(is.na(df), 1, all), ]
   message(paste0("Imported file (", filename,") had ", n, " rows. After removing ", n-nrow(df), " NAs ", nrow(df),
                  " observations remain."))
 
