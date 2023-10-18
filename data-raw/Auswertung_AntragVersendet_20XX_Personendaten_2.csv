@@ -1,0 +1,8 @@
+TVBCASEID,ANT_NNSS,ANT_LASTNAME,ANT_FIRSTNAME,LASTNAME,FIRSTNAME,PERSONID,BIRTHDATE,SEX,CIVILSTATUS,CIVILSTATUSSINCE,CITIZENSHIP,PERMIT,FAMILYREL,STREET,STREETNR,ZIP,CITY,COUNTRY,EGID,EWID,ISKEPDATA
+A,756.0000.000.001,Ackermann,Aaron,Ackermann,Alfons,11,29.08.95,Sex#M,Civil stat#L,07.09.02,French,CHResidenc#B,VBFAMANG#KND,Ackerstrasse,11,,Zürich,77777,1,0,0
+2,756.0000.000.002,Brunner,Berta,Brunner,Billy,22,26.12.00,Sex#W,Civil stat#H,10.10.92,German,CHResidenc#C,VBFAMANG#KND,Bertastrasse,22,88020,Kilchberg ZH,6666,11,10000,0
+3,756.0000.000.003,Christen,Claudio,Christen,Claudia,33,26.12.60,Sex#M,Civil stat#H,19.09.99,Swiss,,VBFAMANG#GAT,Clausiensteig,3c,830200,Kloten,999999999,999,20000,1
+4,,,,,,,,,,,,,,,,,,,,,
+5,756.0000.000.004,Dachs,Dario,Dachs,Dario,5,16.02.70,Sex#M,,,Swiss,,VBFAMANG#ANT,Dammweg,4,9.00E+22,,,,,1
+6,756AB00000004,Eris,Elsa,,,,,,,,,,,Erismannstrasse,505,200800,,,,,0
+7,7230000CSV,Fichter,Fiona,,,,,,,,,,,Piccadilly Circus,6 f,EH1 5200,London,,,,1

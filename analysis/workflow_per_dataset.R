@@ -24,8 +24,7 @@ mysalt<- as.character(read.delim("salt.txt", header = FALSE, sep = "", dec = "."
 #for testing use this simple salt
 #mysalt <- "myverygoodsalt"
 
-
-setwd("/Volumes/pp/projects/sva-research/data_raw/2023-06-09")
+setwd("/Users/flhug/Dropbox (PP)/PhD/Courses/H4Sci_Project/Git/pseudonymizer")
 
 ## DS1.1: ANTRAG VERSENDET - PERSONENDATEN -------
 # Step 0: Define variables
@@ -46,13 +45,13 @@ oldnames <- c("ANT_NNSS", "ANT_FIRSTNAME", "ANT_LASTNAME", "FIRSTNAME", "LASTNAM
 #possibly additional NNSS necessary
 
 newnames <-  c("appl_ahvnr", "appl_firstname", "appl_surname", "firstname", "surname")
-df <- import_raw_data(filename = "./data-raw/FAKE_DATA_AHV_2019.csv",
+df <- import_raw_data(filename = "./data-raw/Auswertung_AntragVersendet_20XX_Personendaten.csv",
                       oldnames = oldnames,
                       newnames = newnames)
 
-df <- import_raw_data(filename = "./Auswertung_AntragVersendet_2021_Personendaten.csv",
-                      oldnames = oldnames,
-                      newnames = newnames)
+test<-read.csv("/Volumes/pp/projects/sva-research/data_raw/2023-06-09/fake/Auswertung_AntragVersendet_2021_Personendaten.csv", na.strings=c("","NA"), sep=';', fileEncoding = "iso-8859-1")
+View(test)
+test<-read.csv("./data-raw/Auswertung_AntragVersendet_20XX_Personendaten.csv", na.strings=c("","NA"), sep=';', fileEncoding = "iso-8859-1", row.names = 1)
 
 # Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = id, salt = mysalt)
