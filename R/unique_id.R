@@ -20,7 +20,7 @@ unique_id <- function(data,
                       pseudo_id,
                       salt,
                       id_expected_format = "digit",
-                      id_expected_length = 13){
+                      id_expected_length = 13) {
 
   # ID to character (necessary for hash function)
   data[, id] <- as.character(data[, id])
