@@ -18,32 +18,34 @@ unique_geo_id <- function(df,
                           var_street = "strasse",
                           var_number = "hausnr",
                           var_plz = "plz",
-                          var_egid = "egid",
-                          var_ewid = "ewid"){
+                          var_egid = NULL,
+                          var_ewid = NULL){
   # Address-ID
   df$address_id <- unique_id_simple(df = df, cols = c(var_street, var_number, var_plz))
   df$address_flag <- 0
-  df[which(is.na(df[, var_street])|
-             is.na(df[, var_number])|
-             is.na(df[, var_plz])), 'address_flag'] <- 1
+  df[which(is.na(df[, var_street]) |
+             is.na(df[, var_number]) |
+             is.na(df[, var_plz])), "address_flag"] <- 1
 
-
+  if (!is.null(var_egid) && var_egid != "") {
   # EGID-ID
   df$egid_pseudo <- unique_id_simple(df = df, cols = var_egid)
-  df[is.na(df[, var_egid]), 'egid_pseudo'] <- NA
+  df[is.na(df[, var_egid]), "egid_pseudo"] <- NA
   # Flag for invalid egid
   df$egid_flag <- as.integer(df[, var_egid] <= 0 | df[, var_egid] > 999999999)
   df$egid_pseudo[df[var_egid] == 999999999] <- 999999999
-  df[which(is.na(df[, 'egid_flag'])), 'egid_flag'] <- 1
+  df[which(is.na(df[, "egid_flag"])), "egid_flag"] <- 1
+  }
 
+  if (!is.null(var_ewid) && var_ewid != "") {
   # EWID-ID
   df$ewid_pseudo <- unique_id_simple(df = df, cols = var_ewid)
-  df[is.na(df[, var_ewid]), 'ewid_pseudo'] <- NA
+  df[is.na(df[, var_ewid]), "ewid_pseudo"] <- NA
   # Flag for invalid ewid
   df$ewid_flag <- as.integer(df[, var_ewid] <= 0 | df[, var_ewid] >= 999999999)
   df$ewid_pseudo[df[var_ewid] == 999] <- 999999999
-  df[which(is.na(df[, 'ewid_flag'])), 'ewid_flag'] <- 1
-
+  df[which(is.na(df[, "ewid_flag"])), "ewid_flag"] <- 1
+  }
 
   return(df)
 }
