@@ -5,9 +5,6 @@
 #' @param keytable_vars Variables to keep in keytable
 #' @param id ID-variable that needs to by pseudonymized
 #' @param pseudo_id Pseudonymized ID-variable
-#' @param firstname Firstname Variable
-#' @param surname Surname Variable
-#' @param birthday Second variable to identify duplicates
 #' @return Writes or appends keytable
 #' @export
 append_keytable <- function(df,
@@ -25,29 +22,6 @@ append_keytable <- function(df,
 id <- "prim_ahvnr"
 pseudo_id <- "prim_pseudo"
 salt <- mysalt
-
-# DF 1
-prim_ahvnr <- c("756.1234.5678.01","756.1234.5678.01", "756.1234.5678.02", "756.1234.5678.03", "756.1234.5678.04", "756.1234.5678.05")
-prim_pseudo <- openssl::sha256(x = prim_ahvnr, key = salt)
-prim_firstname <- c("", "Aaron", "Berta", "Claudio", "Dario", "Elsa")
-prim_surname <- c("", "Ackermann", "Brunner", "Christen", "Dachs", "Eris")
-prim_birthdate <- c("", "1995-08-29", "1961-11-24", "1960-12-26", "1970-02-16", "")
-
-
-df <- data.table::data.table(prim_ahvnr, prim_pseudo, prim_firstname, prim_surname, prim_birthdate)
-
-
-# DF 2
-prim_ahvnr <- c("756.1234.5678.01", "756.9876.5432.02", "756.9876.5432.06", "756.9876.5432.07", "756.9876.5432.08")
-prim_pseudo <- openssl::sha256(x = prim_ahvnr, key = salt)
-prim_firstname <- c("Aaron", "Berta", "Sophia", "Liam", "Olivia")
-prim_surname <- c("Ackermann", "Brunner", "Williams", "Jones", "Brown")
-prim_birthdate <- c("", "1961-11-24", "1995-02-20", "1978-11-30", "1989-07-12")
-
-df <- data.table::data.table(prim_ahvnr, prim_pseudo, prim_firstname, prim_surname, prim_birthdate)
-
-
-####### TEST Data END
 
 n <- nrow(df)
 
@@ -93,7 +67,6 @@ n <- nrow(df)
           nrow(keytable_temp), " observations with ",
           length(unique(keytable_temp$ahvnr)),
           " unique AHV-numbers."))
-      }
     name <- paste0(format(now, "%Y%m%d_%H%M%S"), "_keytable", ".csv")
 
     utils::write.csv(keytable_temp,
@@ -119,11 +92,15 @@ n <- nrow(df)
     # store row count for message
     n <- nrow(keytable_temp)
 
-# Remove duplicates based on ahvnr and pseudo_id
-        keytable_temp <- unique(keytable_temp, by = c("ahvnr", "pseudo_id"))
+    # Remove duplicates based on ahvnr and pseudo_id
+    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "pseudo_id"))
+
+    # Remove NAs
+    keytable_temp <-
+          keytable_temp[complete.cases(keytable_temp[, .(pseudo_id, ahvnr)]), ]
 
     message(paste0(n - nrow(keytable_temp),
-        " duplicates based on AHV-number and secondary removed.
+        " duplicates based on AHV-number and pseudo id removed.
         Keytable now containts ",
         nrow(keytable_temp), " observations with ",
         length(unique(keytable_temp$ahvnr)),
