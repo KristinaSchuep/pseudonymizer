@@ -170,21 +170,28 @@ read.csv(file.path(data_raw_path, file),
 # id <- c("prim_ahvnr", "sec_ahvnr")
 oldnames <- c("VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
                 "NNSSPERSON2", "VORNAMEPERSON2", "FAMILIENNAMEPERSON2", "GEBURTSDATUMPERSON2",
-                "STRASSE", "HAUSNR", "PLZ")
+                "STRASSE", "HAUSNR", "PLZ", "ORT",
+                "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
 
 newnames <-  c("prim_firstname", "prim_surname", "prim_birthdate",
                 "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
-                "street", "streetnr", "zip")
+                "street", "streetnr", "zip", "city", "addresszusatz",
+                "par1_ahvnr", "par2_ahvnr")
 
 #keytable_vars_prim <- c("prim_firstname", "prim_surname",
 #                    "street", "streetnr", "zip", "city")
 
 keytable_vars_sec <- c("sec_pseudo", "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
-                    "street", "streetnr", "zip", "city")                    
+                    "street", "streetnr", "zip", "city")
+
+keytable_vars_par1 <- c("par1_pseudo", "par1_ahvnr")
+
+keytable_vars_par2 <- c("par2_pseudo", "par2_ahvnr")
 
 sensitive_vars <- c("prim_firstname", "prim_surname", "prim_birthdate",
                     "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
-                    "street", "streetnr", "egid", "ewid")
+                    "street", "streetnr", "egid", "ewid",
+                    "par1_ahvnr", "par2_ahvnr")
 
 
 ## Step 1: Import datasets into R -----------------------
@@ -199,6 +206,12 @@ df <- import_raw_data(file.path(data_raw_path, file),
 #df[1:5, "sec_ahvnr"] <- c("756.1234.5678.01", "756.1234.5678.02", "756.1234.5678.03", "756.1234.5678.04", "756.1234.5678.05")
 df <- unique_id(data = df, id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo", salt = mysalt)
+
+df <- unique_id(data = df, id = "par1_ahvnr",
+                pseudo_id = "par1_pseudo", salt = mysalt)
+
+df <- unique_id(data = df, id = "par2_ahvnr",
+                pseudo_id = "par2_pseudo", salt = mysalt)
 
 
 ## Step 3: Aggregate sensitive data -------------------------------
@@ -223,6 +236,18 @@ append_keytable(df = df,
                 id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo")
 
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                keytable_vars = keytable_vars_par1,
+                id = "par1_ahvnr",
+                pseudo_id = "par1_pseudo")
+
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                keytable_vars = keytable_vars_par2,
+                id = "par2_ahvnr",
+                pseudo_id = "par2_pseudo")
+
 ## Step 6: Generate address file --------------------------------
 # Skip this for now to reduce workload
 # And because we have no survey
@@ -238,6 +263,106 @@ export_pseudonymized(data = df,
 
 
 # DS4.1: ANTRAG VERSENDET - STEUERDATEN QS -------
+# Sensitive data
+# Pseudonymize, Transform and Drop
+# See first row of data set
+
+file <- "Auswertung_AntragVersendet_20XX_SteuerdatenQS.csv"
+data_name <- "Rueckfluss_SteuerdatenQS_2021"
+
+read.csv(file.path(data_raw_path, file),
+        na.strings = c("", "NA"),
+        sep = ';', fileEncoding = "iso-8859-1",
+        nrows = 1)
+
+## Step 0: Define variables -----------------------
+# id <- c("prim_ahvnr", "sec_ahvnr")
+oldnames <- c("NNSS", "VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
+                "STRASSE", "HAUSNR", "PLZ", "ORT",
+                "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
+
+newnames <-  c("prim_ahvnr", "prim_firstname", "prim_surname", "prim_birthdate",
+                "street", "streetnr", "zip", "city",
+                "par1_ahvnr", "par2_ahvnr")
+
+keytable_vars_prim <- c("prim_ahvnr", "prim_firstname", "prim_surname",
+                        "prim_birthdate",
+                        "street", "streetnr", "zip", "city")
+
+keytable_vars_par1 <- c("par1_pseudo", "par1_ahvnr")
+
+keytable_vars_par2 <- c("par2_pseudo", "par2_ahvnr")
+
+sensitive_vars <- c("prim_firstname", "prim_surname", "prim_birthdate",
+                    "street", "streetnr", "egid", "ewid", "addresszusatz",
+                    "par1_ahvnr", "par2_ahvnr")
+
+
+## Step 1: Import datasets into R -----------------------
+
+# Prim stands for Primary i.e., Household head
+# Sec stands for Secondary i.e., wife or children
+df <- import_raw_data(file.path(data_raw_path, file),
+                      oldnames = oldnames,
+                      newnames = newnames)
+
+## Step 2: Generate unique ID from AHV-number -------------------------
+#df[1:5, "prim_ahvnr"] <- c("756.1234.5678.01", "756.1234.5678.02", "756.1234.5678.03", "756.1234.5678.04", "756.1234.5678.05")
+#df[1:5, "par1_ahvnr"] <- c("756.1234.5678.81", "756.1234.5678.82", "756.1234.5678.83", "756.1234.5678.84", "756.1234.5678.85")
+#df[1:5, "par2_ahvnr"] <- c("756.1234.5678.91", "756.1234.5678.92", "756.1234.5678.93", "756.1234.5678.94", "756.1234.5678.95")
+
+df <- unique_id(data = df, id = "prim_ahvnr",
+                pseudo_id = "prim_pseudo", salt = mysalt)
+
+df <- unique_id(data = df, id = "par1_ahvnr",
+                pseudo_id = "par1_pseudo", salt = mysalt)
+
+df <- unique_id(data = df, id = "par2_ahvnr",
+                pseudo_id = "par2_pseudo", salt = mysalt)
+
+
+## Step 3: Aggregate sensitive data -------------------------------
+df <- aggregate_sensitive(data = df,
+                            date_var = "prim_birthdate",
+                            date_new_var = "prim_birthyear")
+
+## Step 4: Create Unique Geo ID  -------------------------------
+df <- unique_geo_id(df = df,
+                    var_street = "street",
+                    var_number = "streetnr",
+                    var_plz = "zip")
+
+## Step 5: Generate and append key table ---------------------------
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                keytable_vars = keytable_vars_prim,
+                id = "prim_ahvnr",
+                secondary_var = "prim_birthdate",
+                pseudo_id = "prim_pseudo")
+
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                keytable_vars = keytable_vars_par1,
+                id = "par1_ahvnr",
+                pseudo_id = "par1_pseudo")
+
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                keytable_vars = keytable_vars_par2,
+                id = "par2_ahvnr",
+                pseudo_id = "par2_pseudo")
+
+## Step 6: Generate address file --------------------------------
+# Skip this for now to reduce workload
+# And because we have no survey
+
+
+## Step 7: Drop sensitive data and export --------------------------------
+export_pseudonymized(data = df,
+                     sensitive_vars = sensitive_vars,
+                     path = file.path(data_raw_path, output_path),
+                     data_name = data_name,
+                     data_summary = FALSE)
 
 # DS5.1: ANTRAG VERSENDET - DATENEL -------
 
