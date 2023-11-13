@@ -36,9 +36,8 @@ output_path <- "output"
 file <- "Auswertung_AntragVersendet_20XX_Personendaten.csv"
 data_name <- "Versendet_Personendaten_2021"
 
-# No sensitive data
-# Nothing to pseudonymize
-# Only transformation and drops necessary
+# 
+# Pseudonymize, transform and drop
 # See first row of data set
 
 read.csv(file.path(data_raw_path, file),
@@ -49,14 +48,14 @@ read.csv(file.path(data_raw_path, file),
 
 ## Step 0: Define variables -----------------------
 # id <- c("prim_ahvnr", "sec_ahvnr")
-oldnames <- c("ANT_FIRSTNAME", "ANT_LASTNAME",
-                "FIRSTNAME", "LASTNAME", "BIRTHDATE")
+oldnames <- c("ANT_NNSS", "ANT_FIRSTNAME", "ANT_LASTNAME",
+                "NNSS", "FIRSTNAME", "LASTNAME", "BIRTHDATE")
 
-newnames <-  c("prim_firstname", "prim_surname",
-                "sec_firstname", "sec_surname", "sec_birthdate")
+newnames <-  c("prim_ahvnr", "prim_firstname", "prim_surname",
+                "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate")
 
-sensitive_vars <- c("prim_firstname", "prim_surname",
-                    "sec_firstname", "sec_surname", "sec_birthdate",
+sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_surname",
+                    "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
                     "street", "streetnr", "egid", "ewid")
 
 
@@ -69,9 +68,14 @@ df <- import_raw_data(file.path(data_raw_path, file),
                       newnames = newnames)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
-# df <- unique_id(data = df, id = id, salt = mysalt)
+df <- unique_id(data = df, id = "prim_ahvnr",
+                pseudo_id = "prim_pseudo", salt = mysalt)
+
+df <- unique_id(data = df, id = "sec_ahvnr",
+                pseudo_id = "sec_pseudo", salt = mysalt)
 
 ## Step 3: Aggregate sensitive data -------------------------------
+# ANT_BIRTHDATE should follow
 df <- aggregate_sensitive(data = df,
                             date_var = "sec_birthdate",
                             date_new_var = "sec_birthyear")
@@ -131,6 +135,7 @@ df <- import_raw_data(file.path(data_raw_path, file),
 ## Step 2: Generate unique ID from AHV-number -------------------------
 # skip
 
+
 ## Step 3: Aggregate sensitive data -------------------------------
 # skip
 
@@ -165,6 +170,7 @@ read.csv(file.path(data_raw_path, file),
 ## Step 0: Define variables -----------------------
 # Add prim_ahvnr
 oldnames <- c("VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
+#add prim_ahvnr
                 "NNSSPERSON2", "VORNAMEPERSON2", "FAMILIENNAMEPERSON2", "GEBURTSDATUMPERSON2",
                 "STRASSE", "HAUSNR", "PLZ", "ORT",
                 "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
@@ -500,6 +506,8 @@ read.csv(file.path(data_raw_path, file),
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
+# add: ANT_NNSS, ANT_FIRSTNAME. ANT_LASTNAME, ANT_BIRTHDATE
+# add: Kind/Gattin: NNSS, FIRSTNAME, LASTNAME, BIRTHDATE
 oldnames <- c()
 newnames <- c()
 
@@ -513,16 +521,17 @@ df <- import_raw_data(file.path(data_raw_path, file),
 
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
-# skip
+# add prim_ahvnr
+# add sec_ahvnr
 
 ## Step 3: Aggregate sensitive data -------------------------------
-# skip
+# add prim_birthdate, sec_birthdate
 
 ## Step 4: Create Unique Geo ID  -------------------------------
 # skip
 
 ## Step 5: Generate and append key table ---------------------------
-# skip
+# add prim_ahvnr and sec_ahvnr
 
 ## Step 6: Generate address file --------------------------------
 # skip
