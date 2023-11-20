@@ -104,8 +104,8 @@ n <- nrow(df)
     # store row count for message
     n <- nrow(keytable_temp)
 
-    # Remove duplicates based on ahvnr and birthdate
-    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthdate"))
+    # Remove duplicates based on ahvnr and birthday
+    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthday"))
 
     message(paste0(n - nrow(keytable_temp),
         " duplicates based on AHV-number and birthdate removed.
