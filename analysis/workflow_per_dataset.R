@@ -25,29 +25,34 @@ mysalt <- as.character(read.delim("salt.txt", header = FALSE, sep = "", dec = ".
 #for testing use this simple salt
 #mysalt <- "myverygoodsalt"
 
-#setwd("/Users/flhug/Dropbox (PP)/PhD/Courses/H4Sci_Project/Git/pseudonymizer")
-setwd("/Volumes/pp/projects/sva-research")
+setwd("/Volumes/pp/projects/sva-resestricted")
 
-data_raw_path <- ("/Volumes/pp/projects/sva-research/data/original data/test data")
+data_raw_path <- ("/Volumes/pp/projects/sva-restricted/data/")
+
 output_path <- "output"
+# Folder Structure:
+# "data" folder contains:
+# - "output" that contains:
+# - - "panon"
+# - - "address"
+# - - "keytable"
 
 
 # DS1.1: ANTRAG VERSENDET - PERSONENDATEN -------
-file <- "Auswertung_AntragVersendet_20XX_Personendaten.csv"
+file <- "Auswertung_AntragVersendet_2021_Personendaten.csv"
 data_name <- "Versendet_Personendaten_2021"
 
-# 
+#
 # Pseudonymize, transform and drop
 # See first row of data set
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
-        
+
 
 ## Step 0: Define variables -----------------------
-# id <- c("prim_ahvnr", "sec_ahvnr")
 oldnames <- c("ANT_NNSS", "ANT_FIRSTNAME", "ANT_LASTNAME",
                 "NNSS", "FIRSTNAME", "LASTNAME", "BIRTHDATE")
 
@@ -89,8 +94,17 @@ df <- unique_geo_id(df = df,
                     var_ewid = "ewid")
 
 ## Step 5: Generate and append key table ---------------------------
-# Skip for now
-# Because there is no ID atm
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                id = "prim_ahvnr",
+                pseudo_id = "prim_pseudo",
+                file = file)
+
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                id = "sec_ahvnr",
+                pseudo_id = "sec_pseudo",
+                file = file)
 
 ## Step 6: Generate address file --------------------------------
 # Skip this for now to reduce workload
@@ -111,12 +125,12 @@ export_pseudonymized(data = df,
 # Nothing to pseudonymize, transform or drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_20XX_Fallinformationen.csv"
+file <- "Auswertung_AntragVersendet_2021_Fallinformationen.csv"
 data_name <- "Versendet_Fallinformation_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -160,27 +174,27 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_20XX_Steuerdaten.csv"
+file <- "Auswertung_AntragVersendet_2021_Steuerdaten.csv"
 data_name <- "Versendet_Steuerdaten_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
+
 ## Step 0: Define variables -----------------------
 # Add prim_ahvnr
-oldnames <- c("VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
-#add prim_ahvnr
+oldnames <- c("NNSS", "VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
                 "NNSSPERSON2", "VORNAMEPERSON2", "FAMILIENNAMEPERSON2", "GEBURTSDATUMPERSON2",
                 "STRASSE", "HAUSNR", "PLZ", "ORT",
                 "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
 
-newnames <-  c("prim_firstname", "prim_surname", "prim_birthdate",
+newnames <-  c("prim_ahvnr", "prim_firstname", "prim_surname", "prim_birthdate",
                 "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
                 "street", "streetnr", "zip", "city",
                 "par1_ahvnr", "par2_ahvnr")
 
-sensitive_vars <- c("prim_firstname", "prim_surname", "prim_birthdate",
+sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_surname", "prim_birthdate",
                     "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
                     "street", "streetnr", "egid", "ewid", "addresszusatz",
                     "par1_ahvnr", "par2_ahvnr")
@@ -195,7 +209,8 @@ df <- import_raw_data(file.path(data_raw_path, file),
                       newnames = newnames)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
-#add prim_ahvnr
+df <- unique_id(data = df, id = "prim_ahvnr",
+                pseudo_id = "prim_pseudo", salt = mysalt)
 
 df <- unique_id(data = df, id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo", salt = mysalt)
@@ -223,7 +238,12 @@ df <- unique_geo_id(df = df,
                     var_plz = "zip")
 
 ## Step 5: Generate and append key table ---------------------------
-#add prim_ahvnr
+append_keytable(df = df,
+                path = file.path(data_raw_path, output_path),
+                id = "prim_ahvnr",
+                pseudo_id = "prim_pseudo",
+                file = file)
+
 append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "sec_ahvnr",
@@ -261,16 +281,15 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_20XX_SteuerdatenQS.csv"
+file <- "Auswertung_AntragVersendet_2021_SteuerdatenQS.csv"
 data_name <- "Versendet_SteuerdatenQS_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
-# id <- c("prim_ahvnr", "sec_ahvnr")
 oldnames <- c("NNSS", "VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
                 "STRASSE", "HAUSNR", "PLZ", "ORT",
                 "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
@@ -350,16 +369,15 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_20XX_DatenEL.csv"
+file <- "Auswertung_AntragVersendet_2021_DatenEL.csv"
 data_name <- "Versendet_DatenEL_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
-# id <- c("prim_ahvnr", "sec_ahvnr")
 oldnames <- c("NNSS", "BIRTHDATE",
                 "NNSSELHR", "BIRTHDATEELHR")
 
@@ -429,16 +447,15 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform, Drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_20XX_DatenSH.csv"
+file <- "Auswertung_AntragVersendet_2021_DatenSH.csv"
 data_name <- "Versendet_DatenSH_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
-# id <- c("prim_ahvnr", "sec_ahvnr")
 oldnames <- c("NNSS", "BIRTHDATE",
                         "FIRSTNAME", "NAME")
 
@@ -497,12 +514,12 @@ export_pseudonymized(data = df,
 # Import (to transform colnames) and Export
 # See first row of data set
 
-file <- "Auswertung_AntragRueckfluss_20XX_Fallinformationen.csv"
+file <- "Auswertung_AntragRueckfluss_2021_Fallinformationen.csv"
 data_name <- "Rueckfluss_Fallinformation_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -549,12 +566,12 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragRueckfluss_20XX_Steuerdaten.csv"
+file <- "Auswertung_AntragRueckfluss_2021_Steuerdaten.csv"
 data_name <- "Rueckfluss_Steuerdaten_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -562,9 +579,7 @@ read.csv(file.path(data_raw_path, file),
 oldnames <- c("VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
                 "NNSSPERSON2", "VORNAMEPERSON2", "FAMILIENNAMEPERSON2", "GEBURTSDATUMPERSON2",
                 "STRASSE", "HAUSNR", "PLZ", "ORT",
-                # Note here is a descrepency
-                # One says NNS the other says NNSS
-                "NNSELTERNTEIL1", "NNSSELTERNTEIL2")
+                "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
 
 newnames <-  c("prim_firstname", "prim_surname", "prim_birthdate",
                 "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
@@ -647,20 +662,18 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragRueckfluss_20XX_SteuerdatenQS.csv"
+file <- "Auswertung_AntragRueckfluss_2021_SteuerdatenQS.csv"
 data_name <- "Rueckfluss_SteuerdatenQS_2021"
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ';', fileEncoding = "iso-8859-1",
+        sep = ";", fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
-# id <- c("prim_ahvnr", "sec_ahvnr")
 oldnames <- c("NNSS", "VORNAME", "FAMILIENNAME", "GEBURTSDATUM",
                 "STRASSE", "HAUSNR", "PLZ", "ORT",
-                # note discrepancy in spelling
-                "NNSELTERNTEIL1", "NNSSELTERNTEIL2")
+                "NNSSELTERNTEIL1", "NNSSELTERNTEIL2")
 
 newnames <-  c("prim_ahvnr", "prim_firstname", "prim_surname", "prim_birthdate",
                 "street", "streetnr", "zip", "city",

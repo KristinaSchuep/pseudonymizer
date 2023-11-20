@@ -19,9 +19,10 @@ append_keytable <- function(df,
   # Define which variables to extract
 
   ####### TEST Data START
-id <- "prim_ahvnr"
-pseudo_id <- "prim_pseudo"
-salt <- mysalt
+#id <- "prim_ahvnr"
+#pseudo_id <- "prim_pseudo"
+#salt <- mysalt
+#path = file.path(data_raw_path, output_path)
 
 n <- nrow(df)
 
@@ -97,7 +98,7 @@ n <- nrow(df)
 
     # Remove NAs
     keytable_temp <-
-          keytable_temp[complete.cases(keytable_temp[, .(pseudo_id, ahvnr)]), ]
+          keytable_temp[complete.cases(keytable_temp[, c(pseudo_id, ahvnr)]), ]
 
     message(paste0(n - nrow(keytable_temp),
         " duplicates based on AHV-number and pseudo id removed.
