@@ -106,13 +106,6 @@ n <- nrow(df)
 
     # Remove duplicates based on ahvnr and birthdate
     keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthdate"))
-<<<<<<<<< Temporary merge branch 1
-
-    # Remove NAs
-    keytable_temp <-
-          keytable_temp[complete.cases(keytable_temp[, c("ahvnr")]), ]
-=========
->>>>>>>>> Temporary merge branch 2
 
     message(paste0(n - nrow(keytable_temp),
         " duplicates based on AHV-number and birthdate removed.
