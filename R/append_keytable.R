@@ -7,7 +7,7 @@
 #' @param pseudo_id Pseudonymized ID-variable
 #' @param firstname Firstname of Person
 #' @param lastname Lastname of Person
-#' @param birthdate Birthday of Person
+#' @param birthdate birthdate of Person
 #' @return Writes or appends keytable
 #' @export
 append_keytable <- function(df,
@@ -27,7 +27,9 @@ append_keytable <- function(df,
   ####### TEST Data START
 #id <- "prim_ahvnr"
 #pseudo_id <- "prim_pseudo"
-#salt <- mysalt
+#firstname <- "firstname"
+#lastname <- "lastname"
+#birthdate <- "birthdate"
 #path = file.path(data_raw_path, output_path)
 
 n <- nrow(df)
@@ -68,11 +70,11 @@ n <- nrow(df)
     # store row count for message
     n <- nrow(keytable_temp)
 
-    # Remove duplicates based on ahvnr and birthday
-        keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthday"))
+    # Remove duplicates based on ahvnr and birthdate
+        keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthdate"))
 
         message(paste0(n - nrow(keytable_temp),
-          " duplicates based on AHV-number and birthday removed.
+          " duplicates based on AHV-number and birthdate removed.
           Keytable now containts ",
           nrow(keytable_temp), " observations with ",
           length(unique(keytable_temp$ahvnr)),
@@ -102,15 +104,15 @@ n <- nrow(df)
     # store row count for message
     n <- nrow(keytable_temp)
 
-    # Remove duplicates based on ahvnr and birthday
-    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthday"))
+    # Remove duplicates based on ahvnr and birthdate
+    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthdate"))
 
     # Remove NAs
     keytable_temp <-
           keytable_temp[complete.cases(keytable_temp[, c("ahvnr")]), ]
 
     message(paste0(n - nrow(keytable_temp),
-        " duplicates based on AHV-number and birthday removed.
+        " duplicates based on AHV-number and birthdate removed.
         Keytable now containts ",
         nrow(keytable_temp), " observations with ",
         length(unique(keytable_temp$ahvnr)),
@@ -121,7 +123,7 @@ n <- nrow(df)
     utils::write.csv(
         keytable_temp, file.path(path, "keytable", name), row.names = FALSE)
 
-    message("Newest keytable is appended and duplicate AHV-Nr were removed,
+    message("Newest keytable is appended and duplicate AHV-Nr and Birthday combinations were removed,
             entries from most recent complication are kept")
   }
 
