@@ -5,12 +5,18 @@
 #' @param keytable_vars Variables to keep in keytable
 #' @param id ID-variable that needs to by pseudonymized
 #' @param pseudo_id Pseudonymized ID-variable
+#' @param firstname Firstname of Person
+#' @param lastname Lastname of Person
+#' @param birthdate Birthday of Person
 #' @return Writes or appends keytable
 #' @export
 append_keytable <- function(df,
                             path,
                             id,
                             pseudo_id,
+                            firstname,
+                            lastname,
+                            birthdate,
                             file = file) {
   message(paste0("------- Append Key Table -------"))
   # Check if keytable directory already exists otherwise create
@@ -30,6 +36,9 @@ n <- nrow(df)
   keytable_temp <- data.table::data.table(
     ahvnr = df[[id]],
     pseudo_id = df[[pseudo_id]],
+    firstname = df[[firstname]],
+    lastname = df[[lastname]],
+    birthdate = df[[birthdate]],
     # add the source of the ahvnr
     source = rep(file, n)
   )
@@ -59,11 +68,11 @@ n <- nrow(df)
     # store row count for message
     n <- nrow(keytable_temp)
 
-    # Remove duplicates based on ahvnr and pseudo_id
-        keytable_temp <- unique(keytable_temp, by = c("ahvnr", "pseudo_id"))
+    # Remove duplicates based on ahvnr and birthday
+        keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthday"))
 
         message(paste0(n - nrow(keytable_temp),
-          " duplicates based on AHV-number and pseudo_id removed.
+          " duplicates based on AHV-number and birthday removed.
           Keytable now containts ",
           nrow(keytable_temp), " observations with ",
           length(unique(keytable_temp$ahvnr)),
@@ -93,15 +102,15 @@ n <- nrow(df)
     # store row count for message
     n <- nrow(keytable_temp)
 
-    # Remove duplicates based on ahvnr and pseudo_id
-    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "pseudo_id"))
+    # Remove duplicates based on ahvnr and birthday
+    keytable_temp <- unique(keytable_temp, by = c("ahvnr", "birthday"))
 
     # Remove NAs
     keytable_temp <-
-          keytable_temp[complete.cases(keytable_temp[, c(pseudo_id, ahvnr)]), ]
+          keytable_temp[complete.cases(keytable_temp[, c(ahvnr)]), ]
 
     message(paste0(n - nrow(keytable_temp),
-        " duplicates based on AHV-number and pseudo id removed.
+        " duplicates based on AHV-number and birthday removed.
         Keytable now containts ",
         nrow(keytable_temp), " observations with ",
         length(unique(keytable_temp$ahvnr)),
