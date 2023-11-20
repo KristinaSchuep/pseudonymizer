@@ -95,15 +95,21 @@ df <- unique_geo_id(df = df,
 
 ## Step 5: Generate and append key table ---------------------------
 append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
+                path = paste0(data_raw_path, output_path),
                 id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo",
+                firstname = "prim_firstname",
+                lastname = "prim_lastname",
+                birthdate = "prim_birthdate",
                 file = file)
 
 append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
+                path = paste0(data_raw_path, output_path),
                 id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo",
+                firstname = "sec_firstname",
+                lastname = "sec_lastname",
+                birthdate = "sec_birthdate",
                 file = file)
 
 ## Step 6: Generate address file --------------------------------

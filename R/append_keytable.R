@@ -107,7 +107,7 @@ n <- nrow(df)
 
     # Remove NAs
     keytable_temp <-
-          keytable_temp[complete.cases(keytable_temp[, c(ahvnr)]), ]
+          keytable_temp[complete.cases(keytable_temp[, c("ahvnr")]), ]
 
     message(paste0(n - nrow(keytable_temp),
         " duplicates based on AHV-number and birthday removed.
