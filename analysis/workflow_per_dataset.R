@@ -5,7 +5,9 @@
 # DS1.1: Personendaten
 # DS2.1: Fallinformation
 # DS3.1: Steuerdaten
+# DS3.1Z: Steuerdaten Zusatz
 # DS4.1: Steuerdaten QS
+# DS4.1Z: Steuerdaten QS Zusatz
 # DS5.1: DatenEL
 # DS6.1: Daten SH
 
@@ -53,13 +55,13 @@ read.csv(file.path(data_raw_path, file),
 
 
 ## Step 0: Define variables -----------------------
-oldnames <- c("ANT_NNSS", "ANT_FIRSTNAME", "ANT_LASTNAME",
+oldnames <- c("ANT_NNSS", "ANT_FIRSTNAME", "ANT_LASTNAME", "ANT_BIRTHDATE",
                 "NNSS", "FIRSTNAME", "LASTNAME", "BIRTHDATE")
 
-newnames <-  c("prim_ahvnr", "prim_firstname", "prim_surname",
+newnames <-  c("prim_ahvnr", "prim_firstname", "prim_surname", "prim_birthdate",
                 "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate")
 
-sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_surname",
+sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_surname", "prim_birthdate",
                     "sec_ahvnr", "sec_firstname", "sec_surname", "sec_birthdate",
                     "street", "streetnr", "egid", "ewid")
 
@@ -80,7 +82,10 @@ df <- unique_id(data = df, id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo", salt = mysalt)
 
 ## Step 3: Aggregate sensitive data -------------------------------
-# ANT_BIRTHDATE should follow
+df <- aggregate_sensitive(data = df,
+                            date_var = "prim_birthdate",
+                            date_new_var = "prim_birthyear")
+
 df <- aggregate_sensitive(data = df,
                             date_var = "sec_birthdate",
                             date_new_var = "sec_birthyear")
@@ -248,24 +253,18 @@ append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo",
+                firstname = "prim_firstname",
+                lastname = "prim_lastname",
+                birthdate = "prim_birthdate",
                 file = file)
 
 append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
+                path = paste0(data_raw_path, output_path),
                 id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo",
-                file = file)
-
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "par1_ahvnr",
-                pseudo_id = "par1_pseudo",
-                file = file)
-
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "par2_ahvnr",
-                pseudo_id = "par2_pseudo",
+                firstname = "sec_firstname",
+                lastname = "sec_lastname",
+                birthdate = "sec_birthdate",
                 file = file)
 
 ## Step 6: Generate address file --------------------------------
@@ -344,19 +343,11 @@ append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo",
+                firstname = "prim_firstname",
+                lastname = "prim_lastname",
+                birthdate = "prim_birthdate",
                 file = file)
 
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "par1_ahvnr",
-                pseudo_id = "par1_pseudo",
-                file = file)
-
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "par2_ahvnr",
-                pseudo_id = "par2_pseudo",
-                file = file)
 
 ## Step 6: Generate address file --------------------------------
 # Skip this for now to reduce workload
@@ -427,12 +418,9 @@ append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo",
-                file = file)
-
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "el_ahvnr",
-                pseudo_id = "el_pseudo",
+                firstname = "prim_firstname",
+                lastname = "prim_lastname",
+                birthdate = "prim_birthdate",
                 file = file)
 
 
@@ -499,6 +487,9 @@ append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo",
+                firstname = "prim_firstname",
+                lastname = "prim_lastname",
+                birthdate = "prim_birthdate",
                 file = file)
 
 ## Step 6: Generate address file --------------------------------
@@ -636,6 +627,9 @@ append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "sec_ahvnr",
                 pseudo_id = "sec_pseudo",
+                firstname = "sec_firstname",
+                lastname = "sec_lastname",
+                birthdate = "sec_birthdate",
                 file = file)
 
 append_keytable(df = df,
@@ -725,19 +719,12 @@ append_keytable(df = df,
                 path = file.path(data_raw_path, output_path),
                 id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo",
+                firstname = "prim_firstname",
+                lastname = "prim_lastname",
+                birthdate = "prim_birthdate",
                 file = file)
 
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "par1_ahvnr",
-                pseudo_id = "par1_pseudo",
-                file = file)
 
-append_keytable(df = df,
-                path = file.path(data_raw_path, output_path),
-                id = "par2_ahvnr",
-                pseudo_id = "par2_pseudo",
-                file = file)
 
 ## Step 6: Generate address file --------------------------------
 # Skip this for now to reduce workload
