@@ -12,6 +12,7 @@
 # DS6.1: Daten SH
 
 ## Antrag Rückfluss
+# DS1.2: Personendaten
 # DS2.2: Fallinformation
 # DS3.2: Steuerdaten
 # DS4.2: Steuerdaten QS
@@ -27,6 +28,9 @@ mysalt <- as.character(read.delim("salt.txt", header = FALSE, sep = "", dec = ".
 #for testing use this simple salt
 #mysalt <- "myverygoodsalt"
 
+# Define Year
+year <- "2021"
+
 setwd("/Volumes/pp/projects/sva-resestricted")
 
 data_raw_path <- ("/Volumes/pp/projects/sva-restricted/data/")
@@ -41,8 +45,8 @@ output_path <- "output"
 
 
 # DS1.1: ANTRAG VERSENDET - PERSONENDATEN -------
-file <- "Auswertung_AntragVersendet_2021_Personendaten.csv"
-data_name <- "Versendet_Personendaten_2021"
+file <- paste0("Auswertung_AntragVersendet_", year, "_Personendaten.csv")
+data_name <- paste0("Versendet_Personendaten_", year)
 
 #
 # Pseudonymize, transform and drop
@@ -136,8 +140,8 @@ export_pseudonymized(data = df,
 # Nothing to pseudonymize, transform or drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_2021_Fallinformationen.csv"
-data_name <- "Versendet_Fallinformation_2021"
+file <- paste0("Auswertung_AntragVersendet_", year, "_Fallinformationen.csv")
+data_name <- paste0("Versendet_Fallinformationen_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -183,10 +187,9 @@ export_pseudonymized(data = df,
 # DS3.1: ANTRAG VERSENDET - STEUERDATEN -------
 # Sensitive data
 # Pseudonymize, Transform and Drop
-# See first row of data set
 
-file <- "Auswertung_AntragVersendet_2021_Steuerdaten.csv"
-data_name <- "Versendet_Steuerdaten_2021"
+file <- paste0("Auswertung_AntragVersendet_", year, "_Steuerdaten.csv")
+data_name <- paste0("Versendet_Steuerdaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -197,9 +200,8 @@ read.csv(file.path(data_raw_path, file),
 # It contains exactly the same variables
 # Thus, we run it in parallel to avoid naming "oldnames" etc twice
 
-
-file_Z <- "Auswertung_AntragVersendet_2021_Steuerdaten_Zusatz.csv"
-data_name_Z <- "Versendet_Steuerdaten_Zusatz_2021"
+file_Z <- paste0("Auswertung_AntragVersendet_", year, "_Steuerdaten_Zusatz.csv")
+data_name_Z <- paste0("Versendet_Steuerdaten_Zusatz", year)
 
 read.csv(file.path(data_raw_path, file_Z),
         na.strings = c("", "NA"),
@@ -220,7 +222,7 @@ newnames <-  c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate"
 
 sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate",
                     "sec_ahvnr", "sec_firstname", "sec_lastname", "sec_birthdate",
-                    "street", "streetnr", "egid", "ewid", "addresszusatz",
+                    "street", "streetnr", "adresszusatz",
                     "par1_ahvnr", "par2_ahvnr")
 
 
@@ -323,7 +325,7 @@ append_keytable(df = df_Z,
                 firstname = "prim_firstname",
                 lastname = "prim_lastname",
                 birthdate = "prim_birthdate",
-                file = file)
+                file = file_Z)
 
 append_keytable(df = df_Z,
                 path = paste0(data_raw_path, output_path),
@@ -360,8 +362,8 @@ export_pseudonymized(data = df_Z,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_2021_SteuerdatenQS.csv"
-data_name <- "Versendet_SteuerdatenQS_2021"
+file <- paste0("Auswertung_AntragVersendet_", year, "_SteuerdatenQS.csv")
+data_name <- paste0("Versendet_SteuerdatenQS_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -372,8 +374,8 @@ read.csv(file.path(data_raw_path, file),
 # It contains exactly the same variables
 # Thus, we run it in parallel to avoid naming "oldnames" etc twice
 
-file_Z <- "Auswertung_AntragVersendet_2021_SteuerdatenQS_Zusatz.csv"
-data_name_Z <- "Versendet_SteuerdatenQS_Zusatz_2021"
+file_Z <- paste0("Auswertung_AntragRueckfluss_", year, "_SteuerdatenQS_Zusatz.csv")
+data_name_Z <- paste0("Rueckfluss_SteuerdatenQS_Zusatz_", year)
 
 read.csv(file.path(data_raw_path, file_Z),
         na.strings = c("", "NA"),
@@ -390,7 +392,7 @@ newnames <-  c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate"
                 "par1_ahvnr", "par2_ahvnr")
 
 sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate",
-                    "street", "streetnr", "egid", "ewid", "addresszusatz",
+                    "street", "streetnr", "adresszusatz",
                     "par1_ahvnr", "par2_ahvnr")
 
 
@@ -492,8 +494,8 @@ export_pseudonymized(data = df_Z,
 # Pseudonymize, Transform
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_2021_DatenEL.csv"
-data_name <- "Versendet_DatenEL_2021"
+file <- paste0("Auswertung_AntragVersendet_", year, "_DatenEL.csv")
+data_name <- paste0("Versendet_DatenEL_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -560,8 +562,8 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform, Drop
 # See first row of data set
 
-file <- "Auswertung_AntragVersendet_2021_DatenSH.csv"
-data_name <- "Versendet_DatenSH_2021"
+file <- paste0("Auswertung_AntragVersendet_", year, "_DatenSH.csv")
+data_name <- paste0("Versendet_DatenSH_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -624,8 +626,8 @@ export_pseudonymized(data = df,
                      data_summary = FALSE)
 
 # DS1.2: ANTRAG RÜCKFLUSS - PERSONENDATEN -------
-file <- "Auswertung_AntragRueckfluss_2021_Personendaten.csv"
-data_name <- "Rueckfluss_Personendaten_2021"
+file <- paste0("Auswertung_AntragRueckfluss_", year, "_Personendaten.csv")
+data_name <- paste0("Rueckfluss_Personendaten_", year)
 
 # Pseudonymize, transform and drop
 # See first row of data set
@@ -709,8 +711,8 @@ export_pseudonymized(data = df,
 # Import (to transform colnames) and Export
 # See first row of data set
 
-file <- "Auswertung_AntragRueckfluss_2021_Fallinformationen.csv"
-data_name <- "Rueckfluss_Fallinformation_2021"
+file <- paste0("Auswertung_AntragRueckfluss_", year, "_Fallinformationen.csv")
+data_name <- paste0("Rueckfluss_Fallinformationen_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -757,8 +759,8 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragRueckfluss_2021_Steuerdaten.csv"
-data_name <- "Rueckfluss_Steuerdaten_2021"
+file <- paste0("Auswertung_AntragRueckfluss_", year, "_Steuerdaten.csv")
+data_name <- paste0("Rueckfluss_Steuerdaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -777,9 +779,9 @@ newnames <-  c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate"
                 "street", "streetnr", "zip", "city",
                 "par1_ahvnr", "par2_ahvnr")
 
-sensitive_vars <- c("prim_firstname", "prim_lastname", "prim_birthdate",
+sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate",
                     "sec_ahvnr", "sec_firstname", "sec_lastname", "sec_birthdate",
-                    "street", "streetnr", "addresszusatz", "egid", "ewid",
+                    "street", "streetnr", "adresszusatz",
                     "par1_ahvnr", "par2_ahvnr")
 
 ## Step 1: Import datasets into R -----------------------
@@ -855,8 +857,8 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 # See first row of data set
 
-file <- "Auswertung_AntragRueckfluss_2021_SteuerdatenQS.csv"
-data_name <- "Rueckfluss_SteuerdatenQS_2021"
+file <- paste0("Auswertung_AntragRueckfluss_", year, "_SteuerdatenQS.csv")
+data_name <- paste0("Rueckfluss_SteuerdatenQS_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -873,7 +875,7 @@ newnames <-  c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate"
                 "par1_ahvnr", "par2_ahvnr")
 
 sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate",
-                    "street", "streetnr", "egid", "ewid", "addresszusatz",
+                    "street", "streetnr", "adresszusatz",
                     "par1_ahvnr", "par2_ahvnr")
 
 
