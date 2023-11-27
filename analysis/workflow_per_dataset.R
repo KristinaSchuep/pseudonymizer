@@ -374,8 +374,8 @@ read.csv(file.path(data_raw_path, file),
 # It contains exactly the same variables
 # Thus, we run it in parallel to avoid naming "oldnames" etc twice
 
-file_Z <- paste0("Auswertung_AntragRueckfluss_", year, "_SteuerdatenQS_Zusatz.csv")
-data_name_Z <- paste0("Rueckfluss_SteuerdatenQS_Zusatz_", year)
+file_Z <- paste0("Auswertung_AntragVersendet_", year, "_SteuerdatenQS_Zusatz.csv")
+data_name_Z <- paste0("Versendet_SteuerdatenQS_Zusatz_", year)
 
 read.csv(file.path(data_raw_path, file_Z),
         na.strings = c("", "NA"),
@@ -506,10 +506,10 @@ read.csv(file.path(data_raw_path, file),
 oldnames <- c("NNSS", "BIRTHDATE",
                 "NNSSELHR", "BIRTHDATEELHR")
 
-newnames <-  c("prim_ahvnr", "prim_firstname",
+newnames <-  c("prim_ahvnr", "prim_birthdate",
                 "el_ahvnr", "el_birthdate")
 
-sensitive_vars <- c("prim_ahvnr", "prim_firstname",
+sensitive_vars <- c("prim_ahvnr", "prim_birthdate",
                     "el_ahvnr", "el_birthdate")
 
 
