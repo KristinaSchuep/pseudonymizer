@@ -424,7 +424,7 @@ df <- unique_id(data = df, id = "par2_ahvnr",
 df_Z <- unique_id(data = df_Z, id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo", salt = mysalt)
 
-d_Z <- unique_id(data = df_Z, id = "par1_ahvnr",
+df_Z <- unique_id(data = df_Z, id = "par1_ahvnr",
                 pseudo_id = "par1_pseudo", salt = mysalt)
 
 df_Z <- unique_id(data = df_Z, id = "par2_ahvnr",
