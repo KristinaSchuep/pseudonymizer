@@ -36,6 +36,8 @@ setwd("/Volumes/pp/projects/sva-resestricted")
 data_raw_path <- ("/Volumes/pp/projects/sva-restricted/data/")
 
 output_path <- "output"
+
+sep <- ";"
 # Folder Structure:
 # "data" folder contains:
 # - "output" that contains:
@@ -54,7 +56,7 @@ data_new <- paste0("Versendet_Personendaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 
@@ -76,7 +78,8 @@ sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birth
 # Sec stands for Secondary i.e., wife or children
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "prim_ahvnr",
@@ -149,7 +152,7 @@ data_new <- paste0("Versendet_Fallinformationen_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -162,7 +165,8 @@ sensitive_vars <- c()
 
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
@@ -197,7 +201,7 @@ data_new <- paste0("Versendet_Steuerdaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 # Steuerdaten Zusatz
@@ -209,7 +213,7 @@ data_name_Z <- paste0("Versendet_Steuerdaten_Zusatz", year)
 
 read.csv(file.path(data_raw_path, file_Z),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -236,13 +240,15 @@ sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birth
 # Sec stands for Secondary i.e., wife or children
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step Z: Import datasets into R -----------------------
 
 df_Z <- import_raw_data(file.path(data_raw_path, file_Z),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "prim_ahvnr",
@@ -371,7 +377,7 @@ data_new <- paste0("Versendet_SteuerdatenQS_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 # Steuerdaten Zusatz
@@ -383,7 +389,7 @@ data_name_Z <- paste0("Versendet_SteuerdatenQS_Zusatz_", year)
 
 read.csv(file.path(data_raw_path, file_Z),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -403,12 +409,14 @@ sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birth
 ## Step 1: Import datasets into R -----------------------
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 1Z: Import datasets into R -----------------------
 df_Z <- import_raw_data(file.path(data_raw_path, file_Z),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "prim_ahvnr",
@@ -503,7 +511,7 @@ data_new <- paste0("Versendet_DatenEL_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -523,7 +531,8 @@ sensitive_vars <- c("prim_ahvnr", "prim_birthdate",
 # Sec stands for Secondary i.e., wife or children
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 
@@ -571,7 +580,7 @@ data_new <- paste0("Versendet_DatenSH_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -591,7 +600,8 @@ sensitive_vars <- c("prim_ahvnr", "prim_birthdate",
 # Sec stands for Secondary i.e., wife or children
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 
@@ -638,7 +648,7 @@ new_name <- paste0("Rueckfluss_Personendaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 
@@ -656,7 +666,8 @@ sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birth
 ## Step 1: Import datasets into R -----------------------
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "prim_ahvnr",
@@ -720,7 +731,7 @@ data_new <- paste0("Rueckfluss_Fallinformationen_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -733,7 +744,8 @@ sensitive_vars <- c()
 
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
@@ -768,7 +780,7 @@ data_new <- paste0("Rueckfluss_Steuerdaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -792,7 +804,8 @@ sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birth
 
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "prim_ahvnr",
@@ -866,7 +879,7 @@ data_new <- paste0("Rueckfluss_SteuerdatenQS_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
-        sep = ";", fileEncoding = "iso-8859-1",
+        sep = sep, fileEncoding = "iso-8859-1",
         nrows = 1)
 
 ## Step 0: Define variables -----------------------
@@ -889,7 +902,8 @@ sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birth
 # Sec stands for Secondary i.e., wife or children
 df <- import_raw_data(file.path(data_raw_path, file),
                       oldnames = oldnames,
-                      newnames = newnames)
+                      newnames = newnames,
+                      sep = sep)
 
 ## Step 2: Generate unique ID from AHV-number -------------------------
 df <- unique_id(data = df, id = "prim_ahvnr",

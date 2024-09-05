@@ -7,6 +7,7 @@
 #' @param skiprows Number of rows to skip
 #' @param oldnames Variable names to change
 #' @param newnames New variable names
+#' @param sep column separator by default ";"
 #'
 #' @return Imported dataset, with renamed variables.
 #' @export
@@ -14,12 +15,13 @@ import_raw_data <- function(filename,
                             sheetname = NULL,
                             skiprows = 0,
                             oldnames,
-                            newnames) {
+                            newnames,
+                            sep = ";") {
   message(paste0("------- Import Raw Data -------"))
   if (grepl(".csv", filename, fixed = TRUE)) {
     #import csv and recognize empty strings as NA
     # read_delim should be able to recognize the right deliminator
-    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=',', fileEncoding = "iso-8859-1"))
+    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep = sep, fileEncoding = "iso-8859-1"))
   } else if (grepl(".xls", filename, fixed = TRUE)) {
     #import excel
     df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
