@@ -46,7 +46,7 @@ output_path <- "output"
 
 # DS1.1: ANTRAG VERSENDET - PERSONENDATEN -------
 file <- paste0("Auswertung_AntragVersendet_", year, "_Personendaten.csv")
-data_name <- paste0("Versendet_Personendaten_", year)
+data_new <- paste0("Versendet_Personendaten_", year)
 
 #
 # Pseudonymize, transform and drop
@@ -67,7 +67,7 @@ newnames <-  c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate"
 
 sensitive_vars <- c("prim_ahvnr", "prim_firstname", "prim_lastname", "prim_birthdate",
                     "sec_ahvnr", "sec_firstname", "sec_lastname", "sec_birthdate",
-                    "street", "streetnr", "egid", "ewid")
+                    "street", "streetnr", "egid", "ewid", "civilstatussince")
 
 
 ## Step 1: Import datasets into R -----------------------
@@ -93,6 +93,10 @@ df <- aggregate_sensitive(data = df,
 df <- aggregate_sensitive(data = df,
                             date_var = "sec_birthdate",
                             date_new_var = "sec_birthyear")
+
+df <- aggregate_sensitive(data = df,
+                          date_var = "civilstatussince",
+                          date_new_var = "civilstatussince_year")
 
 ## Step 4: Create Unique Geo ID  -------------------------------
 df <- unique_geo_id(df = df,
@@ -141,7 +145,7 @@ export_pseudonymized(data = df,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragVersendet_", year, "_Fallinformationen.csv")
-data_name <- paste0("Versendet_Fallinformationen_", year)
+data_new <- paste0("Versendet_Fallinformationen_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -189,7 +193,7 @@ export_pseudonymized(data = df,
 # Pseudonymize, Transform and Drop
 
 file <- paste0("Auswertung_AntragVersendet_", year, "_Steuerdaten.csv")
-data_name <- paste0("Versendet_Steuerdaten_", year)
+data_new <- paste0("Versendet_Steuerdaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -363,7 +367,7 @@ export_pseudonymized(data = df_Z,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragVersendet_", year, "_SteuerdatenQS.csv")
-data_name <- paste0("Versendet_SteuerdatenQS_", year)
+data_new <- paste0("Versendet_SteuerdatenQS_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -420,7 +424,7 @@ df <- unique_id(data = df, id = "par2_ahvnr",
 df_Z <- unique_id(data = df_Z, id = "prim_ahvnr",
                 pseudo_id = "prim_pseudo", salt = mysalt)
 
-d_Z <- unique_id(data = df_Z, id = "par1_ahvnr",
+df_Z <- unique_id(data = df_Z, id = "par1_ahvnr",
                 pseudo_id = "par1_pseudo", salt = mysalt)
 
 df_Z <- unique_id(data = df_Z, id = "par2_ahvnr",
@@ -495,7 +499,7 @@ export_pseudonymized(data = df_Z,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragVersendet_", year, "_DatenEL.csv")
-data_name <- paste0("Versendet_DatenEL_", year)
+data_new <- paste0("Versendet_DatenEL_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -554,7 +558,7 @@ df <- aggregate_sensitive(data = df,
 export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
                      path = file.path(data_raw_path, output_path),
-                     data_name = file,
+                     data_name = data_new,
                      data_summary = FALSE)
 
 # DS6.1: ANTRAG VERSENDET - DATENSH -------
@@ -563,7 +567,7 @@ export_pseudonymized(data = df,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragVersendet_", year, "_DatenSH.csv")
-data_name <- paste0("Versendet_DatenSH_", year)
+data_new <- paste0("Versendet_DatenSH_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -622,12 +626,12 @@ append_keytable(df = df,
 export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
                      path = file.path(data_raw_path, output_path),
-                     data_name = file,
+                     data_name = data_new,
                      data_summary = FALSE)
 
 # DS1.2: ANTRAG RÜCKFLUSS - PERSONENDATEN -------
 file <- paste0("Auswertung_AntragRueckfluss_", year, "_Personendaten.csv")
-data_name <- paste0("Rueckfluss_Personendaten_", year)
+new_name <- paste0("Rueckfluss_Personendaten_", year)
 
 # Pseudonymize, transform and drop
 # See first row of data set
@@ -712,7 +716,7 @@ export_pseudonymized(data = df,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragRueckfluss_", year, "_Fallinformationen.csv")
-data_name <- paste0("Rueckfluss_Fallinformationen_", year)
+data_new <- paste0("Rueckfluss_Fallinformationen_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -760,7 +764,7 @@ export_pseudonymized(data = df,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragRueckfluss_", year, "_Steuerdaten.csv")
-data_name <- paste0("Rueckfluss_Steuerdaten_", year)
+data_new <- paste0("Rueckfluss_Steuerdaten_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -858,7 +862,7 @@ export_pseudonymized(data = df,
 # See first row of data set
 
 file <- paste0("Auswertung_AntragRueckfluss_", year, "_SteuerdatenQS.csv")
-data_name <- paste0("Rueckfluss_SteuerdatenQS_", year)
+data_new <- paste0("Rueckfluss_SteuerdatenQS_", year)
 
 read.csv(file.path(data_raw_path, file),
         na.strings = c("", "NA"),
@@ -930,7 +934,7 @@ append_keytable(df = df,
 export_pseudonymized(data = df,
                      sensitive_vars = sensitive_vars,
                      path = file.path(data_raw_path, output_path),
-                     data_name = file,
+                     data_name = data_new,
                      data_summary = FALSE)
 
 
