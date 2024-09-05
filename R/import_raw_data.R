@@ -19,7 +19,7 @@ import_raw_data <- function(filename,
   if (grepl(".csv", filename, fixed = TRUE)) {
     #import csv and recognize empty strings as NA
     # read_delim should be able to recognize the right deliminator
-    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=';', fileEncoding = "iso-8859-1"))
+    df <- suppressMessages(read.csv(filename, na.strings=c("","NA"), sep=',', fileEncoding = "iso-8859-1"))
   } else if (grepl(".xls", filename, fixed = TRUE)) {
     #import excel
     df <- suppressMessages(readxl::read_excel(filename,sheet=sheetname,skip=skiprows))
